@@ -7,6 +7,7 @@
  *
  * @package ealicensewoocommerce
  */
+remove_action('woocommerce_order_status_completed', array('WC_Emails', 'send_transactional_email'), 10, 1);
 // Include admin functions
 require dirname(__FILE__) . '/admin/ealicensewoocommerce_function_admin_menu.php';
 require dirname(__FILE__) . '/admin/ealicensewoocommerce_function_admin_woocommerce_products.php';

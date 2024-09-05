@@ -27,4 +27,3 @@ if (!function_exists('is_plugin_active')) {
 }
 
 require plugin_dir_path( __FILE__ ) . 'inc/ealicensewoocommerce_functions.php';
-remove_action('woocommerce_order_status_completed', array('WC_Emails', 'send_transactional_email'), 10, 1);
