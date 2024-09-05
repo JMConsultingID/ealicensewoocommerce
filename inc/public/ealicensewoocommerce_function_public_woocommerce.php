@@ -62,7 +62,7 @@ function ealicensewoocommerce_display_license_info_on_thank_you_page($order_id) 
         $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
         $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
 
-        if ($account_id && $license_key) {
+        if ($license_key) {
             echo '<h2>' . __('Your License Details', 'ealicensewoocommerce') . '</h2>';
             echo '<p><strong>' . __('License Key', 'ealicensewoocommerce') . ':</strong> ' . esc_html($license_key) . '</p>';
             echo '<p><strong>' . __('Account Limit', 'ealicensewoocommerce') . ':</strong> ' . esc_html($account_quota) . '</p>';
