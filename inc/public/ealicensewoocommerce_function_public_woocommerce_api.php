@@ -7,3 +7,88 @@
  *
  * @package ealicensewoocommerce
  */
+// Send data to API when order status changes to 'completed'
+function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_status, $new_status, $order) {
+    // Use the reusable function to check if the feature is enabled
+    if (!ealicensewoocommerce_is_license_enabled()) {
+        return; // Exit if the feature is not enabled
+    }
+
+    // Get the API base endpoint URL, Authorization Key, and API Version from settings
+    $api_base_endpoint = get_option('ealicensewoocommerce_api_base_endpoint_url');
+    $api_authorization_key = get_option('ealicensewoocommerce_api_authorization_key');
+    $api_version = get_option('ealicensewoocommerce_api_version', 'v1'); // Default to 'v2' if not set
+
+    // Construct the full API endpoint URL based on the base URL and version
+    $api_endpoint = trailingslashit($api_base_endpoint) . $api_version . '/order-completed/';
+
+    if ($new_status == 'completed' && !empty($api_base_endpoint) && !empty($api_authorization_key)) {
+        $email = $order->get_billing_email();
+        $full_name = $order->get_formatted_billing_full_name();
+        $order_id = $order->get_id();
+        $product_id = '';
+        $product_name = '';
+
+        // Fetch product details (assuming a single product order)
+        foreach ($order->get_items() as $item_id => $item) {
+            $product_id = $item->get_product_id();
+            $product_name = $item->get_name();
+            break; // Stop after the first item (assuming single product order)
+        }
+
+
+        // Collect additional information
+        $ip_user = $_SERVER['REMOTE_ADDR'];
+        $browser = $_SERVER['HTTP_USER_AGENT'];
+        $domain = $_SERVER['HTTP_HOST'];
+
+        // Create an array with the additional source information
+        $source = array(
+            'ip_user' => $ip_user,
+            'browser' => $browser,
+            'domain' => $domain
+        );
+
+        // Initialize logger
+        $logger_info = ealicensewoocommerce_connection_response_logger();
+        $logger = $logger_info['logger'];
+        $context = $logger_info['context'];
+
+        if ($account_id && $license_key) {
+            $data = array(
+                'email' => $email,
+                'full_name' => $full_name,
+                'order_id' => $order_id,
+                'product_id' => $product_id,
+                'product_name' => $product_name,
+                'account_id' => $account_id,
+                'license_key' => $license_key,
+                'license_expiration' => $license_expiration,
+                'source' => json_encode($source)
+            );
+
+            $response = wp_remote_post($api_endpoint, array(
+                'method'    => 'POST',
+                'body'      => json_encode($data),
+                'headers'   => array(
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $api_authorization_key, // Use the saved Authorization Key
+                ),
+            ));
+
+            if (is_wp_error($response)) {
+                // Log error
+                $error_message = $response->get_error_message();
+                $logger->error('EA License API error: ' . $error_message, $context);
+            } else {
+                // Log success response
+                $response_body = wp_remote_retrieve_body($response);
+                $logger->info('EA License API response: ' . $response_body, $context);
+            }
+        } else {
+            // Log missing account_id or license_key
+            $logger->warning('EA License API: Missing account_id or license_key', $context);
+        }
+    }
+}
+add_action('woocommerce_order_status_changed', 'ealicensewoocommerce_send_api_on_order_status_change', 10, 4);

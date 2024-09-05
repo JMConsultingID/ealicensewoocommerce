@@ -9,6 +9,7 @@
  */
 // Include admin functions
 require dirname(__FILE__) . '/admin/ealicensewoocommerce_function_admin_menu.php';
+require dirname(__FILE__) . '/admin/ealicensewoocommerce_function_admin_woocommerce_products.php';
 
 // Include helper functions
 require dirname(__FILE__) . '/helper/ealicensewoocommerce_function_helper.php';
