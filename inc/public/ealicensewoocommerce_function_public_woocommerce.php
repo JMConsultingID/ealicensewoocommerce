@@ -33,9 +33,15 @@ function ealicensewoocommerce_display_admin_order_meta($order) {
     if (!ealicensewoocommerce_is_license_enabled()) {
         return; // Exit if the feature is not enabled
     }
+
+    // Retrieve the license key from order meta
+    $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
+    $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
+    $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
     
-    echo '<p><strong>' . __('Account ID') . ':</strong> ' . get_post_meta($order->get_id(), '_yrt_license_account_number', true) . '</p>';
-    echo '<p><strong>' . __('License Key') . ':</strong> ' . get_post_meta($order->get_id(), '_yrt_license_license_key', true) . '</p>';
+    echo '<p><strong>' . __('License Key') . ':</strong> ' . esc_html($license_key) . '</p>';
+    echo '<p><strong>' . __('Account Limit') . ':</strong> ' . esc_html($account_quota) . '</p>';
+    echo '<p><strong>' . __('License Expiration') . ':</strong> ' . esc_html($license_expiration) . '</p>';
 }
 add_action('woocommerce_admin_order_data_after_billing_address', 'ealicensewoocommerce_display_admin_order_meta', 10, 1);
 
@@ -51,13 +57,16 @@ function ealicensewoocommerce_display_license_info_on_thank_you_page($order_id) 
     
     // Check if the order exists and if the status is 'completed'
     if ($order && $order->get_status() === 'completed') {
-        $account_id = get_post_meta($order_id, '_yrt_license_account_number', true);
-        $license_key = get_post_meta($order_id, '_yrt_license_license_key', true);
+        // Retrieve the license key from order meta
+        $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
+        $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
+        $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
 
         if ($account_id && $license_key) {
             echo '<h2>' . __('Your License Details', 'ealicensewoocommerce') . '</h2>';
-            echo '<p><strong>' . __('Account ID', 'ealicensewoocommerce') . ':</strong> ' . esc_html($account_id) . '</p>';
             echo '<p><strong>' . __('License Key', 'ealicensewoocommerce') . ':</strong> ' . esc_html($license_key) . '</p>';
+            echo '<p><strong>' . __('Account Limit', 'ealicensewoocommerce') . ':</strong> ' . esc_html($account_quota) . '</p>';
+            echo '<p><strong>' . __('License Expiration', 'ealicensewoocommerce') . ':</strong> ' . esc_html($license_expiration) . '</p>';
         }
     }
 }

@@ -100,8 +100,16 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                 $error_message = $response->get_error_message();
                 $logger->error('EA License API error: ' . $error_message, $context);
             } else {
-                // Log success response
                 $response_body = wp_remote_retrieve_body($response);
+                $response_data = json_decode($response_body, true);
+
+                if (isset($response_data['license_key'])) {
+                    // Store the license key in order meta
+                    update_post_meta($order_id, '_ealicensewoocommerce_license_key', sanitize_text_field($response_data['license_key']));
+                    update_post_meta($order_id, '_ealicensewoocommerce_account_quota', sanitize_text_field($response_data['account_quota']));
+                    update_post_meta($order_id, '_ealicensewoocommerce_license_expiration', sanitize_text_field($response_data['license_expiration']));
+                }
+
                 $logger->info('EA License API response: ' . $response_body, $context);
             }
 
