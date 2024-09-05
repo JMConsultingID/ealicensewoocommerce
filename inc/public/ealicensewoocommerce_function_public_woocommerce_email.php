@@ -9,6 +9,10 @@
  */
 // Add License Key, and a download link to the order completed email
 function ealicensewoocommerce_add_license_info_to_email($order, $sent_to_admin, $plain_text, $email) {
+    if (!ealicensewoocommerce_is_license_enabled()) {
+        return; // Exit if the feature is not enabled
+    }
+    
     if ($email->id === 'customer_completed_order') {
         $order_id = $order->get_id();
         $download_url = 'https://eastaging.yourrobotrader.com/wp-content/uploads/2024/08/Software_Box_Mockup_robotrader-shadow-web-e1662613546511.png';
@@ -39,7 +43,7 @@ add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_inf
 
 
 function ealicensewoocommerce_add_license_info_to_admin_email($order, $sent_to_admin, $plain_text, $email) {
-    if (!is_yrt_license_enabled()) {
+    if (!ealicensewoocommerce_is_license_enabled()) {
         return; // Exit if the feature is not enabled
     }
     
