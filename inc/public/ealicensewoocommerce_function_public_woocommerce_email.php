@@ -34,7 +34,3 @@ function ealicensewoocommerce_add_license_info_to_email($order, $sent_to_admin, 
     }
 }
 add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_info_to_email', 10, 4);
-
-echo '<p><strong>' . __('License Key') . ':</strong> ' . $license_key . '</p>';
-    echo '<p><strong>' . __('Account Limit') . ':</strong> ' . $account_quota . '</p>';
-    echo '<p><strong>' . __('License Expiration') . ':</strong> ' . $license_expiration . '</p>';
