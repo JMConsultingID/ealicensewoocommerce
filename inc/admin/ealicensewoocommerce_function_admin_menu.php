@@ -13,8 +13,8 @@ function ealicensewoocommerce_add_admin_menu() {
         __('EA License', 'ealicensewoocommerce'),
         __('EA License', 'ealicensewoocommerce'),
         'manage_options',
-        'ea-license',
-        'ea_license_manage_license_page',
+        'ealicensewoocommerce',
+        'ealicensewoocommerce_manage_license_page',
         'dashicons-admin-tools',
         6
     );
@@ -24,8 +24,8 @@ function ealicensewoocommerce_add_admin_menu() {
         __('Manage License', 'ealicensewoocommerce'),
         __('Manage License', 'ealicensewoocommerce'),
         'manage_options',
-        'ea-license',
-        'ea_license_manage_license_page'
+        'ealicensewoocommerce',
+        'ealicensewoocommerce_manage_license_page'
     );
 
     add_submenu_page(
@@ -33,8 +33,8 @@ function ealicensewoocommerce_add_admin_menu() {
         __('Settings', 'ealicensewoocommerce'),
         __('Settings', 'ealicensewoocommerce'),
         'manage_options',
-        'ea-license-settings',
-        'ea_license_settings_page'
+        'ealicensewoocommerce-settings',
+        'ealicensewoocommerce_settings_page'
     );
 }
 add_action('admin_menu', 'ealicensewoocommerce_add_admin_menu');
