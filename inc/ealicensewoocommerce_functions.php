@@ -7,6 +7,14 @@
  *
  * @package ealicensewoocommerce
  */
+function disable_completed_order_email($enabled, $email_id, $order) {
+    if ($email_id === 'customer_completed_order' && $order->get_status() === 'completed') {
+        return false; // Disable the email
+    }
+    return $enabled;
+}
+add_filter('woocommerce_email_enabled_customer_completed_order', 'disable_completed_order_email', 10, 3);
+
 // Include admin functions
 require dirname(__FILE__) . '/admin/ealicensewoocommerce_function_admin_menu.php';
 require dirname(__FILE__) . '/admin/ealicensewoocommerce_function_admin_woocommerce_products.php';
