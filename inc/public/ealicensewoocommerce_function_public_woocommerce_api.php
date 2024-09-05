@@ -62,7 +62,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
 
             // Prepare data to send to API
             $data = array(
-                'order_id' => $order_id,
+                'order_id' => (string) $order_id,
                 'product_id' => $product_id,
                 'product_name' => $product_name,
                 'total_purchase' => $total_purchase,
