@@ -106,7 +106,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                 $logger->info('EA License API response: ' . $response_body, $context);
             }
 
-            $logger->info("==== End Log EA License" ====", $context);
+            $logger->info("==== End Log EA License ====", $context);
         }
     }
 }
