@@ -20,7 +20,7 @@ function ealicensewoocommerce_add_admin_menu() {
     );
 
     add_submenu_page(
-        'ea-license',
+        'ealicensewoocommerce',
         __('Manage License', 'ealicensewoocommerce'),
         __('Manage License', 'ealicensewoocommerce'),
         'manage_options',
@@ -29,7 +29,7 @@ function ealicensewoocommerce_add_admin_menu() {
     );
 
     add_submenu_page(
-        'ea-license',
+        'ealicensewoocommerce',
         __('Settings', 'ealicensewoocommerce'),
         __('Settings', 'ealicensewoocommerce'),
         'manage_options',
