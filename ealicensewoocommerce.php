@@ -31,7 +31,7 @@ add_action('init', 'ealicensewoocommerce_customizations', 20);
 
 function ealicensewoocommerce_customizations() {
     // Remove WooCommerce's default completed order email action
-    remove_action('woocommerce_order_status_completed', array('WC_Email_Customer_Completed_Order', 'trigger'));
+    remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
 
     // Add your custom hooks or logic here
     add_action('woocommerce_order_status_changed', 'ealicensewoocommerce_send_api_on_order_status_change', 10, 4);
