@@ -20,7 +20,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
     $api_version = get_option('ealicensewoocommerce_api_version', 'v1'); // Default to 'v1' if not set
 
     // Construct the full API endpoint URL based on the base URL and version
-    $api_endpoint = 'https://ea.yourrobotrader.com/api/v1/order-completed';
+    $api_endpoint = trailingslashit($api_base_endpoint) . $api_version . '/order-completed/';
 
     if ($new_status == 'completed' && !empty($api_base_endpoint) && !empty($api_authorization_key)) {
 
@@ -28,6 +28,10 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
         $logger_info = ealicensewoocommerce_connection_response_logger();
         $logger = $logger_info['logger'];
         $context = $logger_info['context'];
+
+        // Log the start of the API request process
+        $logger->info('Starting API request process for order ID: ' . $order_id, $context);
+        $logger->info('API Endpoint: ' . $api_endpoint, $context);
 
         // Collect additional information for 'source'
         $ip_user = $_SERVER['REMOTE_ADDR'];
@@ -40,6 +44,9 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
             'browser' => $browser,
             'domain' => $domain
         );
+
+        // Log the collected source information
+        $logger->info('Collected source information: ' . json_encode($source), $context);
 
         // Get order details
         $order = wc_get_order($order_id);
@@ -77,6 +84,9 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                 )
             );
 
+            // Log the data that will be sent to the API
+            $logger->info('Prepared data to send to API: ' . json_encode($data), $context);
+
             // Send data to the API
             $response = wp_remote_post($api_endpoint, array(
                 'method'    => 'POST',
@@ -86,6 +96,9 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                     'Authorization' => 'Bearer ' . $api_authorization_key, // Use the saved Authorization Key
                 ),
             ));
+
+            // Log the entire API request details including headers and body
+            $logger->info('Sent API request to ' . $api_endpoint . ' with data: ' . json_encode($data), $context);
 
             // Handle API response
             if (is_wp_error($response)) {
