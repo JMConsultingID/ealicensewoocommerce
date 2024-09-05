@@ -20,7 +20,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
     $api_version = get_option('ealicensewoocommerce_api_version', 'v1'); // Default to 'v1' if not set
 
     // Construct the full API endpoint URL based on the base URL and version
-    $api_endpoint = trailingslashit($api_base_endpoint) . $api_version . '/order-completed/';
+    $api_endpoint = 'https://ea.yourrobotrader.com/api/v1/order-completed';
 
     if ($new_status == 'completed' && !empty($api_base_endpoint) && !empty($api_authorization_key)) {
 
