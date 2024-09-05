@@ -26,4 +26,12 @@ if (!function_exists('is_plugin_active')) {
     include_once(ABSPATH . '/wp-admin/includes/plugin.php');
 }
 
+function disable_completed_order_email($enabled, $email_id, $order) {
+    if ($email_id === 'customer_completed_order' && $order->get_status() === 'completed') {
+        return false; // Disable the email
+    }
+    return $enabled;
+}
+add_filter('woocommerce_email_enabled_customer_completed_order', 'disable_completed_order_email', 10, 3);
+
 require plugin_dir_path( __FILE__ ) . 'inc/ealicensewoocommerce_functions.php';
