@@ -30,13 +30,17 @@ if (!function_exists('is_plugin_active')) {
 add_action('init', 'ealicensewoocommerce_customizations', 20);
 
 function ealicensewoocommerce_customizations() {
-    // Remove WooCommerce's default completed order email action
-    remove_action( 'woocommerce_order_status_completed_notification', array( $email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
+    // Access WooCommerce email classes
+    $email_class = WC()->mailer();
+
+    // Remove WooCommerce's default "Completed Order" email action
+    remove_action('woocommerce_order_status_completed_notification', array($email_class->emails['WC_Email_Customer_Completed_Order'], 'trigger'));
 
     // Add your custom hooks or logic here
     add_action('woocommerce_order_status_changed', 'ealicensewoocommerce_send_api_on_order_status_change', 10, 4);
 }
 
+add_action('woocommerce_init', 'disable_default_order_completed_email');
 
 function disable_completed_order_email($enabled, $email_id, $order) {
     if ($email_id === 'customer_completed_order' && $order->get_status() === 'completed') {
