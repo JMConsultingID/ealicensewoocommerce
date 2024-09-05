@@ -41,7 +41,7 @@ function ealicensewoocommerce_add_license_info_to_email($order, $sent_to_admin, 
         }
     }
 }
-// add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_info_to_email', 20, 4);
+add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_info_to_email', 10, 4);
 
 
 function ealicensewoocommerce_add_license_info_to_admin_email($order, $sent_to_admin, $plain_text, $email) {

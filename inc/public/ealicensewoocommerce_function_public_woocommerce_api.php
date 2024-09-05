@@ -109,8 +109,8 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                     update_post_meta($order_id, '_ealicensewoocommerce_account_quota', sanitize_text_field($response_data['account_quota']));
                     update_post_meta($order_id, '_ealicensewoocommerce_license_expiration', sanitize_text_field($response_data['license_expiration']));
 
-                    // Trigger a custom action after storing the license key
-                    do_action('ealicense_after_license_stored', $order);
+                    // Manually trigger the email sending function after license key is stored
+                    ealicensewoocommerce_send_customer_email($order);
                 }
 
                 $logger->info('EA License API response: ' . $response_body, $context);
@@ -121,3 +121,10 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
     }
 }
 add_action('woocommerce_order_status_changed', 'ealicensewoocommerce_send_api_on_order_status_change', 10, 4);
+
+
+// Function to send the customer email with the license key
+function ealicensewoocommerce_send_customer_email($order) {
+    // Trigger WooCommerce email
+    WC()->mailer()->emails['WC_Email_Customer_Completed_Order']->trigger($order->get_id());
+}
