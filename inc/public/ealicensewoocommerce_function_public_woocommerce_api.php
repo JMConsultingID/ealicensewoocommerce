@@ -31,7 +31,6 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
 
         // Log the start of the API request process
         $logger->info('Starting API request process for order ID: ' . $order_id, $context);
-        $logger->info('API Endpoint: ' . $api_endpoint, $context);
 
         // Collect additional information for 'source'
         $ip_user = $_SERVER['REMOTE_ADDR'];
@@ -44,9 +43,6 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
             'browser' => $browser,
             'domain' => $domain
         );
-
-        // Log the collected source information
-        $logger->info('Collected source information: ' . json_encode($source), $context);
 
         // Get order details
         $order = wc_get_order($order_id);
@@ -83,9 +79,6 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                     'phone' => $order->get_billing_phone(),
                 )
             );
-
-            // Log the data that will be sent to the API
-            $logger->info('Prepared data to send to API: ' . json_encode($data), $context);
 
             // Send data to the API
             $response = wp_remote_post($api_endpoint, array(
