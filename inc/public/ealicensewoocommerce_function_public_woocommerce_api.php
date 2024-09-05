@@ -29,7 +29,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
         $logger = $logger_info['logger'];
         $context = $logger_info['context'];
 
-        // Collect additional information
+        // Collect additional information for 'source'
         $ip_user = $_SERVER['REMOTE_ADDR'];
         $browser = $_SERVER['HTTP_USER_AGENT'];
         $domain = $_SERVER['HTTP_HOST'];
