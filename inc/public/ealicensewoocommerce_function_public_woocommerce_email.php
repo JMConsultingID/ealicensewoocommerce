@@ -18,26 +18,41 @@ function ealicensewoocommerce_add_license_info_to_email($order, $sent_to_admin, 
         $download_url = 'https://eastaging.yourrobotrader.com/wp-content/uploads/2024/08/Software_Box_Mockup_robotrader-shadow-web-e1662613546511.png';
 
         // Retrieve the license key from order meta
-        $license_key = get_post_meta($order_id, '_ealicensewoocommerce_license_key', true);
-        $account_quota = get_post_meta($order_id, '_ealicensewoocommerce_account_quota', true);
-        $license_expiration = get_post_meta($order_id, '_ealicensewoocommerce_license_expiration', true);
+        $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
+        $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
+        $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
 
-        if ($plain_text) {
-            // Plain text email format
-            echo "License Key: " . $license_key . "\n";
-            echo "Account Limit: " . $account_quota . " Accounts\n";
-            echo "License Expiration: " . $license_expiration . "\n";
-            echo "Download your software here: " . esc_url($download_url) . "\n";
-        } else {
-            // HTML email format
-            echo '<p><strong>' . __('License Key:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . '</p>';
-            echo '<p><strong>' . __('Account Limit:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . ' Accounts</p>';
-            echo '<p><strong>' . __('License Expiration:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . '</p>';
-            echo '<p><a href="' . esc_url($download_url) . '" target="_blank">' . __('Download your file here', 'ealicensewoocommerce') . '</a></p>';
+        // Initialize logger
+        $logger_info = ealicensewoocommerce_connection_response_logger();
+        $logger = $logger_info['logger'];
+        $context = $logger_info['context'];
+
+        // Log the start of the API request process
+        $logger->info("==== Starting Email request Data : ". $order_id ." ====", $context);
+        $logger->info('license_key ' . $license_key, $context);
+        $logger->info('account_quota ' . $account_quota, $context);
+        $logger->info('license_expiration ' . $license_expiration, $context);
+        $logger->info("==== End Email request Data  ====", $context);
+
+
+        if ($license_key) {
+            if ($plain_text) {
+                // Plain text email format
+                echo "License Key: " . $license_key . "\n";
+                echo "Account Limit: " . $account_quota . " Accounts\n";
+                echo "License Expiration: " . $license_expiration . "\n";
+                echo "Download your software here: " . esc_url($download_url) . "\n";
+            } else {
+                // HTML email format
+                echo '<p><strong>' . __('License Key:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . '</p>';
+                echo '<p><strong>' . __('Account Limit:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . ' Accounts</p>';
+                echo '<p><strong>' . __('License Expiration:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . '</p>';
+                echo '<p><a href="' . esc_url($download_url) . '" target="_blank">' . __('Download your file here', 'ealicensewoocommerce') . '</a></p>';
+            }
         }
     }
 }
-add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_info_to_email', 10, 4);
+add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_info_to_email', 20, 4);
 
 
 function ealicensewoocommerce_add_license_info_to_admin_email($order, $sent_to_admin, $plain_text, $email) {
@@ -64,4 +79,4 @@ function ealicensewoocommerce_add_license_info_to_admin_email($order, $sent_to_a
         
     }
 }
-add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_info_to_admin_email', 10, 4);
+add_action('woocommerce_email_order_meta', 'ealicensewoocommerce_add_license_info_to_admin_email', 20, 4);
