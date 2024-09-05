@@ -14,6 +14,7 @@ function ealicensewoocommerce_add_license_info_to_email($order, $sent_to_admin, 
     }
     
     if ($email->id === 'customer_completed_order') {
+        sleep(2);
         $order_id = $order->get_id();
         $download_url = 'https://eastaging.yourrobotrader.com/wp-content/uploads/2024/08/Software_Box_Mockup_robotrader-shadow-web-e1662613546511.png';
 
