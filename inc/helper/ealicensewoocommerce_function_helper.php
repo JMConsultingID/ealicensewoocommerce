@@ -22,7 +22,7 @@ function ealicensewoocommerce_connection_response_logger() {
 }
 
 // Add License Key, and a download link to the order completed email
-function ealicensewoocommerce_send_custom_order_email($order, $license_key, $account_quota, $license_expiration) {
+function ealicensewoocommerce_send_license_order_email($order, $license_key, $account_quota, $license_expiration) {
     $email_heading = 'Your Order is Complete';
     $email_content = '<p>Thank you for your order!</p>';
     $email_content .= '<p><strong>License Key:</strong> ' . esc_html($license_key) . '</p>';
