@@ -30,7 +30,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
         $context = $logger_info['context'];
 
         // Log the start of the API request process
-        $logger->info("============================================", $context);
+        $logger->info("==== Starting API request process for order ID: ". $order_id ." ====", $context);
         $logger->info('Starting API request process for order ID: ' . $order_id, $context);
 
         // Collect additional information for 'source'
@@ -106,7 +106,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                 $logger->info('EA License API response: ' . $response_body, $context);
             }
 
-            $logger->info("============================================\n", $context);
+            $logger->info("==== End Log EA License" ====", $context);
         }
     }
 }
