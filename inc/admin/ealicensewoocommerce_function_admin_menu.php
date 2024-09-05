@@ -110,3 +110,13 @@ function ealicensewoocommerce_license_api_version_callback() {
     // Close the select dropdown
     echo '</select>';
 }
+
+
+// Function to display settings page
+function ealicensewoocommerce_manage_license_page() {
+    ?>
+    <div class="wrap ealicensewoocommerce">
+        <h1><?php _e('Manage License', 'ealicensewoocommerce'); ?></h1>
+    </div>
+    <?php
+}
