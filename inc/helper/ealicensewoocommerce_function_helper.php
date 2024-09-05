@@ -21,22 +21,36 @@ function ealicensewoocommerce_connection_response_logger() {
     return array('logger' => $logger, 'context' => $context);
 }
 
-// Add License Key, and a download link to the order completed email
-function ealicensewoocommerce_send_license_order_email($order, $license_key, $account_quota, $license_expiration) {
-    $email_heading = 'Your Order is Complete';
-    $email_content = '<p>Thank you for your order!</p>';
-    $email_content .= '<p><strong>License Key:</strong> ' . esc_html($license_key) . '</p>';
-    $email_content .= '<p><strong>Account Limit:</strong> ' . esc_html($account_quota) . ' Accounts</p>';
-    $email_content .= '<p><strong>License Expiration:</strong> ' . esc_html($license_expiration) . '</p>';
-    $email_content .= '<p><a href="https://eastaging.yourrobotrader.com/wp-content/uploads/2024/08/Software_Box_Mockup_robotrader-shadow-web-e1662613546511.png" target="_blank">Download your file here</a></p>';
+function ealicensewoocommerce_add_license_info_to_email_order($order) {
+    $order_id = $order->get_id();
+    $download_url = 'https://eastaging.yourrobotrader.com/wp-content/uploads/2024/08/Software_Box_Mockup_robotrader-shadow-web-e1662613546511.png';
 
-    // Get WooCommerce mailer object
-    $mailer = WC()->mailer();
-    $email = $mailer->emails['WC_Email_Customer_Completed_Order'];
+    // Retrieve the license key from order meta
+    $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
+    $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
+    $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
 
-    // Set the recipient to the billing email address of the order
-    $recipient = $order->get_billing_email();
-
-    // Send the email
-    $email->trigger($order->get_id(), $order, $email_content, $email_heading);
+    if ($license_key) {
+        // Add the license key and download link to the email content
+        add_filter('woocommerce_email_order_meta_fields', function ($fields, $sent_to_admin, $order) use ($license_key, $download_url) {
+            $fields['license_key'] = array(
+                'label' => __('License Key', 'ealicensewoocommerce'),
+                'value' => $license_key,
+            );
+            $fields['account_quota'] = array(
+                'label' => __('Account Limit', 'ealicensewoocommerce'),
+                'value' => $account_quota,
+            );
+            $fields['license_key'] = array(
+                'label' => __('License Expiration', 'ealicensewoocommerce'),
+                'value' => $license_expiration,
+            );
+            $fields['download_link'] = array(
+                'label' => __('Download your file here', 'ealicensewoocommerce'),
+                'value' => '<a href="' . esc_url($download_url) . '" target="_blank">' . __('Download your file here', 'ealicensewoocommerce') . '</a>',
+            );
+            return $fields;
+        }, 10, 3);
+    }
 }
+add_action('ealicense_after_license_stored', 'ealicensewoocommerce_add_license_info_to_email_order', 10, 1);
