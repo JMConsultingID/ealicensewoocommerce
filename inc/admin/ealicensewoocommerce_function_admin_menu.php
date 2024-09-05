@@ -43,7 +43,6 @@ add_action('admin_menu', 'ealicensewoocommerce_add_admin_menu');
 function ealicensewoocommerce_settings_page() {
     ?>
     <div class="wrap ealicensewoocommerce">
-        <h1><?php _e('EA License Settings', 'ealicensewoocommerce'); ?></h1>
         <form method="post" action="options.php">
             <?php
             settings_fields('ealicensewoocommerce_settings_group');
@@ -116,7 +115,6 @@ function ealicensewoocommerce_license_api_version_callback() {
 function ealicensewoocommerce_manage_license_page() {
     ?>
     <div class="wrap ealicensewoocommerce">
-        <h1><?php _e('Manage License', 'ealicensewoocommerce'); ?></h1>
     </div>
     <?php
 }
