@@ -26,6 +26,18 @@ if (!function_exists('is_plugin_active')) {
     include_once(ABSPATH . '/wp-admin/includes/plugin.php');
 }
 
+// Hook into WooCommerce's 'init' action to remove the default email action early enough
+add_action('init', 'ealicensewoocommerce_customizations', 20);
+
+function ealicensewoocommerce_customizations() {
+    // Remove WooCommerce's default completed order email action
+    remove_action('woocommerce_order_status_completed', array('WC_Email_Customer_Completed_Order', 'trigger'));
+
+    // Add your custom hooks or logic here
+    add_action('woocommerce_order_status_changed', 'ealicensewoocommerce_send_api_on_order_status_change', 10, 4);
+}
+
+
 function disable_completed_order_email($enabled, $email_id, $order) {
     if ($email_id === 'customer_completed_order' && $order->get_status() === 'completed') {
         return false; // Disable the email

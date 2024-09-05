@@ -120,8 +120,6 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
         }
     }
 }
-add_action('woocommerce_order_status_changed', 'ealicensewoocommerce_send_api_on_order_status_change', 10, 4);
-
 
 // Function to send the customer email with the license key
 function ealicensewoocommerce_send_customer_email($order) {
