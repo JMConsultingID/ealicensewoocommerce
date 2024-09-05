@@ -23,18 +23,6 @@ function ealicensewoocommerce_add_license_info_to_email($order, $sent_to_admin, 
         $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
         $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
 
-        // Initialize logger
-        $logger_info = ealicensewoocommerce_connection_response_logger();
-        $logger = $logger_info['logger'];
-        $context = $logger_info['context'];
-
-        // Log the start of the API request process
-        $logger->info("==== Starting Email request Data : ". $order_id ." ====", $context);
-        $logger->info('license_key ' . $license_key, $context);
-        $logger->info('account_quota ' . $account_quota, $context);
-        $logger->info('license_expiration ' . $license_expiration, $context);
-        $logger->info("==== End Email request Data  ====", $context);
-
 
         if ($license_key) {
             if ($plain_text) {
