@@ -15,7 +15,7 @@ function ealicensewoocommerce_add_admin_menu() {
         'manage_options',
         'ealicensewoocommerce',
         'ealicensewoocommerce_manage_license_page',
-        'dashicons-rest-api',
+        'dashicons-marker',
         6
     );
 
