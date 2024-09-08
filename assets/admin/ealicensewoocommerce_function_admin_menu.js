@@ -36,7 +36,7 @@ function fetchMqlAccountDetails(licenseId) {
                             <td>${account.status}</td>
                             <td>${createdAt}</td>
                             <td>
-                                <a href="#" class="dashicons dashicons-dismiss" onclick="deleteMqlAccount(${account.id}); return false;" title="Delete Account"></a>
+                                <a href="#" class="dashicons dashicons-dismiss" onclick="deleteMqlAccount(${account.account_id}); return false;" title="Delete Account"></a>
                             </td>
                         </tr>`;
                 });
