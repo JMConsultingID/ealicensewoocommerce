@@ -176,7 +176,7 @@ function ealicensewoocommerce_manage_license_page() {
                 $response = wp_remote_get($api_url, array('headers' => $headers));
 
                 if (is_wp_error($response)) {
-                    echo '<tr><td colspan="9">' . __('Error fetching licenses', 'ealicensewoocommerce') . '</td></tr>';
+                    echo '<tr><td colspan="10">' . __('Error fetching licenses', 'ealicensewoocommerce') . '</td></tr>';
                 } else {
                     $response_body = wp_remote_retrieve_body($response);
                     $data = json_decode($response_body, true);
@@ -192,7 +192,7 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<tr>';
                             echo '<td>' . esc_html($license['license_key']) . '</td>';
                             echo '<td>' . esc_html($license['email']) . '</td>';
-                            echo '<td>' . esc_html($license['order_id']) . '</td>';
+                            echo '<td>' . esc_html((int) $license['order_id']) . '</td>'; // Cast order_id to integer
                             echo '<td>' . esc_html($license['account_quota']) . '</td>';
                             echo '<td>' . esc_html($license['used_quota']) . '</td>';
                             echo '<td>' . esc_html($license['license_expiration']) . '</td>';
@@ -203,7 +203,7 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '</tr>';
                         }
                     } else {
-                        echo '<tr><td colspan="9">' . __('No licenses found', 'ealicensewoocommerce') . '</td></tr>';
+                        echo '<tr><td colspan="10">' . __('No licenses found', 'ealicensewoocommerce') . '</td></tr>';
                     }
                 }
                 ?>
