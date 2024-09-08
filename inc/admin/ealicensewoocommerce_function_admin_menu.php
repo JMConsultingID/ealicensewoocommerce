@@ -166,6 +166,7 @@ function ealicensewoocommerce_manage_license_page() {
                     <th><?php _e('License Expiration', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Status', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Creation Date', 'ealicensewoocommerce'); ?></th>
+                    <th><?php _e('Details', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Actions', 'ealicensewoocommerce'); ?></th>
                 </tr>
             </thead>
@@ -197,8 +198,8 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<td>' . esc_html($license['license_expiration']) . '</td>';
                             echo '<td>' . esc_html($license['status']) . '</td>';
                             echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_creation_date']))) . '</td>';
+                            echo '<td><a href="#" class="dashicons dashicons-visibility" onclick="fetchMqlAccountDetails(' . esc_js($license['id']) . ')" title="View Details"></a></td>';
                              echo '<td>';
-                             echo '<a href="#" class="dashicons dashicons-visibility" onclick="fetchMqlAccountDetails(' . esc_js($license['id']) . ')" title="View Details"></a>';
                                 if ($license['status'] === 'active') {
                                     // Show the "dashicons-no" for active licenses and set up a click event to deactivate
                                     echo '<a href="#" class="dashicons dashicons-dismiss" onclick="toggleLicenseStatus(' . esc_js($license['id']) . ', \'inactive\'); return false;" title="Deactivate License"></a>';
