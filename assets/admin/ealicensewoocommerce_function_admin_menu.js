@@ -35,6 +35,7 @@ function fetchMqlAccountDetails(licenseId) {
                             <td>${account.account_mql}</td>
                             <td>${account.status}</td>
                             <td>${createdAt}</td>
+                            <td><a href="#" class="dashicons dashicons-dismiss"></a></td>
                         </tr>`;
                 });
 
