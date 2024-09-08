@@ -256,7 +256,7 @@ function ealicensewoocommerce_manage_license_page() {
                 'Authorization': 'Bearer <?php echo esc_js($api_authorization_key); ?>'
             },
             success: function(response) {
-                if (Array.isArray(response)) {
+                if (Array.isArray(response) && response.length > 0) {
                     // Generate the HTML table if data exists
                     var tableContent = `
                         <table class="wp-list-table widefat fixed striped">
@@ -288,23 +288,56 @@ function ealicensewoocommerce_manage_license_page() {
 
                     jQuery('#mql-account-details').html(tableContent);
                 } else {
-                    jQuery('#mql-account-details').html('<p><?php _e("No accounts found for this license.", "ealicensewoocommerce"); ?></p>');
+                    // Display "No accounts found" message inside the table if no data is found
+                    var noDataContent = `
+                        <table class="wp-list-table widefat fixed striped">
+                            <thead>
+                                <tr>
+                                    <th><?php _e('Account MQL', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Status', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Validation Status', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Created At', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Updated At', 'ealicensewoocommerce'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5"><?php _e('No accounts found for this license.', 'ealicensewoocommerce'); ?></td>
+                                </tr>
+                            </tbody>
+                        </table>`;
+
+                    jQuery('#mql-account-details').html(noDataContent);
                 }
 
                 // Show the modal
                 jQuery('#mqlAccountModal').fadeIn();
             },
             error: function(xhr) {
-                // Capture the error response and display the error message
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    alert(xhr.responseJSON.message);
-                } else {
-                    alert('<?php _e("Failed to retrieve MQL account details.", "ealicensewoocommerce"); ?>');
-                }
+                // Handle 404 and other errors gracefully by displaying a message in the table
+                var errorContent = `
+                    <table class="wp-list-table widefat fixed striped">
+                        <thead>
+                            <tr>
+                                <th><?php _e('Account MQL', 'ealicensewoocommerce'); ?></th>
+                                <th><?php _e('Status', 'ealicensewoocommerce'); ?></th>
+                                <th><?php _e('Validation Status', 'ealicensewoocommerce'); ?></th>
+                                <th><?php _e('Created At', 'ealicensewoocommerce'); ?></th>
+                                <th><?php _e('Updated At', 'ealicensewoocommerce'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5"><?php _e('No accounts found for this license.', 'ealicensewoocommerce'); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>`;
+
+                jQuery('#mql-account-details').html(errorContent);
+                jQuery('#mqlAccountModal').fadeIn();
             }
         });
     }
-
 
     // Modal close function
     jQuery(document).ready(function($) {
