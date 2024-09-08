@@ -12,7 +12,7 @@
 function ealicensewoocommerce_add_my_license_menu_item($items) {
     // Insert the new menu item after the "Orders" tab (or wherever you want it)
     $new_items = array_slice($items, 0, 1, true) +
-                 array('my-license' => __('My License', 'ealicensewoocommerce')) +
+                 array('my-licenses' => __('My License', 'ealicensewoocommerce')) +
                  array_slice($items, 1, null, true);
     return $new_items;
 }
@@ -20,7 +20,7 @@ add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_my_licens
 
 // Add the custom endpoint for My License
 function ealicensewoocommerce_add_my_license_endpoint() {
-    add_rewrite_endpoint('my-license', EP_PAGES);
+    add_rewrite_endpoint('my-licenses', EP_PAGES);
 }
 add_action('init', 'ealicensewoocommerce_add_my_license_endpoint');
 
