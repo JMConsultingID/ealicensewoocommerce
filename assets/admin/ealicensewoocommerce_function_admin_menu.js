@@ -35,7 +35,7 @@ function fetchMqlAccountDetails(licenseId) {
                             <td>${account.account_mql}</td>
                             <td>${account.status}</td>
                             <td>${account.validation_status}</td>
-                            <td>${account.created_at}</td>
+                            <td>${createdAt}</td>
                         </tr>`;
                 });
 
