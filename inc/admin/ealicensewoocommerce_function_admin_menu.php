@@ -199,8 +199,8 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<td>' . esc_html($license['status']) . '</td>';
                             echo '<td>' . esc_html($source_domain) . '</td>';
                             echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_creation_date']))) . '</td>';
-                            echo '<td><a href="' . esc_url(admin_url('admin.php?page=ealicensewoocommerce&edit_id=' . $license['id'])) . '">' . __('Edit', 'ealicensewoocommerce') . '</a></td>';
-                            echo '</tr>';
+                            echo '<td><a href="' . esc_url(admin_url('admin.php?page=ealicensewoocommerce&edit_id=' . $license['id'])) . '" class="dashicons dashicons-visibility" title="' . __('View Details', 'ealicensewoocommerce') . '"></a></td>';
+
                         }
                     } else {
                         echo '<tr><td colspan="10">' . __('No licenses found', 'ealicensewoocommerce') . '</td></tr>';
