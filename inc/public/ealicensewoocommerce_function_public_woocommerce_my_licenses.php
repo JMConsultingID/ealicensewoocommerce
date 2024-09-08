@@ -74,7 +74,7 @@ function ealicensewoocommerce_display_licenses_by_email() {
         echo '<td>' . esc_html($license['account_quota']) . '</td>';
         echo '<td>' . esc_html($license['used_quota']) . '</td>';
         echo '<td>' . esc_html($license['license_expiration']) . '</td>';
-        echo '<td>' . esc_html($license['license_expiration_date'] ? $license['license_expiration_date'] : 'Lifetime') . '</td>';
+        echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_creation_date'])) ? $license['license_expiration_date'] : 'Lifetime') . '</td>';
         echo '<td>' . esc_html($license['status']) . '</td>';
         echo '</tr>';
     }
