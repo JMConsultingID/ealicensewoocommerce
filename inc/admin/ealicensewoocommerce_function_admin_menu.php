@@ -201,10 +201,10 @@ function ealicensewoocommerce_manage_license_page() {
                              echo '<a href="#" class="dashicons dashicons-visibility" onclick="fetchMqlAccountDetails(' . esc_js($license['id']) . ')" title="View Details"></a>';
                                 if ($license['status'] === 'active') {
                                     // Show the "dashicons-no" for active licenses and set up a click event to deactivate
-                                    echo '<a href="#" class="dashicons dashicons-no" onclick="toggleLicenseStatus(' . esc_js($license['id']) . ', \'inactive\'); return false;" title="Deactivate License"></a>';
+                                    echo '<a href="#" class="dashicons dashicons-dismiss" onclick="toggleLicenseStatus(' . esc_js($license['id']) . ', \'inactive\'); return false;" title="Deactivate License"></a>';
                                 } elseif ($license['status'] === 'inactive') {
                                     // Show the "dashicons-yes" for inactive licenses and set up a click event to activate
-                                    echo '<a href="#" class="dashicons dashicons-yes" onclick="toggleLicenseStatus(' . esc_js($license['id']) . ', \'active\'); return false;" title="Activate License"></a>';
+                                    echo '<a href="#" class="dashicons dashicons-yes-alt" onclick="toggleLicenseStatus(' . esc_js($license['id']) . ', \'active\'); return false;" title="Activate License"></a>';
                                 }
                                 
                                 echo '</td>';
