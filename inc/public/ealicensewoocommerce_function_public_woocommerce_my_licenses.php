@@ -48,7 +48,7 @@ function ealicensewoocommerce_my_license_content() {
         echo '<p>' . __('You have no licenses.', 'ealicensewoocommerce') . '</p>';
     }
 }
-add_action('woocommerce_account_my-license_endpoint', 'ealicensewoocommerce_my_license_content');
+add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_my_license_content');
 
 // Flush rewrite rules on activation
 function ealicensewoocommerce_flush_rewrite_rules() {
