@@ -64,17 +64,18 @@ function ealicensewoocommerce_display_licenses_by_email() {
 
     // Display the licenses in a table
     echo '<table class="shop_table shop_table_responsive my_account_orders">';
-    echo '<thead><tr><th>' . __('License', 'ealicensewoocommerce') . '</th><th>' . __('Status', 'ealicensewoocommerce') . '</th><th>' . __('Account Quota', 'ealicensewoocommerce') . '</th><th>' . __('Used Quota', 'ealicensewoocommerce') . '</th><th>' . __('Expiration Date', 'ealicensewoocommerce') . '</th><th>' . __('Order ID', 'ealicensewoocommerce') . '</th></tr></thead>';
+    echo '<thead><tr><th>' . __('Order ID', 'ealicensewoocommerce') . '</th><th>' . __('License', 'ealicensewoocommerce') . '</th>th>' . __('Account Quota', 'ealicensewoocommerce') . '</th><th>' . __('Used Quota', 'ealicensewoocommerce') . '</th><th>' . __('Expiration', 'ealicensewoocommerce') . '</th><th>' . __('Expiration Date', 'ealicensewoocommerce') . '</th><th>' . __('Status', 'ealicensewoocommerce') . '</th><</tr></thead>';
     echo '<tbody>';
 
     foreach ($licenses as $license) {
         echo '<tr>';
         echo '<td>' . esc_html($license['order_id']) . '</td>';
-        echo '<td>' . esc_html($license['license_key']) . '</td>';
-        echo '<td>' . esc_html($license['status']) . '</td>';
+        echo '<td>' . esc_html($license['license_key']) . '</td>';        
         echo '<td>' . esc_html($license['account_quota']) . '</td>';
         echo '<td>' . esc_html($license['used_quota']) . '</td>';
-        echo '<td>' . esc_html($license['license_expiration_date'] ? $license['license_expiration_date'] : 'N/A') . '</td>';        
+        echo '<td>' . esc_html($license['license_expiration']) . '</td>';
+        echo '<td>' . esc_html($license['license_expiration_date'] ? $license['license_expiration_date'] : 'Lifetime') . '</td>';
+        echo '<td>' . esc_html($license['status']) . '</td>';
         echo '</tr>';
     }
 
