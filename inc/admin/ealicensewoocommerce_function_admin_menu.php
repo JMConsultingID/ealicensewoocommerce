@@ -166,7 +166,7 @@ function ealicensewoocommerce_manage_license_page() {
                     <th><?php _e('License Expiration', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Status', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Creation Date', 'ealicensewoocommerce'); ?></th>
-                    <th><?php _e('Details', 'ealicensewoocommerce'); ?></th>
+                    <th><?php _e('Account Details', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Actions', 'ealicensewoocommerce'); ?></th>
                 </tr>
             </thead>
