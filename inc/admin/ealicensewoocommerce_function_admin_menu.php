@@ -159,6 +159,8 @@ function ealicensewoocommerce_manage_license_page() {
             <thead>
                 <tr>
                     <th><?php _e('License Key', 'ealicensewoocommerce'); ?></th>
+                    <th><?php _e('Email', 'ealicensewoocommerce'); ?></th>
+                    <th><?php _e('OrderID', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Account Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Used Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Expiration', 'ealicensewoocommerce'); ?></th>
@@ -190,6 +192,8 @@ function ealicensewoocommerce_manage_license_page() {
 
                             echo '<tr>';
                             echo '<td>' . esc_html($license['license_key']) . '</td>';
+                            echo '<td>' . esc_html($license['email']) . '</td>';
+                            echo '<td>' . esc_html($license['order_id']) . '</td>';
                             echo '<td>' . esc_html($license['account_quota']) . '</td>';
                             echo '<td>' . esc_html($license['used_quota']) . '</td>';
                             echo '<td>' . esc_html($license['license_expiration']) . '</td>';
