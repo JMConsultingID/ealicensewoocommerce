@@ -122,6 +122,17 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
             update_user_meta($user_id, 'billing_phone', $order->get_billing_phone());
             update_user_meta($user_id, 'billing_postcode', $order->get_billing_postcode());
 
+            // Save shipping details to user meta
+            update_user_meta($user_id, 'shipping_address_1', $order->get_shipping_address_1());
+            update_user_meta($user_id, 'shipping_address_2', $order->get_shipping_address_2());
+            update_user_meta($user_id, 'shipping_city', $order->get_shipping_city());
+            update_user_meta($user_id, 'shipping_company', $order->get_shipping_company());
+            update_user_meta($user_id, 'shipping_country', $order->get_shipping_country());
+            update_user_meta($user_id, 'shipping_state', $order->get_shipping_state());
+            update_user_meta($user_id, 'shipping_first_name', $order->get_shipping_first_name());
+            update_user_meta($user_id, 'shipping_last_name', $order->get_shipping_last_name());
+            update_user_meta($user_id, 'shipping_postcode', $order->get_shipping_postcode());
+
             // Trigger the "new account" email to the customer
             WC()->mailer()->customer_new_account($user_id);
 
