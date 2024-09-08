@@ -199,8 +199,7 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<td>' . esc_html($license['status']) . '</td>';
                             echo '<td>' . esc_html($source_domain) . '</td>';
                             echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_creation_date']))) . '</td>';
-                            echo '<td><a href="' . esc_url(admin_url('admin.php?page=ealicensewoocommerce&edit_id=' . $license['id'])) . '" class="dashicons dashicons-visibility" title="' . __('View Details', 'ealicensewoocommerce') . '"></a></td>';
-
+                            echo '<td><a href="#" class="dashicons dashicons-visibility" onclick="fetchMqlAccountDetails(' . esc_js($license['id']) . ')" title="' . __('View Details', 'ealicensewoocommerce') . '"></a></td>';
                         }
                     } else {
                         echo '<tr><td colspan="10">' . __('No licenses found', 'ealicensewoocommerce') . '</td></tr>';
@@ -233,5 +232,55 @@ function ealicensewoocommerce_manage_license_page() {
         }
         ?>
     </div>
+
+    <div id="mqlAccountModal" class="mql-modal" style="display:none;">
+    <div class="mql-modal-content">
+        <span class="mql-close">&times;</span>
+        <h2><?php _e('MQL Account Details', 'ealicensewoocommerce'); ?></h2>
+        <div id="mql-account-details"></div>
+    </div>
+    </div>
+
+    <script type="text/javascript">
+    function fetchMqlAccountDetails(licenseId) {
+        // Construct the API URL to fetch MQL account details
+        var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + '/v1/mql-accounts/license/' + licenseId;
+
+        // Make an AJAX request to fetch the MQL account details
+        jQuery.ajax({
+            url: apiEndpoint,
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer <?php echo esc_js($api_authorization_key); ?>'
+            },
+            success: function(response) {
+                // Populate the modal with the response data
+                var modalContent = `
+                    <p><strong><?php _e('License Key:', 'ealicensewoocommerce'); ?></strong> ${response.license_key}</p>
+                    <p><strong><?php _e('Email User:', 'ealicensewoocommerce'); ?></strong> ${response.email_user}</p>
+                    <p><strong><?php _e('Account MQL:', 'ealicensewoocommerce'); ?></strong> ${response.account_mql}</p>
+                    <p><strong><?php _e('Status:', 'ealicensewoocommerce'); ?></strong> ${response.status}</p>
+                    <p><strong><?php _e('Validation Status:', 'ealicensewoocommerce'); ?></strong> ${response.validation_status}</p>
+                    <p><strong><?php _e('Created At:', 'ealicensewoocommerce'); ?></strong> ${response.created_at}</p>
+                    <p><strong><?php _e('Updated At:', 'ealicensewoocommerce'); ?></strong> ${response.updated_at}</p>
+                `;
+
+                jQuery('#mql-account-details').html(modalContent);
+                jQuery('#mqlAccountModal').fadeIn();
+            },
+            error: function() {
+                alert('<?php _e('Failed to retrieve MQL account details.', 'ealicensewoocommerce'); ?>');
+            }
+        });
+    }
+
+    // Close modal functionality
+    jQuery(document).ready(function($) {
+        $('.mql-close').on('click', function() {
+            $('#mqlAccountModal').fadeOut();
+        });
+    });
+    </script>
+
     <?php
 }
