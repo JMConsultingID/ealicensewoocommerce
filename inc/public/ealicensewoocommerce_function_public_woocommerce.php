@@ -75,25 +75,26 @@ function ealicensewoocommerce_display_license_details_after_order($order_id) {
 // Function to auto-register a user and log them in after the order is completed
 add_action('woocommerce_thankyou', 'ealicensewoocommerce_auto_register_user_after_checkout');
 
+// Function to auto-register a user and log them in after the order is completed
 function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
-    // Get the order details
+    // Get the order object
     $order = wc_get_order($order_id);
-    
+
     // Check if the user is not already registered
     if ($order->get_user_id() == 0) {
         // Get the billing details from the order
         $email = $order->get_billing_email();
         $first_name = $order->get_billing_first_name();
         $last_name = $order->get_billing_last_name();
-        
+
         // Check if the email already exists in the system
         if (!email_exists($email)) {
             // Generate a random password for the new user
             $random_password = wp_generate_password();
-            
+
             // Create a new user using the email and generated password
             $user_id = wp_create_user($email, $random_password, $email);
-            
+
             // Update the user profile with first name and last name
             wp_update_user(array(
                 'ID' => $user_id,
@@ -124,16 +125,18 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
             update_user_meta($user_id, 'shipping_first_name', $order->get_shipping_first_name());
             update_user_meta($user_id, 'shipping_last_name', $order->get_shipping_last_name());
             update_user_meta($user_id, 'shipping_postcode', $order->get_shipping_postcode());
-            
-            // Send an email notification to the user with their new account details
-            wp_new_user_notification($user_id, null, 'user');
-            
+
             // Link the order to the new user account
             $order->set_customer_id($user_id);
             $order->save();
-            
+
             // Automatically log the user in after account creation
             wc_set_customer_auth_cookie($user_id);
+
+            // Send WooCommerce account creation email to the user
+            // The second parameter null ensures the email is sent only for the user
+            wp_new_user_notification($user_id, null, 'user');
+
         } else {
             // If the email exists, automatically log in the existing user
             $user = get_user_by('email', $email);
