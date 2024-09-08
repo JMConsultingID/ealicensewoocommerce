@@ -89,9 +89,44 @@ function fetchMqlAccountDetails(licenseId) {
     });
 }
 
+function toggleLicenseStatus(licenseId, newStatus) {
+    var confirmationMessage = newStatus === 'inactive'
+        ? "Are you sure you want to deactivate this license?"
+        : "Are you sure you want to activate this license?";
+
+    if (!confirm(confirmationMessage)) {
+        return; // Exit if user cancels
+    }
+
+    // Construct the API URL to update the license status
+    var apiEndpoint = ealicensewoocommerce_params.api_base_endpoint + 'v1/licenses/' + licenseId;
+    
+    // Make an AJAX request to update the license status
+    jQuery.ajax({
+        url: apiEndpoint,
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + ealicensewoocommerce_params.api_authorization_key
+        },
+        data: JSON.stringify({ status: newStatus }),
+        success: function(response) {
+            // On success, refresh the page to reflect the status change or update the icon dynamically
+            location.reload(); // You could also dynamically update the icon here instead of reloading
+        },
+        error: function(xhr) {
+            alert('Failed to update the license status. Please try again.');
+        }
+    });
+}
+
+
 // Modal close function
 jQuery(document).ready(function($) {
     $('.mql-close').on('click', function() {
         $('#mqlAccountModal').fadeOut();
     });
 });
+
+
