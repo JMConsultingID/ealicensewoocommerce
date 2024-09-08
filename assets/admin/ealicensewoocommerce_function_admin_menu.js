@@ -131,8 +131,8 @@ function toggleLicenseStatus(licenseId, newStatus) {
 // Function to delete MQL account
 function deleteMqlAccount(accountId) {
     // Display a confirmation dialog before deletion
-    var confirmation = confirm('Are you sure you want to delete this account? This action cannot be undone.');
-    
+    var confirmation = confirm('Are you sure you want to delete this account? This action will also update the quota.');
+
     if (!confirmation) {
         return; // Exit if user cancels
     }
@@ -150,9 +150,9 @@ function deleteMqlAccount(accountId) {
             'Authorization': 'Bearer ' + ealicensewoocommerce_params.api_authorization_key
         },
         success: function(response) {
-            // On success, remove the account row from the table
-            jQuery('#account-' + accountId).remove();
-            alert('Account deleted successfully.');
+            // On success, refresh the page after account is deleted and quota is updated
+            alert('Account deleted and quota updated successfully.');
+            location.reload(); // Refresh the page to reflect quota changes
         },
         error: function(xhr) {
             alert('Failed to delete the account. Please try again.');
