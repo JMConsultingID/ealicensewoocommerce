@@ -243,8 +243,8 @@ function ealicensewoocommerce_manage_license_page() {
 
     <script type="text/javascript">
     function fetchMqlAccountDetails(licenseId) {
-        // Construct the API URL to fetch MQL account details
-        var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + 'v1/mql-accounts/license/' + licenseId;
+    // Construct the API URL to fetch MQL account details
+    var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + 'v1/mql-accounts/license/' + licenseId;
 
         // Make an AJAX request to fetch the MQL account details
         jQuery.ajax({
@@ -256,9 +256,8 @@ function ealicensewoocommerce_manage_license_page() {
                 'Authorization': 'Bearer <?php echo esc_js($api_authorization_key); ?>'
             },
             success: function(response) {
-                // Check if we received multiple accounts
                 if (Array.isArray(response)) {
-                    // Generate the HTML table
+                    // Generate the HTML table if data exists
                     var tableContent = `
                         <table class="wp-list-table widefat fixed striped">
                             <thead>
@@ -272,7 +271,6 @@ function ealicensewoocommerce_manage_license_page() {
                             </thead>
                             <tbody>`;
 
-                    // Iterate over each account and append rows to the table
                     response.forEach(function(account) {
                         tableContent += `
                             <tr>
@@ -288,20 +286,25 @@ function ealicensewoocommerce_manage_license_page() {
                             </tbody>
                         </table>`;
 
-                    // Populate the modal with the generated table
                     jQuery('#mql-account-details').html(tableContent);
                 } else {
-                    jQuery('#mql-account-details').html('<p><?php _e('No accounts found for this license.', 'ealicensewoocommerce'); ?></p>');
+                    jQuery('#mql-account-details').html('<p><?php _e("No accounts found for this license.", "ealicensewoocommerce"); ?></p>');
                 }
 
                 // Show the modal
                 jQuery('#mqlAccountModal').fadeIn();
             },
-            error: function() {
-                alert('<?php _e('Failed to retrieve MQL account details.', 'ealicensewoocommerce'); ?>');
+            error: function(xhr) {
+                // Capture the error response and display the error message
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    alert(xhr.responseJSON.message);
+                } else {
+                    alert('<?php _e("Failed to retrieve MQL account details.", "ealicensewoocommerce"); ?>');
+                }
             }
         });
     }
+
 
     // Modal close function
     jQuery(document).ready(function($) {
