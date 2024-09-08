@@ -22,19 +22,20 @@ function fetchMqlAccountDetails(licenseId) {
                                 <th>Status</th>
                                 <th>Validation Status</th>
                                 <th>Created At</th>
-                                <th>Updated At</th>
                             </tr>
                         </thead>
                         <tbody>`;
 
                 response.forEach(function(account) {
+                    // Format created_at and updated_at as date only
+                    var createdAt = new Date(account.created_at).toLocaleDateString();
+                    var updatedAt = new Date(account.updated_at).toLocaleDateString();
                     tableContent += `
                         <tr>
                             <td>${account.account_mql}</td>
                             <td>${account.status}</td>
                             <td>${account.validation_status}</td>
                             <td>${account.created_at}</td>
-                            <td>${account.updated_at}</td>
                         </tr>`;
                 });
 
