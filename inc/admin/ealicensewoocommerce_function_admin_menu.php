@@ -251,6 +251,8 @@ function ealicensewoocommerce_manage_license_page() {
             url: apiEndpoint,
             method: 'GET',
             headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'Authorization': 'Bearer <?php echo esc_js($api_authorization_key); ?>'
             },
             success: function(response) {
