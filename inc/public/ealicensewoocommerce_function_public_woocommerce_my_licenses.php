@@ -34,16 +34,17 @@ function ealicensewoocommerce_display_licenses_by_email() {
     $api_authorization_key = get_option('ealicensewoocommerce_api_authorization_key');
     $api_version = get_option('ealicensewoocommerce_api_version', 'v1'); // Default to 'v1' if not set
 
-    // Construct the API endpoint to get licenses by email
-    $api_endpoint = trailingslashit($api_base_endpoint) . $api_version . '/licenses/email/' . urlencode($email);
+    // Construct the API endpoint
+    $api_endpoint = trailingslashit($api_base_endpoint) . $api_version . '/licenses/email';
 
-    // Make the GET request to fetch licenses
-    $response = wp_remote_get($api_endpoint, array(
+    // Setup the POST request to send the email in the body
+    $response = wp_remote_post($api_endpoint, array(
         'headers' => array(
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $api_authorization_key,
         ),
+        'body' => json_encode(array('email' => $email)), // Send the email in the POST request body
     ));
 
     // Check for errors in the API response
@@ -77,6 +78,7 @@ function ealicensewoocommerce_display_licenses_by_email() {
 
     echo '</tbody></table>';
 }
+
 
 add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_display_licenses_by_email');
 
