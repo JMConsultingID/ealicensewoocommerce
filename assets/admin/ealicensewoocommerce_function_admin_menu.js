@@ -128,6 +128,39 @@ function toggleLicenseStatus(licenseId, newStatus) {
 }
 
 
+// Function to delete MQL account
+function deleteMqlAccount(accountId) {
+    // Display a confirmation dialog before deletion
+    var confirmation = confirm('Are you sure you want to delete this account? This action cannot be undone.');
+    
+    if (!confirmation) {
+        return; // Exit if user cancels
+    }
+
+    // Construct the API URL to delete the MQL account
+    var deleteApiEndpoint = ealicensewoocommerce_params.api_base_endpoint + 'v1/mql-accounts/' + accountId;
+
+    // Make an AJAX request to delete the MQL account
+    jQuery.ajax({
+        url: deleteApiEndpoint,
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + ealicensewoocommerce_params.api_authorization_key
+        },
+        success: function(response) {
+            // On success, remove the account row from the table
+            jQuery('#account-' + accountId).remove();
+            alert('Account deleted successfully.');
+        },
+        error: function(xhr) {
+            alert('Failed to delete the account. Please try again.');
+        }
+    });
+}
+
+
 
 // Modal close function
 jQuery(document).ready(function($) {
