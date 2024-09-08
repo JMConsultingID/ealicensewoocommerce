@@ -158,14 +158,13 @@ function ealicensewoocommerce_manage_license_page() {
         <table class="wp-list-table widefat fixed striped">
             <thead>
                 <tr>
-                    <th><?php _e('License Key', 'ealicensewoocommerce'); ?></th>
-                    <th><?php _e('Email', 'ealicensewoocommerce'); ?></th>
+                    <th width="150px"><?php _e('License Key', 'ealicensewoocommerce'); ?></th>
+                    <th width="150px"><?php _e('Email', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('OrderID', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Account Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Used Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Expiration', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Status', 'ealicensewoocommerce'); ?></th>
-                    <th><?php _e('Source Domain', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Creation Date', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Actions', 'ealicensewoocommerce'); ?></th>
                 </tr>
@@ -197,7 +196,6 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<td>' . esc_html($license['used_quota']) . '</td>';
                             echo '<td>' . esc_html($license['license_expiration']) . '</td>';
                             echo '<td>' . esc_html($license['status']) . '</td>';
-                            echo '<td>' . esc_html($source_domain) . '</td>';
                             echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_creation_date']))) . '</td>';
                              echo '<td><a href="#" class="dashicons dashicons-visibility" onclick="fetchMqlAccountDetails(' . esc_js($license['id']) . ')" title="View Details"></a></td>';
                         }
