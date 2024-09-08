@@ -97,9 +97,7 @@ function ealicensewoocommerce_create_user_account_after_payment( $order_id ) {
     $order_status = $order->get_status();
 
     // Check if the user exists and if the order status is processing or completed (paid)
-    if( $user == false && $email == false && $order->has_status( 'processing' ) || $user == false && $email == false && $order->has_status( 'completed' ) ) {
-        // Check on category ( multiple categories can be entered, separated by a comma )
-
+    if( $user == false && $email == false && $order->has_status( 'completed' ) ) {
             // Random password with 12 chars
             $random_password = wp_generate_password();
 
