@@ -137,16 +137,14 @@ function ealicensewoocommerce_manage_license_page() {
     $query_args = array(
         'page' => $current_page,
         'limit' => $items_per_page,
-        'search' => $search_query,
-        'order_by' => 'id', // Order by 'id'
-        'order'    => 'desc' // Descending order
+        'search' => $search_query
     );
 
     // Build the full API URL with query parameters
     $api_url = add_query_arg($query_args, $api_endpoint);
 
     ?>
-    <div class="wrap  ealicensewoocommerce ealicensemanagement">
+    <div class="wrap">
         <h1><?php _e('Manage License', 'ealicensewoocommerce'); ?></h1>
 
         <!-- Search Form -->
@@ -180,10 +178,11 @@ function ealicensewoocommerce_manage_license_page() {
                     echo '<tr><td colspan="9">' . __('Error fetching licenses', 'ealicensewoocommerce') . '</td></tr>';
                 } else {
                     $response_body = wp_remote_retrieve_body($response);
-                    $licenses = json_decode($response_body, true);
+                    $data = json_decode($response_body, true);
 
-                    // Ensure licenses are received and it's an array
-                    if (is_array($licenses) && !empty($licenses)) {
+                    // Ensure licenses data exists and is an array
+                    if (isset($data['data']) && is_array($data['data'])) {
+                        $licenses = $data['data'];
                         foreach ($licenses as $license) {
                             // Extract source information from the license data
                             $source = isset($license['source']) ? json_decode($license['source'], true) : array();
@@ -211,19 +210,25 @@ function ealicensewoocommerce_manage_license_page() {
 
         <!-- Pagination -->
         <?php
-        $total_items = isset($data['total']) ? intval($data['total']) : 0;
-        $total_pages = ceil($total_items / $items_per_page);
-        $pagination_args = array(
-            'base' => add_query_arg('paged', '%#%'),
-            'format' => '',
-            'current' => $current_page,
-            'total' => $total_pages,
-            'prev_text' => __('&laquo; Previous', 'ealicensewoocommerce'),
-            'next_text' => __('Next &raquo;', 'ealicensewoocommerce'),
-        );
-        echo '<div class="tablenav"><div class="tablenav-pages">';
-        echo paginate_links($pagination_args);
-        echo '</div></div>';
+        if (isset($data['total'])) {
+            $total_items = $data['total'];
+            $per_page = $data['per_page'];
+            $current_page = $data['current_page'];
+            $total_pages = $data['last_page'];
+
+            $pagination_args = array(
+                'base' => add_query_arg('paged', '%#%'),
+                'format' => '',
+                'current' => $current_page,
+                'total' => $total_pages,
+                'prev_text' => __('&laquo; Previous', 'ealicensewoocommerce'),
+                'next_text' => __('Next &raquo;', 'ealicensewoocommerce'),
+            );
+
+            echo '<div class="tablenav"><div class="tablenav-pages">';
+            echo paginate_links($pagination_args);
+            echo '</div></div>';
+        }
         ?>
     </div>
     <?php
