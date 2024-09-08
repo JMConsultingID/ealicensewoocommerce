@@ -80,7 +80,7 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
     // Get the order object
     $order = wc_get_order($order_id);
 
-    // Check if the user is not already registered
+    // Check if the user is not already registered (guest checkout)
     if ($order->get_user_id() == 0) {
         // Get the billing details from the order
         $email = $order->get_billing_email();
@@ -88,19 +88,21 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
         $last_name = $order->get_billing_last_name();
 
         // Check if the email already exists in the system
-        if (!email_exists($email)) {
-            // Generate a random password for the new user
+        if ($user = get_user_by('email', $email)) {
+            // If the user exists, log them in and link the order to their account
+            wc_set_customer_auth_cookie($user->ID);
+
+            // Assign the existing user to the order
+            $order->set_customer_id($user->ID);
+            $order->save();
+        } else {
+            // If the email doesn't exist, create a new user
             $random_password = wp_generate_password();
-
-            // Set the role as 'customer'
-            $role = 'customer';
-
-            // Create a new user using the email, password, and customer role
             $user_id = wp_create_user($email, $random_password, $email);
 
             // Assign the customer role to the new user
             $user = new WP_User($user_id);
-            $user->set_role($role);
+            $user->set_role('customer');
 
             // Update the user profile with first name and last name
             wp_update_user(array(
@@ -142,10 +144,6 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
 
             // Automatically log the user in after account creation
             wc_set_customer_auth_cookie($user_id);
-        } else {
-            // If the email exists, automatically log in the existing user
-            $user = get_user_by('email', $email);
-            wc_set_customer_auth_cookie($user->ID);
         }
     }
 }
