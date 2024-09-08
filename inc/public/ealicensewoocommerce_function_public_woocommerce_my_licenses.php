@@ -69,7 +69,7 @@ function ealicensewoocommerce_display_licenses_by_email() {
 
     foreach ($licenses as $license) {
         echo '<tr>';
-        echo '<td>' . esc_html($license['order_id']) . '</td>';
+        echo '<td><a href="/my-account/view-order/' . esc_html($license['order_id']) . '">#' . esc_html($license['order_id']) . '</a></td>';
         echo '<td>' . esc_html($license['license_key']) . '</td>';        
         echo '<td>' . esc_html($license['account_quota']) . '</td>';
         echo '<td>' . esc_html($license['used_quota']) . '</td>';
