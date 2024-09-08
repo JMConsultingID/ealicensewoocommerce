@@ -164,7 +164,6 @@ function ealicensewoocommerce_manage_license_page() {
                     <th><?php _e('Account Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Used Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Expiration', 'ealicensewoocommerce'); ?></th>
-                    <th><?php _e('License Expiration Date', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Status', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Source Domain', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Creation Date', 'ealicensewoocommerce'); ?></th>
@@ -197,7 +196,6 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<td>' . esc_html($license['account_quota']) . '</td>';
                             echo '<td>' . esc_html($license['used_quota']) . '</td>';
                             echo '<td>' . esc_html($license['license_expiration']) . '</td>';
-                            echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_expiration_date']))) . '</td>';
                             echo '<td>' . esc_html($license['status']) . '</td>';
                             echo '<td>' . esc_html($source_domain) . '</td>';
                             echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_creation_date']))) . '</td>';
