@@ -243,8 +243,8 @@ function ealicensewoocommerce_manage_license_page() {
 
     <script type="text/javascript">
     function fetchMqlAccountDetails(licenseId) {
-        // Construct the API URL to fetch MQL account details
-        var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + 'v1/mql-accounts/license/' + licenseId;
+    // Construct the API URL to fetch MQL account details
+    var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + 'v1/mql-accounts/license/' + licenseId;
 
         // Make an AJAX request to fetch the MQL account details
         jQuery.ajax({
@@ -256,18 +256,45 @@ function ealicensewoocommerce_manage_license_page() {
                 'Authorization': 'Bearer <?php echo esc_js($api_authorization_key); ?>'
             },
             success: function(response) {
-                // Populate the modal with the response data
-                var modalContent = `
-                    <p><strong><?php _e('License Key:', 'ealicensewoocommerce'); ?></strong> ${response.license_key}</p>
-                    <p><strong><?php _e('Email User:', 'ealicensewoocommerce'); ?></strong> ${response.email_user}</p>
-                    <p><strong><?php _e('Account MQL:', 'ealicensewoocommerce'); ?></strong> ${response.account_mql}</p>
-                    <p><strong><?php _e('Status:', 'ealicensewoocommerce'); ?></strong> ${response.status}</p>
-                    <p><strong><?php _e('Validation Status:', 'ealicensewoocommerce'); ?></strong> ${response.validation_status}</p>
-                    <p><strong><?php _e('Created At:', 'ealicensewoocommerce'); ?></strong> ${response.created_at}</p>
-                    <p><strong><?php _e('Updated At:', 'ealicensewoocommerce'); ?></strong> ${response.updated_at}</p>
-                `;
+                // Check if we received multiple accounts
+                if (Array.isArray(response)) {
+                    // Generate the HTML table
+                    var tableContent = `
+                        <table class="wp-list-table widefat fixed striped">
+                            <thead>
+                                <tr>
+                                    <th><?php _e('Account MQL', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Status', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Validation Status', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Created At', 'ealicensewoocommerce'); ?></th>
+                                    <th><?php _e('Updated At', 'ealicensewoocommerce'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
 
-                jQuery('#mql-account-details').html(modalContent);
+                    // Iterate over each account and append rows to the table
+                    response.forEach(function(account) {
+                        tableContent += `
+                            <tr>
+                                <td>${account.account_mql}</td>
+                                <td>${account.status}</td>
+                                <td>${account.validation_status}</td>
+                                <td>${account.created_at}</td>
+                                <td>${account.updated_at}</td>
+                            </tr>`;
+                    });
+
+                    tableContent += `
+                            </tbody>
+                        </table>`;
+
+                    // Populate the modal with the generated table
+                    jQuery('#mql-account-details').html(tableContent);
+                } else {
+                    jQuery('#mql-account-details').html('<p><?php _e('No accounts found for this license.', 'ealicensewoocommerce'); ?></p>');
+                }
+
+                // Show the modal
                 jQuery('#mqlAccountModal').fadeIn();
             },
             error: function() {
@@ -276,12 +303,13 @@ function ealicensewoocommerce_manage_license_page() {
         });
     }
 
-    // Close modal functionality
+    // Modal close function
     jQuery(document).ready(function($) {
         $('.mql-close').on('click', function() {
             $('#mqlAccountModal').fadeOut();
         });
     });
+
     </script>
 
     <?php
