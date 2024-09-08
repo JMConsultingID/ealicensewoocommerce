@@ -20,7 +20,6 @@ function fetchMqlAccountDetails(licenseId) {
                             <tr>
                                 <th>Account MQL</th>
                                 <th>Status</th>
-                                <th>Validation Status</th>
                                 <th>Created At</th>
                             </tr>
                         </thead>
@@ -34,7 +33,6 @@ function fetchMqlAccountDetails(licenseId) {
                         <tr>
                             <td>${account.account_mql}</td>
                             <td>${account.status}</td>
-                            <td>${account.validation_status}</td>
                             <td>${createdAt}</td>
                         </tr>`;
                 });
@@ -52,10 +50,7 @@ function fetchMqlAccountDetails(licenseId) {
                             <tr>
                                 <th>Account MQL</th>
                                 <th>Status</th>
-                                <th>Validation Status</th>
                                 <th>Created At</th>
-                                <th>Updated At</th>
-                            </tr>
                         </thead>
                         <tbody>
                             <tr>
@@ -78,9 +73,7 @@ function fetchMqlAccountDetails(licenseId) {
                         <tr>
                             <th>Account MQL</th>
                             <th>Status</th>
-                            <th>Validation Status</th>
                             <th>Created At</th>
-                            <th>Updated At</th>
                         </tr>
                     </thead>
                     <tbody>
