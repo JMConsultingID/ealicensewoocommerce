@@ -243,8 +243,8 @@ function ealicensewoocommerce_manage_license_page() {
 
     <script type="text/javascript">
     function fetchMqlAccountDetails(licenseId) {
-    // Construct the API URL to fetch MQL account details
-    var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + 'v1/mql-accounts/license/' + licenseId;
+        // Construct the API URL to fetch MQL account details
+        var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + 'v1/mql-accounts/license/' + licenseId;
 
         // Make an AJAX request to fetch the MQL account details
         jQuery.ajax({
