@@ -191,7 +191,7 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<tr>';
                             echo '<td>' . esc_html($license['license_key']) . '</td>';
                             echo '<td>' . esc_html($license['email']) . '</td>';
-                            echo '<td>' . esc_html((int) $license['order_id']) . '</td>'; // Cast order_id to integer
+                            echo '<td><a href="' . esc_url(admin_url('post.php?post=' . (int) $license['order_id'] . '&action=edit')) . '" target="_blank">' . esc_html((int) $license['order_id']) . '</a></td>';
                             echo '<td>' . esc_html($license['account_quota']) . '</td>';
                             echo '<td>' . esc_html($license['used_quota']) . '</td>';
                             echo '<td>' . esc_html($license['license_expiration']) . '</td>';
