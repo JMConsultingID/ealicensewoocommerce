@@ -98,8 +98,8 @@ function toggleLicenseStatus(licenseId, newStatus) {
         return; // Exit if user cancels
     }
 
-    // Construct the API URL to update the license status
-    var apiEndpoint = ealicensewoocommerce_params.api_base_endpoint + 'v1/licenses/' + licenseId;
+    // Construct the API URL to update the license status using the new route
+    var apiEndpoint = ealicensewoocommerce_params.api_base_endpoint + 'v1/licenses/' + licenseId + '/status';
     
     // Make an AJAX request to update the license status
     jQuery.ajax({
@@ -120,6 +120,7 @@ function toggleLicenseStatus(licenseId, newStatus) {
         }
     });
 }
+
 
 
 // Modal close function
