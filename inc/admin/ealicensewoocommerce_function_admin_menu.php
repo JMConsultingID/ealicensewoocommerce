@@ -39,6 +39,78 @@ function ealicensewoocommerce_add_admin_menu() {
 }
 add_action('admin_menu', 'ealicensewoocommerce_add_admin_menu');
 
+// Function to display settings page
+function ealicensewoocommerce_settings_page() {
+    ?>
+    <div class="wrap ealicensewoocommerce">
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('ealicensewoocommerce_settings_group');
+            do_settings_sections('ealicensewoocommerce_settings');
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+// Register settings and fields
+function ealicensewoocommerce_register_settings() {
+    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_enable_license');
+    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_api_base_endpoint_url');
+    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_api_authorization_key');
+    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_api_version');
+
+    add_settings_section('ealicensewoocommerce_section', __('EA License Main Settings', 'ealicensewoocommerce'), null, 'ealicensewoocommerce_settings');
+
+    add_settings_field('ealicensewoocommerce_enable_license', __('Enable EA License', 'ealicensewoocommerce'), 'ealicensewoocommerce_enable_license_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
+    add_settings_field('ealicensewoocommerce_api_base_endpoint_url', __('API Base Endpoint URL', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_base_endpoint_url_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
+    add_settings_field('ealicensewoocommerce_api_authorization_key', __('API Authorization Key', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_authorization_key_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
+    add_settings_field('ealicensewoocommerce_api_version', __('API Version', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_version_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
+}
+add_action('admin_init', 'ealicensewoocommerce_register_settings');
+
+// Callbacks for settings fields
+function ealicensewoocommerce_enable_license_callback() {
+    $checked = get_option('ealicensewoocommerce_enable_license') ? 'checked' : '';
+    echo '<input type="checkbox" id="ealicensewoocommerce_enable_license" name="ealicensewoocommerce_enable_license" value="1" ' . $checked . ' />';
+}
+
+function ealicensewoocommerce_license_api_base_endpoint_url_callback() {
+    $value = esc_attr(get_option('ealicensewoocommerce_api_base_endpoint_url'));
+    echo '<input type="text" id="ealicensewoocommerce_api_base_endpoint_url" name="ealicensewoocommerce_api_base_endpoint_url" value="' . $value . '" class="regular-text" />';
+}
+
+function ealicensewoocommerce_license_api_authorization_key_callback() {
+    $value = esc_attr(get_option('ealicensewoocommerce_api_authorization_key'));
+    echo '<input type="text" id="ealicensewoocommerce_api_authorization_key" name="ealicensewoocommerce_api_authorization_key" value="' . $value . '" class="regular-text" />';
+}
+
+// Callback for ealicensewoocommerce API Version setting field
+function ealicensewoocommerce_license_api_version_callback() {
+    // Get the current option value, defaulting to 'v1'
+    $selected_version = get_option('ealicensewoocommerce_api_version', 'v1');
+
+    // Define the select options
+    $options = array(
+        'v1' => __('Version 1', 'ealicensewoocommerce'),
+        'v2' => __('Version 2', 'ealicensewoocommerce')
+    );
+
+    // Start the select dropdown
+    echo '<select id="ealicensewoocommerce_api_version" name="ealicensewoocommerce_api_version">';
+
+    // Loop through options and set the selected attribute
+    foreach ($options as $value => $label) {
+        $selected = ($selected_version === $value) ? 'selected="selected"' : '';
+        echo '<option value="' . esc_attr($value) . '" ' . $selected . '>' . esc_html($label) . '</option>';
+    }
+
+    // Close the select dropdown
+    echo '</select>';
+}
+
+
 // Function to fetch data from REST API and display it in a table with pagination and search
 function ealicensewoocommerce_manage_license_page() {
     // Get the API base endpoint URL, API Version, and Authorization Key from settings
@@ -74,7 +146,7 @@ function ealicensewoocommerce_manage_license_page() {
     $api_url = add_query_arg($query_args, $api_endpoint);
 
     ?>
-    <div class="wrap">
+    <div class="wrap  ealicensewoocommerce ealicensemanagement">
         <h1><?php _e('Manage License', 'ealicensewoocommerce'); ?></h1>
 
         <!-- Search Form -->
@@ -153,87 +225,6 @@ function ealicensewoocommerce_manage_license_page() {
         echo paginate_links($pagination_args);
         echo '</div></div>';
         ?>
-    </div>
-    <?php
-}
-
-
-// Function to display settings page
-function ealicensewoocommerce_settings_page() {
-    ?>
-    <div class="wrap ealicensewoocommerce">
-        <form method="post" action="options.php">
-            <?php
-            settings_fields('ealicensewoocommerce_settings_group');
-            do_settings_sections('ealicensewoocommerce_settings');
-            submit_button();
-            ?>
-        </form>
-    </div>
-    <?php
-}
-
-// Register settings and fields
-function ealicensewoocommerce_register_settings() {
-    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_enable_license');
-    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_api_base_endpoint_url');
-    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_api_authorization_key');
-    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_api_version');
-
-    add_settings_section('ealicensewoocommerce_section', __('EA License Main Settings', 'ealicensewoocommerce'), null, 'ealicensewoocommerce_settings');
-
-    add_settings_field('ealicensewoocommerce_enable_license', __('Enable EA License', 'ealicensewoocommerce'), 'ealicensewoocommerce_enable_license_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
-    add_settings_field('ealicensewoocommerce_api_base_endpoint_url', __('API Base Endpoint URL', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_base_endpoint_url_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
-    add_settings_field('ealicensewoocommerce_api_authorization_key', __('API Authorization Key', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_authorization_key_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
-    add_settings_field('ealicensewoocommerce_api_version', __('API Version', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_version_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
-}
-add_action('admin_init', 'ealicensewoocommerce_register_settings');
-
-// Callbacks for settings fields
-function ealicensewoocommerce_enable_license_callback() {
-    $checked = get_option('ealicensewoocommerce_enable_license') ? 'checked' : '';
-    echo '<input type="checkbox" id="ealicensewoocommerce_enable_license" name="ealicensewoocommerce_enable_license" value="1" ' . $checked . ' />';
-}
-
-function ealicensewoocommerce_license_api_base_endpoint_url_callback() {
-    $value = esc_attr(get_option('ealicensewoocommerce_api_base_endpoint_url'));
-    echo '<input type="text" id="ealicensewoocommerce_api_base_endpoint_url" name="ealicensewoocommerce_api_base_endpoint_url" value="' . $value . '" class="regular-text" />';
-}
-
-function ealicensewoocommerce_license_api_authorization_key_callback() {
-    $value = esc_attr(get_option('ealicensewoocommerce_api_authorization_key'));
-    echo '<input type="text" id="ealicensewoocommerce_api_authorization_key" name="ealicensewoocommerce_api_authorization_key" value="' . $value . '" class="regular-text" />';
-}
-
-// Callback for ealicensewoocommerce API Version setting field
-function ealicensewoocommerce_license_api_version_callback() {
-    // Get the current option value, defaulting to 'v1'
-    $selected_version = get_option('ealicensewoocommerce_api_version', 'v1');
-
-    // Define the select options
-    $options = array(
-        'v1' => __('Version 1', 'ealicensewoocommerce'),
-        'v2' => __('Version 2', 'ealicensewoocommerce')
-    );
-
-    // Start the select dropdown
-    echo '<select id="ealicensewoocommerce_api_version" name="ealicensewoocommerce_api_version">';
-
-    // Loop through options and set the selected attribute
-    foreach ($options as $value => $label) {
-        $selected = ($selected_version === $value) ? 'selected="selected"' : '';
-        echo '<option value="' . esc_attr($value) . '" ' . $selected . '>' . esc_html($label) . '</option>';
-    }
-
-    // Close the select dropdown
-    echo '</select>';
-}
-
-
-// Function to display settings page
-function ealicensewoocommerce_manage_license_page() {
-    ?>
-    <div class="wrap ealicensewoocommerce">
     </div>
     <?php
 }
