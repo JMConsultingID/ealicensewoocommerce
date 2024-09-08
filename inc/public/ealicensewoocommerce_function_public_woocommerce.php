@@ -45,7 +45,7 @@ function ealicensewoocommerce_display_admin_order_meta($order) {
 }
 add_action('woocommerce_admin_order_data_after_billing_address', 'ealicensewoocommerce_display_admin_order_meta', 10, 1);
 
-
+add_action('woocommerce_thankyou', 'ealicensewoocommerce_display_license_info_on_thank_you_page');
 // Display Account ID and License Key on the order received (thank you) page only if the order is completed
 function ealicensewoocommerce_display_license_info_on_thank_you_page($order_id) {
     if (!ealicensewoocommerce_is_license_enabled()) {
@@ -72,13 +72,16 @@ function ealicensewoocommerce_display_license_info_on_thank_you_page($order_id) 
         }
     }
 }
-add_action('woocommerce_thankyou', 'ealicensewoocommerce_display_license_info_on_thank_you_page');
 
 add_action('woocommerce_thankyou', 'ealicensewoocommerce_create_user_account_after_payment', 10, 1);
 
 function ealicensewoocommerce_create_user_account_after_payment( $order_id ) {
     // If user is logged in, do nothing because they already have an account
     if( is_user_logged_in() ) return;
+
+    if (!ealicensewoocommerce_is_license_enabled()) {
+        return; // Exit if the feature is not enabled
+    }
 
     // Get the newly created order
     $order = wc_get_order( $order_id );
@@ -138,16 +141,15 @@ function ealicensewoocommerce_create_user_account_after_payment( $order_id ) {
             update_user_meta( $user_id, 'billing_postcode', $order->billing_postcode );
 
             // User's shipping data
-            update_user_meta( $user_id, 'shipping_address_1', $order->shipping_address_1 );
-            update_user_meta( $user_id, 'shipping_address_2', $order->shipping_address_2 );
-            update_user_meta( $user_id, 'shipping_city', $order->shipping_city );
-            update_user_meta( $user_id, 'shipping_company', $order->shipping_company );
-            update_user_meta( $user_id, 'shipping_state', $order->shipping_state );
-            update_user_meta( $user_id, 'shipping_country', $order->shipping_country );
-            update_user_meta( $user_id, 'shipping_first_name', $order->shipping_first_name );
-            update_user_meta( $user_id, 'shipping_last_name', $order->shipping_last_name );
-            update_user_meta( $user_id, 'shipping_method', $order->shipping_method );
-            update_user_meta( $user_id, 'shipping_postcode', $order->shipping_postcode );
+            update_user_meta( $user_id, 'shipping_address_1', $order->billing_address_1);
+            update_user_meta( $user_id, 'shipping_address_2', $order->billing_address_2 );
+            update_user_meta( $user_id, 'shipping_city', $order->billing_city );
+            update_user_meta( $user_id, 'shipping_company', $order->billing_company );
+            update_user_meta( $user_id, 'shipping_state', $order->billing_state );
+            update_user_meta( $user_id, 'shipping_country', $order->billing_country);
+            update_user_meta( $user_id, 'shipping_first_name', $order->billing_first_name  );
+            update_user_meta( $user_id, 'shipping_last_name', $order->billing_last_name );
+            update_user_meta( $user_id, 'shipping_postcode', $order->billing_postcode );
 
             // Link past orders to this newly created customer
             wc_update_new_customer_past_orders( $user_id );
