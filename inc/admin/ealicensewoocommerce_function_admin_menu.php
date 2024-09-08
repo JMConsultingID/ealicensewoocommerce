@@ -199,7 +199,7 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<td>' . esc_html($license['status']) . '</td>';
                             echo '<td>' . esc_html($source_domain) . '</td>';
                             echo '<td>' . esc_html(date('Y-m-d', strtotime($license['license_creation_date']))) . '</td>';
-                            echo '<td><a href="#" class="dashicons dashicons-visibility" onclick="fetchMqlAccountDetails(' . esc_js($license['id']) . ')" title="' . __('View Details', 'ealicensewoocommerce') . '"></a></td>';
+                             echo '<td><a href="#" class="dashicons dashicons-visibility" onclick="fetchMqlAccountDetails(' . esc_js($license['id']) . ')" title="View Details"></a></td>';
                         }
                     } else {
                         echo '<tr><td colspan="10">' . __('No licenses found', 'ealicensewoocommerce') . '</td></tr>';
@@ -233,120 +233,13 @@ function ealicensewoocommerce_manage_license_page() {
         ?>
     </div>
 
+    <!-- Modal to show MQL account details -->
     <div id="mqlAccountModal" class="mql-modal" style="display:none;">
-    <div class="mql-modal-content">
-        <span class="mql-close">&times;</span>
-        <h2><?php _e('MQL Account Details', 'ealicensewoocommerce'); ?></h2>
-        <div id="mql-account-details"></div>
+        <div class="mql-modal-content">
+            <span class="mql-close">&times;</span>
+            <h2><?php _e('MQL Account Details', 'ealicensewoocommerce'); ?></h2>
+            <div id="mql-account-details"></div>
+        </div>
     </div>
-    </div>
-
-    <script type="text/javascript">
-    function fetchMqlAccountDetails(licenseId) {
-    // Construct the API URL to fetch MQL account details
-    var apiEndpoint = '<?php echo esc_url($api_base_endpoint); ?>' + 'v1/mql-accounts/license/' + licenseId;
-
-        // Make an AJAX request to fetch the MQL account details
-        jQuery.ajax({
-            url: apiEndpoint,
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer <?php echo esc_js($api_authorization_key); ?>'
-            },
-            success: function(response) {
-                if (Array.isArray(response) && response.length > 0) {
-                    // Generate the HTML table if data exists
-                    var tableContent = `
-                        <table class="wp-list-table widefat fixed striped">
-                            <thead>
-                                <tr>
-                                    <th><?php _e('Account MQL', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Status', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Validation Status', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Created At', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Updated At', 'ealicensewoocommerce'); ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>`;
-
-                    response.forEach(function(account) {
-                        tableContent += `
-                            <tr>
-                                <td>${account.account_mql}</td>
-                                <td>${account.status}</td>
-                                <td>${account.validation_status}</td>
-                                <td>${account.created_at}</td>
-                                <td>${account.updated_at}</td>
-                            </tr>`;
-                    });
-
-                    tableContent += `
-                            </tbody>
-                        </table>`;
-
-                    jQuery('#mql-account-details').html(tableContent);
-                } else {
-                    // Display "No accounts found" message inside the table if no data is found
-                    var noDataContent = `
-                        <table class="wp-list-table widefat fixed striped">
-                            <thead>
-                                <tr>
-                                    <th><?php _e('Account MQL', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Status', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Validation Status', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Created At', 'ealicensewoocommerce'); ?></th>
-                                    <th><?php _e('Updated At', 'ealicensewoocommerce'); ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="5"><?php _e('No accounts found for this license.', 'ealicensewoocommerce'); ?></td>
-                                </tr>
-                            </tbody>
-                        </table>`;
-
-                    jQuery('#mql-account-details').html(noDataContent);
-                }
-
-                // Show the modal
-                jQuery('#mqlAccountModal').fadeIn();
-            },
-            error: function(xhr) {
-                // Handle 404 and other errors gracefully by displaying a message in the table
-                var errorContent = `
-                    <table class="wp-list-table widefat fixed striped">
-                        <thead>
-                            <tr>
-                                <th><?php _e('Account MQL', 'ealicensewoocommerce'); ?></th>
-                                <th><?php _e('Status', 'ealicensewoocommerce'); ?></th>
-                                <th><?php _e('Validation Status', 'ealicensewoocommerce'); ?></th>
-                                <th><?php _e('Created At', 'ealicensewoocommerce'); ?></th>
-                                <th><?php _e('Updated At', 'ealicensewoocommerce'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="5"><?php _e('No accounts found for this license.', 'ealicensewoocommerce'); ?></td>
-                            </tr>
-                        </tbody>
-                    </table>`;
-
-                jQuery('#mql-account-details').html(errorContent);
-                jQuery('#mqlAccountModal').fadeIn();
-            }
-        });
-    }
-
-    // Modal close function
-    jQuery(document).ready(function($) {
-        $('.mql-close').on('click', function() {
-            $('#mqlAccountModal').fadeOut();
-        });
-    });
-
-    </script>
-
     <?php
 }

@@ -28,8 +28,24 @@ function ealicensewoocommerce_enqueue_admin_assets($hook_suffix) {
         '1.0.0', 
         'all'
     );
+
     // Enqueue the registered styles and scripts
     wp_enqueue_style('ealicensewoocommerce-admin-style');
+
+    wp_enqueue_script(
+        'ealicensewoocommerce_function_admin_menu',
+        plugins_url('../assets/admin/ealicensewoocommerce_function_admin_menu.js', __FILE__),
+        array('jquery'), // Dependencies
+        '1.0',           // Version
+        true             // In the footer
+    );
+
+    // Pass necessary variables to JavaScript file
+    wp_localize_script('ealicensewoocommerce_function_admin_menu', 'ealicensewoocommerce_params', array(
+        'api_base_endpoint' => get_option('ealicensewoocommerce_api_base_endpoint_url'),
+        'api_authorization_key' => get_option('ealicensewoocommerce_api_authorization_key')
+    ));
+
 }
 
 // Hook into the 'admin_enqueue_scripts' action
