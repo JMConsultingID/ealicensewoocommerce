@@ -21,7 +21,7 @@ function fetchMqlAccountDetails(licenseId) {
                                 <th>Account MQL</th>
                                 <th>Status</th>
                                 <th>Created At</th>
-                                <th>Action</th>
+                                <th>Delete Account</th>
                             </tr>
                         </thead>
                         <tbody>`;
@@ -55,7 +55,7 @@ function fetchMqlAccountDetails(licenseId) {
                                 <th>Account MQL</th>
                                 <th>Status</th>
                                 <th>Created At</th>
-                                <th>Action</th>
+                                <th>Delete Account</th>
                         </thead>
                         <tbody>
                             <tr>
@@ -79,7 +79,7 @@ function fetchMqlAccountDetails(licenseId) {
                             <th>Account MQL</th>
                             <th>Status</th>
                             <th>Created At</th>
-                            <th>Action</th>
+                            <th>Delete Account</th>
                         </tr>
                     </thead>
                     <tbody>
