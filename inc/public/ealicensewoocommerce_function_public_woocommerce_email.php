@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin functions and definitions for Admin.
+ * Plugin functions and definitions for Email User.
  *
  * For additional information on potential customization options,
  * read the developers' documentation:
