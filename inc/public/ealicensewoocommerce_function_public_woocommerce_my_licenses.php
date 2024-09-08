@@ -24,31 +24,61 @@ function ealicensewoocommerce_add_my_license_endpoint() {
 }
 add_action('init', 'ealicensewoocommerce_add_my_license_endpoint');
 
-// Display the content for the My License menu
-function ealicensewoocommerce_my_license_content() {
-    $user_id = get_current_user_id();
-    $licenses = get_user_licenses($user_id); // Custom function to fetch licenses associated with user
+function ealicensewoocommerce_display_licenses_by_email() {
+    // Get the current user's email address
+    $current_user = wp_get_current_user();
+    $email = $current_user->user_email;
 
-    if (!empty($licenses)) {
-        echo '<h2>' . __('My Licenses', 'ealicensewoocommerce') . '</h2>';
-        echo '<table class="shop_table shop_table_responsive my_account_orders">';
-        echo '<thead><tr><th>' . __('License Key', 'ealicensewoocommerce') . '</th><th>' . __('Status', 'ealicensewoocommerce') . '</th><th>' . __('Expiration Date', 'ealicensewoocommerce') . '</th></tr></thead>';
-        echo '<tbody>';
+    // Get the API base endpoint URL, Authorization Key, and API Version from settings
+    $api_base_endpoint = get_option('ealicensewoocommerce_api_base_endpoint_url');
+    $api_authorization_key = get_option('ealicensewoocommerce_api_authorization_key');
+    $api_version = get_option('ealicensewoocommerce_api_version', 'v1'); // Default to 'v1' if not set
 
-        foreach ($licenses as $license) {
-            echo '<tr>';
-            echo '<td>' . esc_html($license['license_key']) . '</td>';
-            echo '<td>' . esc_html($license['status']) . '</td>';
-            echo '<td>' . esc_html($license['expiration_date']) . '</td>';
-            echo '</tr>';
-        }
+    // Construct the API endpoint to get licenses by email
+    $api_endpoint = trailingslashit($api_base_endpoint) . $api_version . '/licenses/email/' . urlencode($email);
 
-        echo '</tbody></table>';
-    } else {
-        echo '<p>' . __('You have no licenses.', 'ealicensewoocommerce') . '</p>';
+    // Make the GET request to fetch licenses
+    $response = wp_remote_get($api_endpoint, array(
+        'headers' => array(
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $api_authorization_key,
+        ),
+    ));
+
+    // Check for errors in the API response
+    if (is_wp_error($response)) {
+        echo '<p>' . __('Error fetching licenses', 'ealicensewoocommerce') . '</p>';
+        return;
     }
+
+    // Decode the JSON response
+    $body = wp_remote_retrieve_body($response);
+    $licenses = json_decode($body, true);
+
+    if (empty($licenses)) {
+        echo '<p>' . __('No licenses found for this email.', 'ealicensewoocommerce') . '</p>';
+        return;
+    }
+
+    // Display the licenses in a table
+    echo '<table class="shop_table shop_table_responsive my_account_orders">';
+    echo '<thead><tr><th>' . __('License', 'ealicensewoocommerce') . '</th><th>' . __('Status', 'ealicensewoocommerce') . '</th><th>' . __('Expiration Date', 'ealicensewoocommerce') . '</th><th>' . __('Order ID', 'ealicensewoocommerce') . '</th></tr></thead>';
+    echo '<tbody>';
+
+    foreach ($licenses as $license) {
+        echo '<tr>';
+        echo '<td>' . esc_html($license['license_key']) . '</td>';
+        echo '<td>' . esc_html($license['status']) . '</td>';
+        echo '<td>' . esc_html($license['expiration_date']) . '</td>';
+        echo '<td>' . esc_html($license['order_id']) . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</tbody></table>';
 }
-add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_my_license_content');
+
+add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_display_licenses_by_email');
 
 // Flush rewrite rules on activation
 function ealicensewoocommerce_flush_rewrite_rules() {
