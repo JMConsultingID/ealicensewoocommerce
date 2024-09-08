@@ -21,6 +21,7 @@ function fetchMqlAccountDetails(licenseId) {
                                 <th>Account MQL</th>
                                 <th>Status</th>
                                 <th>Created At</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>`;
@@ -51,10 +52,11 @@ function fetchMqlAccountDetails(licenseId) {
                                 <th>Account MQL</th>
                                 <th>Status</th>
                                 <th>Created At</th>
+                                <th>Action</th>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="5">No accounts found for this license.</td>
+                                <td colspan="4">No accounts found for this license.</td>
                             </tr>
                         </tbody>
                     </table>`;
@@ -74,11 +76,12 @@ function fetchMqlAccountDetails(licenseId) {
                             <th>Account MQL</th>
                             <th>Status</th>
                             <th>Created At</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="5">No accounts found for this license.</td>
+                            <td colspan="4">No accounts found for this license.</td>
                         </tr>
                     </tbody>
                 </table>`;
