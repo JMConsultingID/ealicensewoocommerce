@@ -135,8 +135,8 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
             update_user_meta($user_id, 'shipping_last_name', $order->get_shipping_last_name());
             update_user_meta($user_id, 'shipping_postcode', $order->get_shipping_postcode());
 
-            // Trigger the "new account" email to the customer
-            WC()->mailer()->customer_new_account($user_id);
+            // Trigger the "new account" email to the customer, passing the password
+            WC()->mailer()->customer_new_account($user_id, $random_password);
 
             // Link the order to the new user account
             $order->set_customer_id($user_id);
