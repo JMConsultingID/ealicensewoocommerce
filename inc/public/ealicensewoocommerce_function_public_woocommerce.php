@@ -97,7 +97,7 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
             $order->save();
         } else {
             // If the email doesn't exist, create a new user
-            $random_password = wp_generate_password(); // Save the generated password
+            $random_password = wp_generate_password();
             $user_id = wp_create_user($email, $random_password, $email);
 
             // Assign the customer role to the new user
@@ -135,15 +135,8 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
             update_user_meta($user_id, 'shipping_last_name', $order->get_shipping_last_name());
             update_user_meta($user_id, 'shipping_postcode', $order->get_shipping_postcode());
 
-            // Custom email notification to send password
-            $mailer = WC()->mailer();
-            $email_data = array(
-                'user_id' => $user_id,
-                'user_email' => $email,
-                'user_pass' => $random_password, // Pass the generated password to the email
-                'email_heading' => __('Your EA YourRoboTrader Account Details'),
-            );
-            $mailer->send($email, __('Your New Account on EA YourRoboTrader'), $mailer->wrap_message(__('Account Details'), wc_get_template_html('emails/customer-new-account.php', $email_data)));
+            // Trigger the "new account" email to the customer, passing the password
+            WC()->mailer()->customer_new_account($user_id, $random_password);
 
             // Link the order to the new user account
             $order->set_customer_id($user_id);
