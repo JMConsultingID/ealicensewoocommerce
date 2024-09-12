@@ -141,7 +141,8 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
                 'user_id' => $user_id,
                 'user_email' => $email,
                 'user_pass' => $random_password, // Pass the generated password to the email
-                'email_heading' => __('Your EA YourRoboTrader Account Details'),
+                'user_login' => $email, // Set the username as the email, assuming it's the same (or set it to the actual username if different)
+                'email_heading' => __('Account Details'),
             );
             $mailer->send($email, __('Your New Account on EA YourRoboTrader'), wc_get_template_html('emails/customer-new-account.php', $email_data));
 
