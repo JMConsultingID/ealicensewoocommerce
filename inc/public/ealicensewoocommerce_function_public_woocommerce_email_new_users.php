@@ -37,9 +37,9 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
         <span><?php echo esc_html( $user_login ); ?></span><br>
         <?php _e( 'Password:', 'woocommerce' ); ?>
         <span><?php echo esc_html( $user_pass ); ?></span><br>
-        <?php _e( 'Account Login:', 'woocommerce' ); ?>
+        <?php _e( 'Login:', 'woocommerce' ); ?>
         <a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>">
-            <?php _e( 'Click here to login', 'woocommerce' ); ?>
+            <?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>
         </a>
     </p>
 <?php endif; ?>
