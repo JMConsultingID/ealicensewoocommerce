@@ -14,7 +14,7 @@ function ealicensewoocommerce_menu_items($items) {
     // Insert the new menu items after the "Orders" tab (or wherever you want them)
     $new_items = array_slice($items, 0, 2, true) +
                  array('my-licenses' => __('My License', 'ealicensewoocommerce')) +
-                 array('video-tutorials' => __('Video Tutorials', 'ealicensewoocommerce')) +
+                 array('video-tutorials' => __('Video Guides', 'ealicensewoocommerce')) +
                  array_slice($items, 2, null, true);
     return $new_items;
 }
