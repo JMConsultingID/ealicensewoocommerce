@@ -9,6 +9,8 @@
  */
 
 function ealicensewoocommerce_menu_items($items) {
+    // Unset Address Menu 
+    unset($items['edit-address']); 
     // Insert the new menu items after the "Orders" tab (or wherever you want them)
     $new_items = array_slice($items, 0, 1, true) +
                  array('my-licenses' => __('My License', 'ealicensewoocommerce')) +
