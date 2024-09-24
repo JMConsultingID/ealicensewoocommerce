@@ -7,27 +7,6 @@
  *
  * @package ealicensewoocommerce
  */
-add_filter( 'woocommerce_add_to_cart_redirect', 'ealicensewoocommerce_add_to_cart_redirect');
-add_filter( 'wc_add_to_cart_message_html', '__return_false' );
-add_filter( 'woocommerce_add_cart_item_data', '_empty_cart' );
-add_filter( 'woocommerce_adjust_non_base_location_prices', '__return_false' );
-add_filter('woocommerce_enable_order_notes_field', '__return_false');
-add_filter( 'woocommerce_checkout_fields' , 'ealicensewoocommerce_modify_woocommerce_billing_fields' );
-
-function ealicensewoocommerce_modify_woocommerce_billing_fields( $fields ) {
-    $fields['billing']['billing_email']['priority'] = 5;
-    return $fields;
-}
-
-function _empty_cart( $cart_item_data ) {
-    WC()->cart->empty_cart();
-    return $cart_item_data;
-}
-
-function ealicensewoocommerce_add_to_cart_redirect() {
-    return wc_get_checkout_url();
-}
-
 // Display custom fields in the WooCommerce admin order details
 function ealicensewoocommerce_display_admin_order_meta($order) {
     if (!ealicensewoocommerce_is_license_enabled()) {
