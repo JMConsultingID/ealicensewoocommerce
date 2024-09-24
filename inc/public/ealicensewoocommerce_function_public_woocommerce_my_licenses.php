@@ -88,7 +88,7 @@ function ealicensewoocommerce_display_licenses_by_email() {
 add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_display_licenses_by_email');
 
 function ealicensewoocommerce_video_tutorials_content() {
-    echo '<h2>Video Tutorials</h2>';
+    echo '<h4>Video Tutorials</h4>';
 }
 add_action('woocommerce_account_video-tutorials_endpoint', 'ealicensewoocommerce_video_tutorials_content');
 
