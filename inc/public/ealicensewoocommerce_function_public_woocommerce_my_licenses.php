@@ -8,21 +8,22 @@
  * @package ealicensewoocommerce
  */
 
-// Add "My License" to the My Account menu
-function ealicensewoocommerce_add_my_license_menu_item($items) {
-    // Insert the new menu item after the "Orders" tab (or wherever you want it)
+function ealicensewoocommerce_menu_items($items) {
+    // Insert the new menu items after the "Orders" tab (or wherever you want them)
     $new_items = array_slice($items, 0, 1, true) +
                  array('my-licenses' => __('My License', 'ealicensewoocommerce')) +
+                 array('video-tutorials' => __('Video Tutorials', 'ealicensewoocommerce')) +
                  array_slice($items, 1, null, true);
     return $new_items;
 }
-add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_my_license_menu_item');
+add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 
-// Add the custom endpoint for My License
-function ealicensewoocommerce_add_my_license_endpoint() {
+// Add the custom endpoint for My License, Video Tutorials, and Guides
+function ealicensewoocommerce_menu_items_endpoint() {
     add_rewrite_endpoint('my-licenses', EP_PAGES);
+    add_rewrite_endpoint('video-tutorials', EP_PAGES);
 }
-add_action('init', 'ealicensewoocommerce_add_my_license_endpoint');
+add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
 
 function ealicensewoocommerce_display_licenses_by_email() {
     // Get the current user's email address
@@ -82,13 +83,17 @@ function ealicensewoocommerce_display_licenses_by_email() {
     echo '</tbody></table>';
 }
 
-
-
 add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_display_licenses_by_email');
+
+function ealicensewoocommerce_video_tutorials_content() {
+    echo '<h2>Video Tutorials</h2>';
+}
+add_action('woocommerce_account_video-tutorials_endpoint', 'ealicensewoocommerce_video_tutorials_content');
+
 
 // Flush rewrite rules on activation
 function ealicensewoocommerce_flush_rewrite_rules() {
-    ealicensewoocommerce_add_my_license_endpoint();
+    ealicensewoocommerce_menu_items_endpoint();
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'ealicensewoocommerce_flush_rewrite_rules');
