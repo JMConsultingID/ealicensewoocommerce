@@ -13,8 +13,8 @@ function ealicensewoocommerce_menu_items($items) {
     unset($items['edit-address']); 
     // Insert the new menu items after the "Orders" tab (or wherever you want them)
     $new_items = array_slice($items, 0, 1, true) +
-                array('video-tutorials' => __('Video Guides', 'ealicensewoocommerce')) +
-                array('my-licenses' => __('My License', 'ealicensewoocommerce')) +                 
+                array('my-licenses' => __('My License', 'ealicensewoocommerce')) +    
+                array('video-tutorials' => __('Video Guides', 'ealicensewoocommerce')) +                             
                 array_slice($items, 1, null, true);
     return $new_items;
 }
