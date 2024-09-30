@@ -111,7 +111,7 @@ function sample_video_content_yrt() {
 
     <div class="row g-3">
         <!-- Card 1 -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-dashboard p-3">
                 <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="PerceptTrader">
                 <div class="card-body">
@@ -125,7 +125,7 @@ function sample_video_content_yrt() {
         </div>
 
          <!-- Card 2 -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-dashboard p-3">
                 <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="GoldenPickaxe">
                 <div class="card-body">
@@ -139,7 +139,7 @@ function sample_video_content_yrt() {
         </div>
 
         <!-- Card 3 -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-dashboard p-3">
                 <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="WakaWaka">
                 <div class="card-body">
@@ -153,7 +153,7 @@ function sample_video_content_yrt() {
         </div>
 
         <!-- Card 4 -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-dashboard p-3">
                 <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="NewsCatcher">
                 <div class="card-body">
@@ -167,7 +167,7 @@ function sample_video_content_yrt() {
         </div>
 
         <!-- Card 5 -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-dashboard p-3">
                 <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="EveningScalper">
                 <div class="card-body">
@@ -181,7 +181,7 @@ function sample_video_content_yrt() {
         </div>
 
         <!-- Card 6 -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-dashboard p-3">
                 <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="NightHunterPro">
                 <div class="card-body">
