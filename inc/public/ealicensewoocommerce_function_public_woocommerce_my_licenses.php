@@ -102,7 +102,7 @@ function ealicensewoocommerce_flush_rewrite_rules() {
 }
 register_activation_hook(__FILE__, 'ealicensewoocommerce_flush_rewrite_rules');
 
-function sample_video_content_yrt{
+function sample_video_content_yrt() {
     ?>
 
     <div class="alert alert-info d-flex align-items-center">
