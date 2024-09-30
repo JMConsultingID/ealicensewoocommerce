@@ -12,10 +12,10 @@ function ealicensewoocommerce_menu_items($items) {
     // Unset Address Menu 
     unset($items['edit-address']); 
     // Insert the new menu items after the "Orders" tab (or wherever you want them)
-    $new_items = array_slice($items, 0, 0, true) +
+    $new_items = array_slice($items, 0, 1, true) +
                 array('video-tutorials' => __('Video Guides', 'ealicensewoocommerce')) +
                 array('my-licenses' => __('My License', 'ealicensewoocommerce')) +                 
-                array_slice($items, 0, null, true);
+                array_slice($items, 1, null, true);
     return $new_items;
 }
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
