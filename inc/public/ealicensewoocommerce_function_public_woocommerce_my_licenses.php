@@ -11,7 +11,6 @@
 function ealicensewoocommerce_menu_items($items) {
     // Unset Address Menu 
     unset($items['edit-address']); 
-    unset($items['dashboard']); 
     // Insert the new menu items after the "Orders" tab (or wherever you want them)
     $new_items = array_slice($items, 0, 0, true) +
                 array('video-tutorials' => __('Video Guides', 'ealicensewoocommerce')) +
