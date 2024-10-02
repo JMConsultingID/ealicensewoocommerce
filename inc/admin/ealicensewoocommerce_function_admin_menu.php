@@ -72,9 +72,17 @@ function ealicensewoocommerce_register_settings() {
     add_settings_field('ealicensewoocommerce_api_authorization_key', __('API Authorization Key', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_authorization_key_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
     add_settings_field('ealicensewoocommerce_api_version', __('API Version', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_api_version_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
 
-    add_settings_field('ealicensewoocommerce_template_dashboard_id', __('Dashboard Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_dashboard_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
-    add_settings_field('ealicensewoocommerce_template_license_id', __('License Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_license_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
-    add_settings_field('ealicensewoocommerce_template_guides_id', __('Guides Template ID (optional)', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_guides_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_section');
+    add_settings_section(
+        'hello_woocommerce_settings_section',
+        'Hello Theme WooCommerce Settings',
+        'hello_woocommerce_settings_section_callback',
+        'hello-woocommerce-settings'
+    );
+
+    add_settings_section('ealicensewoocommerce_elementor_section', __('Elementor Settings Page', 'ealicensewoocommerce'), null, 'ealicensewoocommerce_settings');
+    add_settings_field('ealicensewoocommerce_template_dashboard_id', __('Dashboard Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_dashboard_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_elementor_section');
+    add_settings_field('ealicensewoocommerce_template_license_id', __('License Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_license_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_elementor_section');
+    add_settings_field('ealicensewoocommerce_template_guides_id', __('Guides Template ID (optional)', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_guides_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_elementor_section');
 }
 add_action('admin_init', 'ealicensewoocommerce_register_settings');
 
