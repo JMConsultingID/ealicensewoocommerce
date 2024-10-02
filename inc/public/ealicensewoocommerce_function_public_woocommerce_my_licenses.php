@@ -156,7 +156,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
-            <p class="card-text">13 VIDEOS</p>
             <p class="card-text">A free course on how to take your business online. Serve more clients and generate more revenue in this new environment.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -167,7 +166,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
-            <p class="card-text">10 VIDEOS</p>
             <p class="card-text">Create animations in After Effects, export them as Lottie JSON files, then animate them in your Webflow site.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -178,7 +176,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
-            <p class="card-text">6 VIDEOS</p>
             <p class="card-text">This course introduces you to the basic concepts of grid, including how it compares to and works alongside flexbox.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -190,7 +187,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
-            <p class="card-text">13 VIDEOS</p>
             <p class="card-text">A free course on how to take your business online. Serve more clients and generate more revenue in this new environment.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -201,7 +197,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
-            <p class="card-text">10 VIDEOS</p>
             <p class="card-text">Create animations in After Effects, export them as Lottie JSON files, then animate them in your Webflow site.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -212,7 +207,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
-            <p class="card-text">6 VIDEOS</p>
             <p class="card-text">This course introduces you to the basic concepts of grid, including how it compares to and works alongside flexbox.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -223,7 +217,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
-            <p class="card-text">13 VIDEOS</p>
             <p class="card-text">A free course on how to take your business online. Serve more clients and generate more revenue in this new environment.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -234,7 +227,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
-            <p class="card-text">10 VIDEOS</p>
             <p class="card-text">Create animations in After Effects, export them as Lottie JSON files, then animate them in your Webflow site.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
@@ -245,7 +237,6 @@ function sample_video_content_yrt() {
           <?php $random = rand(1, 1000); ?>  <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
-            <p class="card-text">6 VIDEOS</p>
             <p class="card-text">This course introduces you to the basic concepts of grid, including how it compares to and works alongside flexbox.</p>
             <a href="#" class="view-course-btn">View Video →</a>
           </div>
