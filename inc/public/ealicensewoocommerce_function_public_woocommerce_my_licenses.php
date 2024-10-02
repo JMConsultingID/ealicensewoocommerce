@@ -132,7 +132,7 @@ function sample_video_content_yrt() {
       <!-- Card 1 -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/350" class="card-img-top" alt="Course Image 1">
+          <img src="https://placehold.co/300x200" class="card-img-top" alt="Course Image 1">
           <div class="card-body">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
@@ -145,7 +145,7 @@ function sample_video_content_yrt() {
       <!-- Card 2 -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/350" class="card-img-top" alt="Course Image 2">
+          <img src="https://placehold.co/300x200" class="card-img-top" alt="Course Image 2">
           <div class="card-body">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
@@ -158,7 +158,7 @@ function sample_video_content_yrt() {
       <!-- Card 3 -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/350" class="card-img-top" alt="Course Image 3">
+          <img src="https://placehold.co/300x200" class="card-img-top" alt="Course Image 3">
           <div class="card-body">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
