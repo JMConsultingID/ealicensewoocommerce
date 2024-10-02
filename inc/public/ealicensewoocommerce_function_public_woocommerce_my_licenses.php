@@ -103,7 +103,6 @@ function ealicensewoocommerce_flush_rewrite_rules() {
 register_activation_hook(__FILE__, 'ealicensewoocommerce_flush_rewrite_rules');
 
 function sample_video_content_yrt() {
-    $random = rand(1, 1000);  // Generate a random number for each card
     ?>
 
     <style>
@@ -154,7 +153,7 @@ function sample_video_content_yrt() {
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
@@ -165,7 +164,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
@@ -176,7 +175,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
@@ -188,7 +187,7 @@ function sample_video_content_yrt() {
       <!-- Add more card blocks here -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
@@ -199,7 +198,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
@@ -210,7 +209,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
@@ -221,7 +220,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
@@ -232,7 +231,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
@@ -243,7 +242,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
+          <?php $random = rand(1, 1000); ?>  // Generate a random number for each card <img src="https://picsum.photos/300/180?random=<?php echo $random; ?>" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
