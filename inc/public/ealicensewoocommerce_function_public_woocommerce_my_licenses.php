@@ -153,7 +153,7 @@ function sample_video_content_yrt() {
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
@@ -164,7 +164,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
@@ -175,7 +175,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
@@ -187,7 +187,7 @@ function sample_video_content_yrt() {
       <!-- Add more card blocks here -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
@@ -198,7 +198,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
@@ -209,7 +209,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
@@ -220,7 +220,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
@@ -231,7 +231,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
@@ -242,7 +242,7 @@ function sample_video_content_yrt() {
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <img src="https://picsum.photos/300/180?random=1" class="card-img-top" alt="Course Image">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
