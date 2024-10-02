@@ -107,18 +107,41 @@ function sample_video_content_yrt() {
 
     <style>
     .card {
-      border: none; /* Remove card border */
-      box-shadow: none; /* Remove card shadow */
+      height: 100%;
+      border: none; /* Removes the border */
+      box-shadow: none; /* Removes the shadow */
     }
-    .card img {
-      border-radius: 8px; /* Optional: Add slight rounding to images */
+
+    .card-body {
+      padding: 1rem;
     }
+
+    .card-img-top {
+      height: 180px;
+      object-fit: cover;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
     .card-title {
-      font-weight: bold;
+      font-size: 1.25rem;
+      font-weight: 700;
     }
+
     .card-text {
+      font-size: 0.875rem;
+    }
+
+    .view-course-btn {
+      margin-top: auto;
       font-size: 0.9rem;
-      color: #6c757d;
+    }
+
+    /* Ensure the card content aligns properly with the image */
+    .card img,
+    .card-body {
+      padding-left: 0;
+      padding-right: 0;
     }
     </style>
     
@@ -127,49 +150,107 @@ function sample_video_content_yrt() {
         <p class="mb-0 ms-3">Feeling a bit lost? <a href="#">Click here to watch a tutorial video</a></p>
     </div>
 
-    <div class="container mt-4">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      <!-- Card 1 -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://placehold.co/300x200" class="card-img-top" alt="Course Image 1">
-          <div class="card-body">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title">Moving your business online</h5>
             <p class="card-text">13 VIDEOS</p>
             <p class="card-text">A free course on how to take your business online. Serve more clients and generate more revenue in this new environment.</p>
-            <a href="#" class="btn btn-link">View Course →</a>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
           </div>
         </div>
       </div>
-
-      <!-- Card 2 -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://placehold.co/300x200" class="card-img-top" alt="Course Image 2">
-          <div class="card-body">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title">After Effects & Lottie in Webflow</h5>
             <p class="card-text">10 VIDEOS</p>
             <p class="card-text">Create animations in After Effects, export them as Lottie JSON files, then animate them in your Webflow site.</p>
-            <a href="#" class="btn btn-link">View Course →</a>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
           </div>
         </div>
       </div>
-
-      <!-- Card 3 -->
       <div class="col">
         <div class="card h-100">
-          <img src="https://placehold.co/300x200" class="card-img-top" alt="Course Image 3">
-          <div class="card-body">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title">Grid 2.0</h5>
             <p class="card-text">6 VIDEOS</p>
-            <p class="card-text">This course introduces you to the basic concepts of grid, including how it compares to and works alongside other layout options like flexbox.</p>
-            <a href="#" class="btn btn-link">View Course →</a>
+            <p class="card-text">This course introduces you to the basic concepts of grid, including how it compares to and works alongside flexbox.</p>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
           </div>
         </div>
       </div>
-
-      <!-- Additional cards can be added similarly -->
-    </div>
+      <!-- Add more card blocks here -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Moving your business online</h5>
+            <p class="card-text">13 VIDEOS</p>
+            <p class="card-text">A free course on how to take your business online. Serve more clients and generate more revenue in this new environment.</p>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">After Effects & Lottie in Webflow</h5>
+            <p class="card-text">10 VIDEOS</p>
+            <p class="card-text">Create animations in After Effects, export them as Lottie JSON files, then animate them in your Webflow site.</p>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Grid 2.0</h5>
+            <p class="card-text">6 VIDEOS</p>
+            <p class="card-text">This course introduces you to the basic concepts of grid, including how it compares to and works alongside flexbox.</p>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Moving your business online</h5>
+            <p class="card-text">13 VIDEOS</p>
+            <p class="card-text">A free course on how to take your business online. Serve more clients and generate more revenue in this new environment.</p>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">After Effects & Lottie in Webflow</h5>
+            <p class="card-text">10 VIDEOS</p>
+            <p class="card-text">Create animations in After Effects, export them as Lottie JSON files, then animate them in your Webflow site.</p>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="https://via.placeholder.com/300x180" class="card-img-top" alt="Course Image">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Grid 2.0</h5>
+            <p class="card-text">6 VIDEOS</p>
+            <p class="card-text">This course introduces you to the basic concepts of grid, including how it compares to and works alongside flexbox.</p>
+            <a href="#" class="btn btn-primary view-course-btn">View Course →</a>
+          </div>
+        </div>
+      </div>
     </div>
     <?php
 }
