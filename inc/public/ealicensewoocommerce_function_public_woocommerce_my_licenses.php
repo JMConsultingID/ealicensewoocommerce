@@ -52,7 +52,7 @@ function ealicensewoocommerce_display_licenses_by_email() {
 
     // Check for errors in the API response
     if (is_wp_error($response)) {
-        echo '<p>' . __('Error fetching licenses', 'ealicensewoocommerce') . '</p>';
+        echo '<div class="alert alert-warning d-flex align-items-center">' . __('Error fetching licenses', 'ealicensewoocommerce') . '</div>';
         return;
     }
 
@@ -61,7 +61,7 @@ function ealicensewoocommerce_display_licenses_by_email() {
     $licenses = json_decode($body, true);
 
     if (empty($licenses)) {
-        echo '<p>' . __('No licenses found for this email.', 'ealicensewoocommerce') . '</p>';
+        echo '<div class="alert alert-warning d-flex align-items-center">' . __('No licenses found for this email.', 'ealicensewoocommerce') . '</div>';
         return;
     }
 
