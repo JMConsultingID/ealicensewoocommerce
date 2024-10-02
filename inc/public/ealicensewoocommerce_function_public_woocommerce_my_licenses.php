@@ -102,6 +102,8 @@ function ealicensewoocommerce_flush_rewrite_rules() {
 }
 register_activation_hook(__FILE__, 'ealicensewoocommerce_flush_rewrite_rules');
 
+<?php
+
 function sample_video_content_yrt() {
     ?>
     <div class="alert alert-info d-flex align-items-center">
@@ -111,88 +113,113 @@ function sample_video_content_yrt() {
 
     <div class="row g-3">
         <!-- Card 1 -->
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-dashboard p-3">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="PerceptTrader">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 1">
                 <div class="card-body">
-                    <h5 class="card-title">PERCEPTTRADER AI</h5>
-                    <p class="card-text">Last version: 2.23</p>
-                    <a href="#" class="btn btn-custom w-100 mb-2">Download</a>
-                    <a href="#" class="btn btn-outline-dark w-100 mb-2">Tutorial</a>
-                    <a href="#" class="btn btn-outline-dark w-100">Start Trial</a>
+                    <h5 class="card-title">Intro to Trading</h5>
+                    <p class="card-text">5 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example1" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
                 </div>
             </div>
         </div>
 
-         <!-- Card 2 -->
-        <div class="col-md-3">
+        <!-- Card 2 -->
+        <div class="col-md-4">
             <div class="card card-dashboard p-3">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="GoldenPickaxe">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 2">
                 <div class="card-body">
-                    <h5 class="card-title">GOLDEN PICKAXE</h5>
-                    <p class="card-text">Last version: 2.23</p>
-                    <a href="#" class="btn btn-custom w-100 mb-2">Download</a>
-                    <a href="#" class="btn btn-outline-dark w-100 mb-2">Tutorial</a>
-                    <a href="#" class="btn btn-outline-dark w-100">Start Trial</a>
+                    <h5 class="card-title">Advanced Strategies</h5>
+                    <p class="card-text">7 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example2" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
                 </div>
             </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-dashboard p-3">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="WakaWaka">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 3">
                 <div class="card-body">
-                    <h5 class="card-title">WAKAWAKA</h5>
-                    <p class="card-text">Last version: 4.43</p>
-                    <a href="#" class="btn btn-custom w-100 mb-2">Download</a>
-                    <a href="#" class="btn btn-outline-dark w-100 mb-2">Tutorial</a>
-                    <a href="#" class="btn btn-outline-dark w-100">Start Trial</a>
+                    <h5 class="card-title">Forex Trading Basics</h5>
+                    <p class="card-text">8 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example3" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
                 </div>
             </div>
         </div>
 
         <!-- Card 4 -->
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-dashboard p-3">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="NewsCatcher">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 4">
                 <div class="card-body">
-                    <h5 class="card-title">NEWSCATCHER PRO</h5>
-                    <p class="card-text">Last version: 4.24</p>
-                    <a href="#" class="btn btn-custom w-100 mb-2">Download</a>
-                    <a href="#" class="btn btn-outline-dark w-100 mb-2">Tutorial</a>
-                    <a href="#" class="btn btn-outline-dark w-100">Start Trial</a>
+                    <h5 class="card-title">Risk Management</h5>
+                    <p class="card-text">6 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example4" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
                 </div>
             </div>
         </div>
 
         <!-- Card 5 -->
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-dashboard p-3">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="EveningScalper">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 5">
                 <div class="card-body">
-                    <h5 class="card-title">EVENING SCALPER</h5>
-                    <p class="card-text">Last version: 2.56</p>
-                    <a href="#" class="btn btn-custom w-100 mb-2">Download</a>
-                    <a href="#" class="btn btn-outline-dark w-100 mb-2">Tutorial</a>
-                    <a href="#" class="btn btn-outline-dark w-100">Start Trial</a>
+                    <h5 class="card-title">Algo Trading Guide</h5>
+                    <p class="card-text">10 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example5" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
                 </div>
             </div>
         </div>
 
         <!-- Card 6 -->
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card card-dashboard p-3">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="NightHunterPro">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 6">
                 <div class="card-body">
-                    <h5 class="card-title">NIGHTHUNTER PRO</h5>
-                    <p class="card-text">Last version: 2.23</p>
-                    <a href="#" class="btn btn-custom w-100 mb-2">Download</a>
-                    <a href="#" class="btn btn-outline-dark w-100 mb-2">Tutorial</a>
-                    <a href="#" class="btn btn-outline-dark w-100">Start Trial</a>
+                    <h5 class="card-title">Using Indicators</h5>
+                    <p class="card-text">4 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example6" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="col-md-4">
+            <div class="card card-dashboard p-3">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 7">
+                <div class="card-body">
+                    <h5 class="card-title">Candlestick Patterns</h5>
+                    <p class="card-text">12 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example7" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="col-md-4">
+            <div class="card card-dashboard p-3">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 8">
+                <div class="card-body">
+                    <h5 class="card-title">Psychology in Trading</h5>
+                    <p class="card-text">9 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example8" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="col-md-4">
+            <div class="card card-dashboard p-3">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Video 9">
+                <div class="card-body">
+                    <h5 class="card-title">Market Analysis Tools</h5>
+                    <p class="card-text">11 VIDEOS</p>
+                    <a href="https://www.youtube.com/watch?v=example9" class="btn btn-outline-dark w-100 mb-2">Watch Course</a>
                 </div>
             </div>
         </div>
     </div>
     <?php
 }
+
