@@ -25,30 +25,25 @@ function ealicensewoocommerce_display_admin_order_meta($order) {
 add_action('woocommerce_admin_order_data_after_billing_address', 'ealicensewoocommerce_display_admin_order_meta', 10, 1);
 
 // Hook to WooCommerce 'Thank You' page
-add_action('woocommerce_thankyou', 'ealicensewoocommerce_display_license_details_after_order');
+// add_action('woocommerce_thankyou', 'ealicensewoocommerce_display_license_details_after_order');
+// function ealicensewoocommerce_display_license_details_after_order($order_id) {
+//     $order = wc_get_order($order_id);
+//     if ($order && $order->get_status() === 'completed') {
+//         // Retrieve license-related data from the order meta
+//         $user_email = get_post_meta($order->get_id(), '_ealicensewoocommerce_email', true);
+//         $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
+//         $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
+//         $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
 
-function ealicensewoocommerce_display_license_details_after_order($order_id) {
-    // Get the order object
-    $order = wc_get_order($order_id);
-
-    // Check if the order exists and the order status is 'completed'
-    if ($order && $order->get_status() === 'completed') {
-        // Retrieve license-related data from the order meta
-        $user_email = get_post_meta($order->get_id(), '_ealicensewoocommerce_email', true);
-        $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
-        $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
-        $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
-
-        // Display license details only if a license key exists
-        if ($license_key) {
-            echo '<h2>' . __('Your License Details', 'ealicensewoocommerce') . '</h2>';
-            echo '<p><strong>' . __('User Email:', 'ealicensewoocommerce') . '</strong> ' . esc_html($user_email) . '</p>';
-            echo '<p><strong>' . __('License Key:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . '</p>';
-            echo '<p><strong>' . __('Account Limit:', 'ealicensewoocommerce') . '</strong> ' . esc_html($account_quota) . ' ' . __('Accounts', 'ealicensewoocommerce') . '</p>';
-            echo '<p><strong>' . __('License Expiration:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_expiration) . '</p>';
-        }
-    }
-}
+//         if ($license_key) {
+//             echo '<h2>' . __('Your License Details', 'ealicensewoocommerce') . '</h2>';
+//             echo '<p><strong>' . __('User Email:', 'ealicensewoocommerce') . '</strong> ' . esc_html($user_email) . '</p>';
+//             echo '<p><strong>' . __('License Key:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_key) . '</p>';
+//             echo '<p><strong>' . __('Account Limit:', 'ealicensewoocommerce') . '</strong> ' . esc_html($account_quota) . ' ' . __('Accounts', 'ealicensewoocommerce') . '</p>';
+//             echo '<p><strong>' . __('License Expiration:', 'ealicensewoocommerce') . '</strong> ' . esc_html($license_expiration) . '</p>';
+//         }
+//     }
+// }
 
 
 // Function to auto-register a user and log them in after the order is completed
