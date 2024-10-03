@@ -18,7 +18,7 @@ require dirname(__FILE__) . '/helper/ealicensewoocommerce_function_helper.php';
 require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce.php';
 require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_api.php';
 require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_email.php';
-require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_my_account_menu_additional.php';
+require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_my_account_menu.php';
 
 function ealicensewoocommerce_enqueue_admin_assets($hook_suffix) {
     // Register the CSS file
