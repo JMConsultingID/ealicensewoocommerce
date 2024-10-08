@@ -36,20 +36,23 @@ function ealicensewoocommerce_add_icons() {
             // Query all navigation links in My Account page
             let menuItems = document.querySelectorAll('.woocommerce-MyAccount-navigation-link a');
 
-            // Loop through each menu item and prepend the correct icon
+            // Loop through each menu item and prepend the correct icon if not already present
             menuItems.forEach(function(item) {
-                if (item.innerText.includes("Expert Advisor")) {
-                    item.innerHTML = '<i class="fas fa-chart-line"></i> ' + item.innerHTML;
-                } else if (item.innerText.includes("Licenses")) {
-                    item.innerHTML = '<i class="fas fa-file-alt"></i> ' + item.innerHTML;
-                } else if (item.innerText.includes("Orders")) {
-                    item.innerHTML = '<i class="fas fa-shopping-cart"></i> ' + item.innerHTML;
-                } else if (item.innerText.includes("Offers")) {
-                    item.innerHTML = '<i class="fas fa-tags"></i> ' + item.innerHTML;
-                } else if (item.innerText.includes("Settings")) {
-                    item.innerHTML = '<i class="fas fa-cog"></i> ' + item.innerHTML;
-                } else if (item.innerText.includes("Logout")) {
-                    item.innerHTML = '<i class="fas fa-sign-out-alt"></i> ' + item.innerHTML;
+                // Check if the item already contains an icon, if not, add it
+                if (!item.querySelector('i')) {
+                    if (item.innerText.includes("Expert Advisor")) {
+                        item.innerHTML = '<i class="fas fa-chart-line"></i> ' + item.innerHTML;
+                    } else if (item.innerText.includes("Licenses")) {
+                        item.innerHTML = '<i class="fas fa-file-alt"></i> ' + item.innerHTML;
+                    } else if (item.innerText.includes("Orders")) {
+                        item.innerHTML = '<i class="fas fa-shopping-cart"></i> ' + item.innerHTML;
+                    } else if (item.innerText.includes("Offers")) {
+                        item.innerHTML = '<i class="fas fa-tags"></i> ' + item.innerHTML;
+                    } else if (item.innerText.includes("Settings")) {
+                        item.innerHTML = '<i class="fas fa-cog"></i> ' + item.innerHTML;
+                    } else if (item.innerText.includes("Logout")) {
+                        item.innerHTML = '<i class="fas fa-sign-out-alt"></i> ' + item.innerHTML;
+                    }
                 }
             });
         });
@@ -57,6 +60,7 @@ function ealicensewoocommerce_add_icons() {
     <?php
 }
 add_action('woocommerce_before_account_navigation', 'ealicensewoocommerce_add_icons');
+
 
 
 // Add the custom endpoint for My License, Video Tutorials, and Guides
