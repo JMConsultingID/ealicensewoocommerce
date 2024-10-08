@@ -28,33 +28,36 @@ function ealicensewoocommerce_menu_items($items) {
 // Hook the function to 'woocommerce_account_menu_items' to customize My Account menu
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 
-// Function to add icons to WooCommerce My Account menu items
-function ealicensewoocommerce_add_icons_to_menu_items($item_output, $item, $args) {
-    // Add an icon based on the menu slug/endpoint
+// Function to add Heroicon SVG icons to WooCommerce My Account menu items
+function add_heroicons_to_menu_items($item_output, $item, $args) {
+    // Define SVG icons for each menu item based on the endpoint
     if ($item->endpoint === 'dashboard') {
-        // Icon for 'Dashboard' (now renamed to 'Expert Advisor')
-        $icon = '<i class="fas fa-chart-line"></i> ';
+        // Icon for 'Expert Advisor' (Dashboard renamed)
+        $icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.105 0-2-.672-2-1.5S10.895 5 12 5s2 .672 2 1.5S13.105 8 12 8zm0 0v9m-4 4h8m-5-8l5-3m0 0l5 3M3 8l5 3"/></svg> ';
     } elseif ($item->endpoint === 'my-licenses') {
         // Icon for 'Licenses'
-        $icon = '<i class="fas fa-file-alt"></i> ';
+        $icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c.104 0 .207.024.305.072l1.365.683 1.36-.68a.753.753 0 0 1 .67 0l1.36.68 1.365-.683A.753.753 0 0 1 19 11v4.36a.752.752 0 0 1-.305.608l-2.055 1.287a.751.751 0 0 1-.67 0l-2.05-1.282a.751.751 0 0 1-.67 0l-2.05 1.282a.751.751 0 0 1-.67 0l-2.05-1.282A.752.752 0 0 1 5 15.36V11c0-.414.336-.75.75-.75zM9.75 7a.75.75 0 0 1 0-1.5h4.5a.75.75 0 0 1 0 1.5h-4.5zM5 4.5h14c.414 0 .75.336.75.75v10.755c0 .414-.336.75-.75.75H5.75a.75.75 0 0 1-.75-.75V5.25c0-.414.336-.75.75-.75z"/></svg> ';
     } elseif ($item->endpoint === 'orders') {
         // Icon for 'Orders'
-        $icon = '<i class="fas fa-shopping-cart"></i> ';
+        $icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 4a2 2 0 00-2 2v2H9a2 2 0 00-2 2v6m0 0h11a2 2 0 001-3.732M7 16v5m0-5a2 2 0 00-2 2v3a2 2 0 002 2m7-5v5m0-5a2 2 0 00-2 2v3a2 2 0 002 2M5 16v5m5-5h11a2 2 0 001-3.732M15 11l5-3"/></svg> ';
     } elseif ($item->endpoint === 'offers') {
-        // Icon for 'Offer'
-        $icon = '<i class="fas fa-tags"></i> ';
+        // Icon for 'Offers'
+        $icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.75a.75.75 0 00-.75.75v7.19a2.25 2.25 0 100 4.62v7.19c0 .414.336.75.75.75s.75-.336.75-.75V15.31a2.25 2.25 0 100-4.62V3.5a.75.75 0 00-.75-.75zM2.75 8a.75.75 0 01.75-.75H9a.75.75 0 010 1.5H3.5a.75.75 0 01-.75-.75zM15 7.25h5.25a.75.75 0 010 1.5H15a.75.75 0 010-1.5zM2.75 17.25h5.25a.75.75 0 000-1.5H2.75a.75.75 0 000 1.5z"/></svg> ';
     } elseif ($item->endpoint === 'edit-account') {
-        // Icon for 'Settings' (renamed from 'Account Details')
-        $icon = '<i class="fas fa-cog"></i> ';
+        // Icon for 'Settings'
+        $icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 4a2 2 0 011 3.732V17m0-3h-6a2 2 0 011-3.732M7 11v4a2 2 0 11-1-3.732M19 11v4a2 2 0 001-3.732"/></svg> ';
+    } elseif ($item->endpoint === 'customer-logout') {
+        // Icon for 'Logout'
+        $icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m-6 4h3m-3 0a2 2 0 011-3.732M3 16v5h5m0-4a2 2 0 10-1-3.732m0 0v-3m6 4a2 2 0 001-3.732"/></svg> ';
     } else {
         $icon = '';  // No icon for other items
     }
 
-    // Combine the icon with the menu item label and return the result
+    // Combine the SVG icon with the menu item label and return the result
     return $icon . $item_output;
 }
-// Hook the function to 'woocommerce_nav_menu_items' to display icons with My Account menu items
-add_filter('woocommerce_nav_menu_items', 'ealicensewoocommerce_add_icons_to_menu_items', 10, 3);
+// Hook the function to 'woocommerce_nav_menu_items' to display Heroicon SVGs with My Account menu items
+add_filter('woocommerce_nav_menu_items', 'add_heroicons_to_menu_items', 10, 3);
 
 
 
