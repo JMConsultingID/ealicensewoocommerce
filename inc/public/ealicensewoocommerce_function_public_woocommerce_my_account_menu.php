@@ -29,29 +29,35 @@ function ealicensewoocommerce_menu_items($items) {
 // Hook the function to 'woocommerce_account_menu_items' to customize My Account menu
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 
-function ealicensewoocommerce_add_icons_to_menu($items) {
-    // Loop through each menu item
-    foreach ( $items as $endpoint => $label ) {
-        // Add the respective icons for each menu item using Font Awesome
-        if ( $endpoint == 'dashboard' ) {
-            $items[$endpoint] = wp_kses_post('<i class="fas fa-chart-line"></i> ' . $label); // Icon for Expert Advisor
-        } elseif ( $endpoint == 'my-licenses' ) {
-            $items[$endpoint] = wp_kses_post('<i class="fas fa-file-alt"></i> ' . $label); // Icon for Licenses
-        } elseif ( $endpoint == 'orders' ) {
-            $items[$endpoint] = wp_kses_post('<i class="fas fa-shopping-cart"></i> ' . $label); // Icon for Orders
-        } elseif ( $endpoint == 'offers' ) {
-            $items[$endpoint] = wp_kses_post('<i class="fas fa-tags"></i> ' . $label); // Icon for Offers
-        } elseif ( $endpoint == 'edit-account' ) {
-            $items[$endpoint] = wp_kses_post('<i class="fas fa-cog"></i> ' . $label); // Icon for Settings
-        } elseif ( $endpoint == 'customer-logout' ) {
-            $items[$endpoint] = wp_kses_post('<i class="fas fa-sign-out-alt"></i> ' . $label); // Icon for Logout
-        }
-    }
-    
-    // Return the modified menu items
-    return $items;
+function ealicensewoocommerce_add_icons() {
+    ?>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Query all navigation links in My Account page
+            let menuItems = document.querySelectorAll('.woocommerce-MyAccount-navigation-link a');
+
+            // Loop through each menu item and prepend the correct icon
+            menuItems.forEach(function(item) {
+                if (item.innerText.includes("Expert Advisor")) {
+                    item.innerHTML = '<i class="fas fa-chart-line"></i> ' + item.innerHTML;
+                } else if (item.innerText.includes("Licenses")) {
+                    item.innerHTML = '<i class="fas fa-file-alt"></i> ' + item.innerHTML;
+                } else if (item.innerText.includes("Orders")) {
+                    item.innerHTML = '<i class="fas fa-shopping-cart"></i> ' + item.innerHTML;
+                } else if (item.innerText.includes("Offers")) {
+                    item.innerHTML = '<i class="fas fa-tags"></i> ' + item.innerHTML;
+                } else if (item.innerText.includes("Settings")) {
+                    item.innerHTML = '<i class="fas fa-cog"></i> ' + item.innerHTML;
+                } else if (item.innerText.includes("Logout")) {
+                    item.innerHTML = '<i class="fas fa-sign-out-alt"></i> ' + item.innerHTML;
+                }
+            });
+        });
+    </script>
+    <?php
 }
-add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_icons_to_menu');
+add_action('woocommerce_before_account_navigation', 'ealicensewoocommerce_add_icons');
+
 
 // Add the custom endpoint for My License, Video Tutorials, and Guides
 function ealicensewoocommerce_menu_items_endpoint() {
