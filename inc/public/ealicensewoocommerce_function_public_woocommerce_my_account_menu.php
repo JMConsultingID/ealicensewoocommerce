@@ -18,7 +18,7 @@ function ealicensewoocommerce_menu_items($items) {
         'dashboard'      => __('Expert Advisor', 'ealicensewoocommerce'),  // Rename 'Dashboard' to 'Expert Advisor'
         'my-licenses'    => __('Licenses', 'ealicensewoocommerce'),        // Add a new menu item 'Licenses'
         'orders'         => __('Orders', 'ealicensewoocommerce'),          // Keep 'Orders' as is
-        'offers'         => __('Offer', 'ealicensewoocommerce'),           // Add a new menu item 'Offer'
+        'offers'         => __('Offers', 'ealicensewoocommerce'),           // Add a new menu item 'Offer'
         'edit-account'   => __('Settings', 'ealicensewoocommerce'),        // Rename 'Account Details' to 'Settings'
     );
 
