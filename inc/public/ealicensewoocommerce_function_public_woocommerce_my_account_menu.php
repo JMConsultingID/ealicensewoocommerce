@@ -29,36 +29,30 @@ function ealicensewoocommerce_menu_items($items) {
 // Hook the function to 'woocommerce_account_menu_items' to customize My Account menu
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 
-// Function to add icons to WooCommerce My Account menu items
-function ealicensewoocommerce_add_icons_to_menu_items($item_output, $item, $args) {
-    // Add an icon based on the menu slug/endpoint
-    if ($item->endpoint === 'dashboard') {
-        // Icon for 'Dashboard' (now renamed to 'Expert Advisor')
-        $icon = '<i class="fas fa-chart-line"></i> ';
-    } elseif ($item->endpoint === 'my-licenses') {
-        // Icon for 'Licenses'
-        $icon = '<i class="fas fa-file-alt"></i> ';
-    } elseif ($item->endpoint === 'orders') {
-        // Icon for 'Orders'
-        $icon = '<i class="fas fa-shopping-cart"></i> ';
-    } elseif ($item->endpoint === 'offers') {
-        // Icon for 'Offer'
-        $icon = '<i class="fas fa-tags"></i> ';
-    } elseif ($item->endpoint === 'edit-account') {
-        // Icon for 'Settings' (renamed from 'Account Details')
-        $icon = '<i class="fas fa-cog"></i> ';
-    } elseif ($item->endpoint === 'customer-logout') {
-        // Icon for 'Logout'
-        $icon = '<i class="fas fa-sign-out-alt"></i> ';
-    } else {
-        $icon = '';  // No icon for other items
+function ealicensewoocommerce_add_icons_to_menu($items) {
+    // Loop through each menu item
+    foreach ( $items as $endpoint => $label ) {
+        // Add the respective icons for each menu item using Font Awesome (or inline SVG)
+        if ( $endpoint == 'dashboard' ) {
+            $items[$endpoint] = '<i class="fas fa-chart-line"></i> ' . $label; // Icon for Expert Advisor
+        } elseif ( $endpoint == 'my-licenses' ) {
+            $items[$endpoint] = '<i class="fas fa-file-alt"></i> ' . $label; // Icon for Licenses
+        } elseif ( $endpoint == 'orders' ) {
+            $items[$endpoint] = '<i class="fas fa-shopping-cart"></i> ' . $label; // Icon for Orders
+        } elseif ( $endpoint == 'offers' ) {
+            $items[$endpoint] = '<i class="fas fa-tags"></i> ' . $label; // Icon for Offers
+        } elseif ( $endpoint == 'edit-account' ) {
+            $items[$endpoint] = '<i class="fas fa-cog"></i> ' . $label; // Icon for Settings
+        } elseif ( $endpoint == 'customer-logout' ) {
+            $items[$endpoint] = '<i class="fas fa-sign-out-alt"></i> ' . $label; // Icon for Logout
+        }
     }
-
-    // Combine the icon with the menu item label and return the result
-    return $icon . $item_output;
+    
+    // Return the modified menu items
+    return $items;
 }
-// Hook the function to 'woocommerce_nav_menu_items' to display icons with My Account menu items
-add_filter('woocommerce_nav_menu_items', 'ealicensewoocommerce_add_icons_to_menu_items', 10, 3);
+add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_icons_to_menu');
+
 
 
 
