@@ -32,19 +32,19 @@ add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 function ealicensewoocommerce_add_icons_to_menu($items) {
     // Loop through each menu item
     foreach ( $items as $endpoint => $label ) {
-        // Add the respective icons for each menu item using Font Awesome (or inline SVG)
+        // Add the respective icons for each menu item using Font Awesome
         if ( $endpoint == 'dashboard' ) {
-            $items[$endpoint] = '<i class="fas fa-chart-line"></i> ' . $label; // Icon for Expert Advisor
+            $items[$endpoint] = '<i class="fas fa-chart-line"></i> ' . esc_html( $label ); // Icon for Expert Advisor
         } elseif ( $endpoint == 'my-licenses' ) {
-            $items[$endpoint] = '<i class="fas fa-file-alt"></i> ' . $label; // Icon for Licenses
+            $items[$endpoint] = '<i class="fas fa-file-alt"></i> ' . esc_html( $label ); // Icon for Licenses
         } elseif ( $endpoint == 'orders' ) {
-            $items[$endpoint] = '<i class="fas fa-shopping-cart"></i> ' . $label; // Icon for Orders
+            $items[$endpoint] = '<i class="fas fa-shopping-cart"></i> ' . esc_html( $label ); // Icon for Orders
         } elseif ( $endpoint == 'offers' ) {
-            $items[$endpoint] = '<i class="fas fa-tags"></i> ' . $label; // Icon for Offers
+            $items[$endpoint] = '<i class="fas fa-tags"></i> ' . esc_html( $label ); // Icon for Offers
         } elseif ( $endpoint == 'edit-account' ) {
-            $items[$endpoint] = '<i class="fas fa-cog"></i> ' . $label; // Icon for Settings
+            $items[$endpoint] = '<i class="fas fa-cog"></i> ' . esc_html( $label ); // Icon for Settings
         } elseif ( $endpoint == 'customer-logout' ) {
-            $items[$endpoint] = '<i class="fas fa-sign-out-alt"></i> ' . $label; // Icon for Logout
+            $items[$endpoint] = '<i class="fas fa-sign-out-alt"></i> ' . esc_html( $label ); // Icon for Logout
         }
     }
     
@@ -52,8 +52,6 @@ function ealicensewoocommerce_add_icons_to_menu($items) {
     return $items;
 }
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_icons_to_menu');
-
-
 
 
 // Add the custom endpoint for My License, Video Tutorials, and Guides
