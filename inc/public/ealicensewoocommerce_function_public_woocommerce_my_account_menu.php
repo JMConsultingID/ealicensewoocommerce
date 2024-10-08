@@ -39,9 +39,9 @@ function ealicensewoocommerce_add_icons() {
             // Loop through each menu item and prepend the correct icon if not already present
             menuItems.forEach(function(item) {
                 // Check if the item already contains an icon, if not, add it
-                if (!item.querySelector('i')) {
+                if (!item.querySelector('i') || !item.querySelector('svg')) {
                     if (item.innerText.includes("Expert Advisor")) {
-                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.105 0-2-.672-2-1.5S10.895 5 12 5s2 .672 2 1.5S13.105 8 12 8zm0 0v9m-4 4h8m-5-8l5-3m0 0l5 3M3 8l5 3"/></svg>' + item.innerHTML;
+                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13.125 5C13.125 6.72589 11.7259 8.125 10 8.125C8.27414 8.125 6.87503 6.72589 6.87503 5C6.87503 3.27411 8.27414 1.875 10 1.875C11.7259 1.875 13.125 3.27411 13.125 5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75098 16.7652C3.80956 13.3641 6.58492 10.625 10 10.625C13.4152 10.625 16.1906 13.3642 16.2491 16.7654C14.3468 17.6383 12.2304 18.125 10.0003 18.125C7.77003 18.125 5.65344 17.6383 3.75098 16.7652Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' + item.innerHTML;
                     } else if (item.innerText.includes("Licenses")) {
                         item.innerHTML = '<i class="fas fa-file-alt"></i> ' + item.innerHTML;
                     } else if (item.innerText.includes("Orders")) {
@@ -68,6 +68,8 @@ function ealicensewoocommerce_menu_items_endpoint() {
     add_rewrite_endpoint('offers', EP_PAGES);
 }
 add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
+
+
 
 function ealicensewoocommerce_display_licenses_by_email() {
     // Get the current user's email address
