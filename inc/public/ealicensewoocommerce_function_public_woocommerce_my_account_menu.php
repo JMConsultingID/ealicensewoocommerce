@@ -20,6 +20,7 @@ function ealicensewoocommerce_menu_items($items) {
         'orders'         => __('Orders', 'ealicensewoocommerce'),          // Keep 'Orders' as is
         'offers'         => __('Offers', 'ealicensewoocommerce'),           // Add a new menu item 'Offer'
         'edit-account'   => __('Settings', 'ealicensewoocommerce'),        // Rename 'Account Details' to 'Settings'
+        'customer-logout'=> __('Logout', 'ealicensewoocommerce'),          // Add 'Logout' menu item
     );
 
     // Return the modified menu items
@@ -46,6 +47,9 @@ function ealicensewoocommerce_add_icons_to_menu_items($item_output, $item, $args
     } elseif ($item->endpoint === 'edit-account') {
         // Icon for 'Settings' (renamed from 'Account Details')
         $icon = '<i class="fas fa-cog"></i> ';
+    } elseif ($item->endpoint === 'customer-logout') {
+        // Icon for 'Logout'
+        $icon = '<i class="fas fa-sign-out-alt"></i> ';
     } else {
         $icon = '';  // No icon for other items
     }
