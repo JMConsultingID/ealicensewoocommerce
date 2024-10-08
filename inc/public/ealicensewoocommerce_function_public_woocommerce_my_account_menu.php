@@ -61,7 +61,7 @@ add_filter('woocommerce_nav_menu_items', 'ealicensewoocommerce_add_icons_to_menu
 // Add the custom endpoint for My License, Video Tutorials, and Guides
 function ealicensewoocommerce_menu_items_endpoint() {
     add_rewrite_endpoint('my-licenses', EP_PAGES);
-    add_rewrite_endpoint('video-tutorials', EP_PAGES);
+    add_rewrite_endpoint('offers', EP_PAGES);
 }
 add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
 
@@ -126,11 +126,10 @@ function ealicensewoocommerce_display_licenses_by_email() {
 
 add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_display_licenses_by_email');
 
-function ealicensewoocommerce_video_tutorials_content() {
-    echo '<h4>' . __('Video Guides', 'ealicensewoocommerce') . '</h4>';
-    sample_video_content_yrt();
+function ealicensewoocommerce_offers_content() {
+    echo '<h4>' . __('Offers', 'ealicensewoocommerce') . '</h4>';
 }
-add_action('woocommerce_account_video-tutorials_endpoint', 'ealicensewoocommerce_video_tutorials_content');
+add_action('woocommerce_account_offers_endpoint', 'ealicensewoocommerce_offers_content');
 
 
 // Flush rewrite rules on activation
