@@ -41,7 +41,7 @@ function ealicensewoocommerce_add_icons() {
                 // Check if the item already contains an icon, if not, add it
                 if (!item.querySelector('i')) {
                     if (item.innerText.includes("Expert Advisor")) {
-                        item.innerHTML = '<i class="fas fa-chart-line"></i> ' + item.innerHTML;
+                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.105 0-2-.672-2-1.5S10.895 5 12 5s2 .672 2 1.5S13.105 8 12 8zm0 0v9m-4 4h8m-5-8l5-3m0 0l5 3M3 8l5 3"/></svg>' + item.innerHTML;
                     } else if (item.innerText.includes("Licenses")) {
                         item.innerHTML = '<i class="fas fa-file-alt"></i> ' + item.innerHTML;
                     } else if (item.innerText.includes("Orders")) {
@@ -60,7 +60,6 @@ function ealicensewoocommerce_add_icons() {
     <?php
 }
 add_action('woocommerce_before_account_navigation', 'ealicensewoocommerce_add_icons');
-
 
 
 // Add the custom endpoint for My License, Video Tutorials, and Guides
