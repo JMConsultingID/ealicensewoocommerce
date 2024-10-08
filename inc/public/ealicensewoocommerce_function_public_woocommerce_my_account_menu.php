@@ -8,17 +8,55 @@
  * @package ealicensewoocommerce
  */
 
+// Function to modify the WooCommerce My Account menu items
 function ealicensewoocommerce_menu_items($items) {
-    // Unset Address Menu 
-    unset($items['edit-address']); 
-    // Insert the new menu items after the "Orders" tab (or wherever you want them)
-    $new_items = array_slice($items, 0, 1, true) +
-                array('my-licenses' => __('My License', 'ealicensewoocommerce')) +    
-                // array('video-tutorials' => __('Video Guides', 'ealicensewoocommerce')) +                             
-                array_slice($items, 1, null, true);
+    // Remove the default 'edit-address' menu item
+    unset($items['edit-address']);
+
+    // Add and rename menu items
+    $new_items = array(
+        'dashboard'      => __('Expert Advisor', 'ealicensewoocommerce'),  // Rename 'Dashboard' to 'Expert Advisor'
+        'my-licenses'    => __('Licenses', 'ealicensewoocommerce'),        // Add a new menu item 'Licenses'
+        'orders'         => __('Orders', 'ealicensewoocommerce'),          // Keep 'Orders' as is
+        'offers'         => __('Offer', 'ealicensewoocommerce'),           // Add a new menu item 'Offer'
+        'edit-account'   => __('Settings', 'ealicensewoocommerce'),        // Rename 'Account Details' to 'Settings'
+    );
+
+    // Return the modified menu items
     return $new_items;
 }
+// Hook the function to 'woocommerce_account_menu_items' to customize My Account menu
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
+
+// Function to add icons to WooCommerce My Account menu items
+function ealicensewoocommerce_add_icons_to_menu_items($item_output, $item, $args) {
+    // Add an icon based on the menu slug/endpoint
+    if ($item->endpoint === 'dashboard') {
+        // Icon for 'Dashboard' (now renamed to 'Expert Advisor')
+        $icon = '<i class="fas fa-chart-line"></i> ';
+    } elseif ($item->endpoint === 'my-licenses') {
+        // Icon for 'Licenses'
+        $icon = '<i class="fas fa-file-alt"></i> ';
+    } elseif ($item->endpoint === 'orders') {
+        // Icon for 'Orders'
+        $icon = '<i class="fas fa-shopping-cart"></i> ';
+    } elseif ($item->endpoint === 'offers') {
+        // Icon for 'Offer'
+        $icon = '<i class="fas fa-tags"></i> ';
+    } elseif ($item->endpoint === 'edit-account') {
+        // Icon for 'Settings' (renamed from 'Account Details')
+        $icon = '<i class="fas fa-cog"></i> ';
+    } else {
+        $icon = '';  // No icon for other items
+    }
+
+    // Combine the icon with the menu item label and return the result
+    return $icon . $item_output;
+}
+// Hook the function to 'woocommerce_nav_menu_items' to display icons with My Account menu items
+add_filter('woocommerce_nav_menu_items', 'ealicensewoocommerce_add_icons_to_menu_items', 10, 3);
+
+
 
 // Add the custom endpoint for My License, Video Tutorials, and Guides
 function ealicensewoocommerce_menu_items_endpoint() {
