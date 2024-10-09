@@ -8,7 +8,6 @@
  * @package ealicensewoocommerce
  */
 
-<?php
 // Function to modify menu items
 function ealicensewoocommerce_menu_items($items) {
     // Remove some default WooCommerce menu items
