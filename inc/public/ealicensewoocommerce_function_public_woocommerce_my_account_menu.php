@@ -16,12 +16,12 @@ function ealicensewoocommerce_menu_items($items) {
 
     // Add and modify menu items with icons
     $new_items = array(
-        'dashboard'      => __('<i class="fas fa-tachometer-alt"></i> Expert Advisor', 'ealicensewoocommerce'),
-        'my-licenses'    => __('<i class="fas fa-key"></i> Licenses', 'ealicensewoocommerce'),
-        'orders'         => __('<i class="fas fa-shopping-cart"></i> Orders', 'ealicensewoocommerce'),
-        'offers'         => __('<i class="fas fa-tag"></i> Offer', 'ealicensewoocommerce'),
-        'edit-account'   => __('<i class="fas fa-cog"></i> Settings', 'ealicensewoocommerce'),
-        'customer-logout'=> __('<i class="fas fa-cog"></i> Logout', 'ealicensewoocommerce'),
+        'dashboard'      => __('Expert Advisor', 'ealicensewoocommerce'),
+        'my-licenses'    => __('Licenses', 'ealicensewoocommerce'),
+        'orders'         => __('Orders', 'ealicensewoocommerce'),
+        'offers'         => __('Offer', 'ealicensewoocommerce'),
+        'edit-account'   => __('Settings', 'ealicensewoocommerce'),
+        'customer-logout'=> __('Logout', 'ealicensewoocommerce'),
     );
     return $new_items;
 }
