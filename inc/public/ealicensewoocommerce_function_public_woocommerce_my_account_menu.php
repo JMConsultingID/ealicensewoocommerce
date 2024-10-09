@@ -8,20 +8,20 @@
  * @package ealicensewoocommerce
  */
 
-// Function to modify menu items and add icons
+// Function to modify menu items
 function ealicensewoocommerce_menu_items($items) {
     // Remove some default WooCommerce menu items
-    unset($items['edit-address']); // Remove edit-address
-    unset($items['downloads']); // Remove downloads
+    unset($items['edit-address']);
+    unset($items['downloads']);
 
-    // Add and modify menu items with icons
+    // Add and modify menu items
     $new_items = array(
         'dashboard'      => __('Expert Advisor', 'ealicensewoocommerce'),
         'my-licenses'    => __('Licenses', 'ealicensewoocommerce'),
         'orders'         => __('Orders', 'ealicensewoocommerce'),
         'offers'         => __('Offer', 'ealicensewoocommerce'),
         'edit-account'   => __('Settings', 'ealicensewoocommerce'),
-        'customer-logout'=> __('Logout', 'ealicensewoocommerce'),
+        'customer-logout' => __('Logout', 'ealicensewoocommerce'),
     );
     return $new_items;
 }
@@ -50,6 +50,24 @@ function ealicensewoocommerce_add_menu_icons($menu_html) {
 }
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 add_filter('wp_nav_menu_items', 'ealicensewoocommerce_add_menu_icons', 10, 2);
+
+// Function to load Font Awesome
+function ealicensewoocommerce_enqueue_fontawesome() {
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+}
+add_action('wp_enqueue_scripts', 'ealicensewoocommerce_enqueue_fontawesome');
+
+// Function to add custom CSS
+function ealicensewoocommerce_custom_css() {
+    echo '
+    <style>
+        .woocommerce-MyAccount-navigation ul li a i {
+            margin-right: 10px;
+        }
+    </style>
+    ';
+}
+add_action('wp_head', 'ealicensewoocommerce_custom_css');
 
 function ealicensewoocommerce_add_icons() {
     ?>
