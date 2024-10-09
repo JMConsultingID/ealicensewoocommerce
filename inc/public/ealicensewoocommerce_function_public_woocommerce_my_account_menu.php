@@ -115,20 +115,6 @@ function ealicensewoocommerce_query_vars( $vars ) {
 }
 add_filter( 'query_vars', 'ealicensewoocommerce_query_vars', 0 );
 
-// Content for 'my-licenses' endpoint
-function ealicensewoocommerce_my_licenses_content() {
-    echo '<h2>' . __( 'My Licenses', 'ealicensewoocommerce' ) . '</h2>';
-    // Add your custom content here
-}
-add_action( 'woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_my_licenses_content' );
-
-// Content for 'offers' endpoint
-function ealicensewoocommerce_offers_content() {
-    echo '<h2>' . __( 'Offers', 'ealicensewoocommerce' ) . '</h2>';
-    // Add your custom content here
-}
-add_action( 'woocommerce_account_offers_endpoint', 'ealicensewoocommerce_offers_content' );
-
 // Function to get the current page title based on the endpoint
 function ealicensewoocommerce_get_current_title() {
     // Get the current endpoint
