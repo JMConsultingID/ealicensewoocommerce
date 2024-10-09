@@ -200,7 +200,7 @@ function ealicensewoocommerce_display_licenses_by_email() {
 add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_display_licenses_by_email');
 
 function ealicensewoocommerce_offers_content() {
-    echo '<h4>' . __('Offers', 'ealicensewoocommerce') . '</h4>';
+    echo do_shortcode('[elementor-template id="11138"]');
 }
 add_action('woocommerce_account_offers_endpoint', 'ealicensewoocommerce_offers_content');
 
