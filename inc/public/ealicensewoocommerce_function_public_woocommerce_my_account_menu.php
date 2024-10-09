@@ -107,7 +107,6 @@ function ealicensewoocommerce_menu_items_endpoint() {
 }
 add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
 
-<?php
 // Function to get the current page title based on the endpoint
 function ealicensewoocommerce_get_current_title() {
     // Get the current endpoint
