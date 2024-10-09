@@ -28,7 +28,7 @@ function ealicensewoocommerce_menu_items($items) {
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 
 // Function to add icons to menu items
-function ealicensewoocommerce_add_menu_icons($menu_links) {
+function ealicensewoocommerce_add_menu_icons($menu_html) {
     $icon_classes = array(
         'dashboard'      => 'fas fa-tachometer-alt',
         'my-licenses'    => 'fas fa-key',
@@ -38,15 +38,18 @@ function ealicensewoocommerce_add_menu_icons($menu_links) {
         'customer-logout' => 'fas fa-sign-out-alt',
     );
 
-    foreach ($menu_links as $endpoint => $label) {
-        if (isset($icon_classes[$endpoint])) {
-            $menu_links[$endpoint] = '<i class="' . $icon_classes[$endpoint] . '"></i> ' . $label;
-        }
+    foreach ($icon_classes as $endpoint => $icon_class) {
+        $menu_html = preg_replace(
+            '/<li class="[^"]*woocommerce-MyAccount-navigation-link--' . $endpoint . '[^"]*">\s*<a[^>]*>/',
+            '$0<i class="' . $icon_class . '"></i> ',
+            $menu_html
+        );
     }
 
-    return $menu_links;
+    return $menu_html;
 }
-add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_menu_icons', 20);
+add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
+add_filter('wp_nav_menu_items', 'ealicensewoocommerce_add_menu_icons', 10, 2);
 
 function ealicensewoocommerce_add_icons() {
     ?>
