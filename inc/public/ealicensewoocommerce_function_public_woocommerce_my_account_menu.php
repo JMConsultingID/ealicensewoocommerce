@@ -19,7 +19,7 @@ function ealicensewoocommerce_menu_items($items) {
         'dashboard'        => __('Expert Advisor', 'ealicensewoocommerce'),
         'my-licenses'      => __('Licenses', 'ealicensewoocommerce'),
         'orders'           => __('Orders', 'ealicensewoocommerce'),
-        'offers'           => __('Offer', 'ealicensewoocommerce'),
+        'offers'           => __('Offers', 'ealicensewoocommerce'),
         'edit-account'     => __('Settings', 'ealicensewoocommerce'),
         'customer-logout'  => __('Logout', 'ealicensewoocommerce'),
     );
