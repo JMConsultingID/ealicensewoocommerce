@@ -8,26 +8,43 @@
  * @package ealicensewoocommerce
  */
 
-// Function to modify the WooCommerce My Account menu items
+// Function to modify menu items and add icons
 function ealicensewoocommerce_menu_items($items) {
-    // Remove the default 'edit-address' menu item
-    unset($items['edit-address']);
+    // Remove some default WooCommerce menu items
+    unset($items['edit-address']); // Remove edit-address
+    unset($items['downloads']); // Remove downloads
 
-    // Add and rename menu items
+    // Add and modify menu items with icons
     $new_items = array(
-        'dashboard'      => __('Expert Advisor', 'ealicensewoocommerce'),  // Rename 'Dashboard' to 'Expert Advisor'
-        'my-licenses'    => __('Licenses', 'ealicensewoocommerce'),        // Add a new menu item 'Licenses'
-        'orders'         => __('Orders', 'ealicensewoocommerce'),          // Keep 'Orders' as is
-        'offers'         => __('Offers', 'ealicensewoocommerce'),           // Add a new menu item 'Offer'
-        'edit-account'   => __('Settings', 'ealicensewoocommerce'),        // Rename 'Account Details' to 'Settings'
-        'customer-logout'=> __('Logout', 'ealicensewoocommerce'),          // Add 'Logout' menu item
+        'dashboard'      => __('<i class="fas fa-tachometer-alt"></i> Expert Advisor', 'ealicensewoocommerce'),
+        'my-licenses'    => __('<i class="fas fa-key"></i> Licenses', 'ealicensewoocommerce'),
+        'orders'         => __('<i class="fas fa-shopping-cart"></i> Orders', 'ealicensewoocommerce'),
+        'offers'         => __('<i class="fas fa-tag"></i> Offer', 'ealicensewoocommerce'),
+        'edit-account'   => __('<i class="fas fa-cog"></i> Settings', 'ealicensewoocommerce'),
+        'customer-logout'=> __('<i class="fas fa-cog"></i> Logout', 'ealicensewoocommerce'),
     );
-
-    // Return the modified menu items
     return $new_items;
 }
-// Hook the function to 'woocommerce_account_menu_items' to customize My Account menu
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
+
+// Function to add icon classes to menu items
+function ealicensewoocommerce_menu_item_classes($classes, $endpoint) {
+    $icon_classes = array(
+        'dashboard'      => 'fas fa-tachometer-alt',
+        'my-licenses'    => 'fas fa-key',
+        'orders'         => 'fas fa-shopping-cart',
+        'offers'         => 'fas fa-tag',
+        'edit-account'   => 'fas fa-cog',
+        'customer-logout' => 'fas fa-sign-out-alt',
+    );
+
+    if (isset($icon_classes[$endpoint])) {
+        $classes[] = $icon_classes[$endpoint];
+    }
+
+    return $classes;
+}
+add_filter('woocommerce_get_account_menu_item_classes', 'ealicensewoocommerce_menu_item_classes', 10, 2);
 
 function ealicensewoocommerce_add_icons() {
     ?>
@@ -60,31 +77,6 @@ function ealicensewoocommerce_add_icons() {
     <?php
 }
 // add_action('woocommerce_before_account_navigation', 'ealicensewoocommerce_add_icons');
-
-function ealicensewoocommerce_add_icons_to_menu($items) {
-    // Loop through each menu item
-    foreach ( $items as $endpoint => $label ) {
-        // Add the respective icons for each menu item using Font Awesome (or inline SVG)
-        if ( $endpoint == 'dashboard' ) {
-            $items[$endpoint] = '<i class="fas fa-chart-line"></i> ' . $label; // Icon for Expert Advisor
-        } elseif ( $endpoint == 'my-licenses' ) {
-            $items[$endpoint] = '<i class="fas fa-file-alt"></i> ' . $label; // Icon for Licenses
-        } elseif ( $endpoint == 'orders' ) {
-            $items[$endpoint] = '<i class="fas fa-shopping-cart"></i> ' . $label; // Icon for Orders
-        } elseif ( $endpoint == 'offers' ) {
-            $items[$endpoint] = '<i class="fas fa-tags"></i> ' . $label; // Icon for Offers
-        } elseif ( $endpoint == 'edit-account' ) {
-            $items[$endpoint] = '<i class="fas fa-cog"></i> ' . $label; // Icon for Settings
-        } elseif ( $endpoint == 'customer-logout' ) {
-            $items[$endpoint] = '<i class="fas fa-sign-out-alt"></i> ' . $label; // Icon for Logout
-        }
-    }
-    
-    // Return the modified menu items
-    return $items;
-}
-add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_icons_to_menu');
-
 
 
 // Add the custom endpoint for My License, Video Tutorials, and Guides
