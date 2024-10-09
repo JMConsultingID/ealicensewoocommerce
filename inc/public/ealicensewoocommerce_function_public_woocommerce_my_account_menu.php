@@ -8,35 +8,6 @@
  * @package ealicensewoocommerce
  */
 
-// Function to get the current page title based on the endpoint
-function ealicensewoocommerce_get_current_title() {
-    // Get the current endpoint
-    $current_endpoint = WC()->query->get_current_endpoint();
-
-    // If the endpoint is empty, we're on the 'dashboard' page
-    if (empty($current_endpoint)) {
-        $current_endpoint = 'dashboard';
-    }
-
-    // Define titles for each endpoint
-    $titles = array(
-        'dashboard'        => __('Expert Advisor', 'ealicensewoocommerce'),
-        'my-licenses'      => __('Licenses', 'ealicensewoocommerce'),
-        'orders'           => __('Orders', 'ealicensewoocommerce'),
-        'offers'           => __('Offers', 'ealicensewoocommerce'),
-        'edit-account'     => __('Settings', 'ealicensewoocommerce'),
-        'customer-logout'  => __('Logout', 'ealicensewoocommerce'),
-    );
-
-    // Return the title if it exists, else default to 'My Account'
-    if (isset($titles[$current_endpoint])) {
-        return $titles[$current_endpoint];
-    } else {
-        return __('My Account', 'ealicensewoocommerce');
-    }
-}
-
-
 // Function to modify menu items
 function ealicensewoocommerce_menu_items($items) {
     // Remove some default WooCommerce menu items
@@ -95,6 +66,7 @@ function ealicensewoocommerce_account_navigation() {
     <?php
 }
 
+
 function ealicensewoocommerce_add_icons() {
     ?>
     <script type="text/javascript">
@@ -134,6 +106,56 @@ function ealicensewoocommerce_menu_items_endpoint() {
     add_rewrite_endpoint('offers', EP_PAGES);
 }
 add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
+
+// Add new query vars
+function ealicensewoocommerce_query_vars( $vars ) {
+    $vars[] = 'my-licenses';
+    $vars[] = 'offers';
+    return $vars;
+}
+add_filter( 'query_vars', 'ealicensewoocommerce_query_vars', 0 );
+
+// Content for 'my-licenses' endpoint
+function ealicensewoocommerce_my_licenses_content() {
+    echo '<h2>' . __( 'My Licenses', 'ealicensewoocommerce' ) . '</h2>';
+    // Add your custom content here
+}
+add_action( 'woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_my_licenses_content' );
+
+// Content for 'offers' endpoint
+function ealicensewoocommerce_offers_content() {
+    echo '<h2>' . __( 'Offers', 'ealicensewoocommerce' ) . '</h2>';
+    // Add your custom content here
+}
+add_action( 'woocommerce_account_offers_endpoint', 'ealicensewoocommerce_offers_content' );
+
+// Function to get the current page title based on the endpoint
+function ealicensewoocommerce_get_current_title() {
+    // Get the current endpoint
+    $current_endpoint = WC()->query->get_current_endpoint();
+
+    // If the endpoint is empty, we're on the 'dashboard' page
+    if ( empty( $current_endpoint ) ) {
+        $current_endpoint = 'dashboard';
+    }
+
+    // Define titles for each endpoint
+    $titles = array(
+        'dashboard'        => __( 'Expert Advisor', 'ealicensewoocommerce' ),
+        'my-licenses'      => __( 'Licenses', 'ealicensewoocommerce' ),
+        'orders'           => __( 'Orders', 'ealicensewoocommerce' ),
+        'offers'           => __( 'Offers', 'ealicensewoocommerce' ),
+        'edit-account'     => __( 'Settings', 'ealicensewoocommerce' ),
+        'customer-logout'  => __( 'Logout', 'ealicensewoocommerce' ),
+    );
+
+    // Return the title if it exists, else default to 'My Account'
+    if ( isset( $titles[ $current_endpoint ] ) ) {
+        return $titles[ $current_endpoint ];
+    } else {
+        return __( 'My Account', 'ealicensewoocommerce' );
+    }
+}
 
 function ealicensewoocommerce_display_licenses_by_email() {
     // Get the current user's email address
