@@ -8,6 +8,7 @@
  * @package ealicensewoocommerce
  */
 
+<?php
 // Function to modify menu items
 function ealicensewoocommerce_menu_items($items) {
     // Remove some default WooCommerce menu items
@@ -16,58 +17,56 @@ function ealicensewoocommerce_menu_items($items) {
 
     // Add and modify menu items
     $new_items = array(
-        'dashboard'      => __('Expert Advisor', 'ealicensewoocommerce'),
-        'my-licenses'    => __('Licenses', 'ealicensewoocommerce'),
-        'orders'         => __('Orders', 'ealicensewoocommerce'),
-        'offers'         => __('Offer', 'ealicensewoocommerce'),
-        'edit-account'   => __('Settings', 'ealicensewoocommerce'),
-        'customer-logout' => __('Logout', 'ealicensewoocommerce'),
+        'dashboard'        => __('Expert Advisor', 'ealicensewoocommerce'),
+        'my-licenses'      => __('Licenses', 'ealicensewoocommerce'),
+        'orders'           => __('Orders', 'ealicensewoocommerce'),
+        'offers'           => __('Offer', 'ealicensewoocommerce'),
+        'edit-account'     => __('Settings', 'ealicensewoocommerce'),
+        'customer-logout'  => __('Logout', 'ealicensewoocommerce'),
     );
+
     return $new_items;
 }
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 
-// Function to add icons to menu items
-function ealicensewoocommerce_add_menu_icons($menu_html) {
+// Remove default My Account navigation
+remove_action('woocommerce_account_navigation', 'woocommerce_account_navigation');
+
+// Add custom My Account navigation with icons
+add_action('woocommerce_account_navigation', 'ealicensewoocommerce_account_navigation');
+function ealicensewoocommerce_account_navigation() {
+    $menu_items = wc_get_account_menu_items();
+
+    // Define icon classes for each endpoint
     $icon_classes = array(
-        'dashboard'      => 'fas fa-tachometer-alt',
-        'my-licenses'    => 'fas fa-key',
-        'orders'         => 'fas fa-shopping-cart',
-        'offers'         => 'fas fa-tag',
-        'edit-account'   => 'fas fa-cog',
-        'customer-logout' => 'fas fa-sign-out-alt',
+        'dashboard'        => 'fas fa-tachometer-alt',
+        'my-licenses'      => 'fas fa-key',
+        'orders'           => 'fas fa-shopping-cart',
+        'offers'           => 'fas fa-tag',
+        'edit-account'     => 'fas fa-cog',
+        'customer-logout'  => 'fas fa-sign-out-alt',
     );
-
-    foreach ($icon_classes as $endpoint => $icon_class) {
-        $menu_html = preg_replace(
-            '/<li class="[^"]*woocommerce-MyAccount-navigation-link--' . $endpoint . '[^"]*">\s*<a[^>]*>/',
-            '$0<i class="' . $icon_class . '"></i> ',
-            $menu_html
-        );
-    }
-
-    return $menu_html;
+    ?>
+    <nav class="woocommerce-MyAccount-navigation">
+        <ul>
+            <?php foreach ($menu_items as $endpoint => $label) : ?>
+                <li class="<?php echo wc_get_account_menu_item_classes($endpoint); ?>">
+                    <a href="<?php echo esc_url(wc_get_account_endpoint_url($endpoint)); ?>">
+                        <?php
+                        // Display the icon if it's set for the endpoint
+                        if (isset($icon_classes[$endpoint])) {
+                            echo '<i class="' . esc_attr($icon_classes[$endpoint]) . '"></i> ';
+                        }
+                        echo esc_html($label);
+                        ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+    <?php
 }
-add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
-add_filter('wp_nav_menu_items', 'ealicensewoocommerce_add_menu_icons', 10, 2);
 
-// Function to load Font Awesome
-function ealicensewoocommerce_enqueue_fontawesome() {
-    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
-}
-add_action('wp_enqueue_scripts', 'ealicensewoocommerce_enqueue_fontawesome');
-
-// Function to add custom CSS
-function ealicensewoocommerce_custom_css() {
-    echo '
-    <style>
-        .woocommerce-MyAccount-navigation ul li a i {
-            margin-right: 10px;
-        }
-    </style>
-    ';
-}
-add_action('wp_head', 'ealicensewoocommerce_custom_css');
 
 function ealicensewoocommerce_add_icons() {
     ?>
