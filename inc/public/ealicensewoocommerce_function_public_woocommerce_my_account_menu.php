@@ -27,8 +27,8 @@ function ealicensewoocommerce_menu_items($items) {
 }
 add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_menu_items');
 
-// Function to add icon classes to menu items
-function ealicensewoocommerce_menu_item_classes($classes, $endpoint) {
+// Function to add icons to menu items
+function ealicensewoocommerce_add_menu_icons($menu_links) {
     $icon_classes = array(
         'dashboard'      => 'fas fa-tachometer-alt',
         'my-licenses'    => 'fas fa-key',
@@ -38,13 +38,15 @@ function ealicensewoocommerce_menu_item_classes($classes, $endpoint) {
         'customer-logout' => 'fas fa-sign-out-alt',
     );
 
-    if (isset($icon_classes[$endpoint])) {
-        $classes[] = $icon_classes[$endpoint];
+    foreach ($menu_links as $endpoint => $label) {
+        if (isset($icon_classes[$endpoint])) {
+            $menu_links[$endpoint] = '<i class="' . $icon_classes[$endpoint] . '"></i> ' . $label;
+        }
     }
 
-    return $classes;
+    return $menu_links;
 }
-add_filter('woocommerce_get_account_menu_item_classes', 'ealicensewoocommerce_menu_item_classes', 10, 2);
+add_filter('woocommerce_account_menu_items', 'ealicensewoocommerce_add_menu_icons', 20);
 
 function ealicensewoocommerce_add_icons() {
     ?>
