@@ -107,6 +107,34 @@ function ealicensewoocommerce_menu_items_endpoint() {
 }
 add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
 
+<?php
+// Function to get the current page title based on the endpoint
+function ealicensewoocommerce_get_current_title() {
+    // Get the current endpoint
+    $current_endpoint = WC()->query->get_current_endpoint();
+
+    // If the endpoint is empty, we're on the 'dashboard' page
+    if (empty($current_endpoint)) {
+        $current_endpoint = 'dashboard';
+    }
+
+    // Define titles for each endpoint
+    $titles = array(
+        'dashboard'        => __('Expert Advisor', 'ealicensewoocommerce'),
+        'my-licenses'      => __('Licenses', 'ealicensewoocommerce'),
+        'orders'           => __('Orders', 'ealicensewoocommerce'),
+        'offers'           => __('Offer', 'ealicensewoocommerce'),
+        'edit-account'     => __('Settings', 'ealicensewoocommerce'),
+        'customer-logout'  => __('Logout', 'ealicensewoocommerce'),
+    );
+
+    // Return the title if it exists, else default to 'My Account'
+    if (isset($titles[$current_endpoint])) {
+        return $titles[$current_endpoint];
+    } else {
+        return __('My Account', 'ealicensewoocommerce');
+    }
+}
 
 
 function ealicensewoocommerce_display_licenses_by_email() {
