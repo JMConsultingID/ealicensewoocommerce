@@ -184,13 +184,13 @@ function ealicensewoocommerce_display_licenses_by_email() {
 
     foreach ($licenses as $license) {
         echo '<tr>';
-        echo '<td><a href="/my-account/view-order/' . esc_html($license['order_id']) . '">#' . esc_html($license['order_id']) . '</a></td>';
-        echo '<td>' . esc_html($license['license_key']) . '</td>';        
-        echo '<td>' . esc_html($license['account_quota']) . '</td>';
-        echo '<td>' . esc_html($license['used_quota']) . '</td>';
-        echo '<td>' . esc_html($license['license_expiration']) . '</td>';
-        echo '<td>' . esc_html($license['license_expiration_date'] ? date('Y-m-d', strtotime($license['license_expiration_date'])) : 'Lifetime') . '</td>';
-        echo '<td>' . esc_html($license['status']) . '</td>';
+        echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Order ID"><a href="/my-account/view-order/' . esc_html($license['order_id']) . '">#' . esc_html($license['order_id']) . '</a></td>';
+        echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="License">' . esc_html($license['license_key']) . '</td>';        
+        echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Account Quota">' . esc_html($license['account_quota']) . '</td>';
+        echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Used Quota">' . esc_html($license['used_quota']) . '</td>';
+        echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Expiration">' . esc_html($license['license_expiration']) . '</td>';
+        echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Expiration Date">' . esc_html($license['license_expiration_date'] ? date('Y-m-d', strtotime($license['license_expiration_date'])) : 'Lifetime') . '</td>';
+        echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Status">' . esc_html($license['status']) . '</td>';
         echo '</tr>';
     }
 
