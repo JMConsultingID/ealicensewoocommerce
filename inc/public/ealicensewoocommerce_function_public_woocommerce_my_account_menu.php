@@ -134,7 +134,7 @@ function ealicensewoocommerce_get_current_title() {
     }
 
     // Default title
-    return __( 'My Account', 'ealicensewoocommerce' );
+    return __( 'Order Details', 'ealicensewoocommerce' );
 }
 
 
