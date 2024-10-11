@@ -17,7 +17,7 @@ require dirname(__FILE__) . '/helper/ealicensewoocommerce_function_helper.php';
 // Include public functions
 require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce.php';
 require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_api.php';
-require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_email.php';
+//require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_email.php';
 require dirname(__FILE__) . '/public/ealicensewoocommerce_function_public_woocommerce_my_account_menu.php';
 
 function ealicensewoocommerce_enqueue_admin_assets($hook_suffix) {
