@@ -190,7 +190,7 @@ function ealicensewoocommerce_manage_license_page() {
                     <th width="150px"><?php _e('License Key', 'ealicensewoocommerce'); ?></th>
                     <th width="150px"><?php _e('Email', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('OrderID', 'ealicensewoocommerce'); ?></th>
-                    <th><?php _e('ProgramSN', 'ealicensewoocommerce'); ?></th>
+                    <th><?php _e('EA Program', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Account Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Used Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Expiration', 'ealicensewoocommerce'); ?></th>
