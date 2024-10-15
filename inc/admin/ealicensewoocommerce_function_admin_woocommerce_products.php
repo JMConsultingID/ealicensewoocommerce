@@ -76,10 +76,22 @@ function ealicensewoocommerce_add_program_sn_column_to_admin_products($columns) 
         $new_columns[$key] = $name;
 
         if ('sku' === $key) {
-            $new_columns['_ealicensewoocommerce_program_sn'] = __('EA Program', 'yourpropfirm');
+            $new_columns['ealicensewoocommerce_program_sn'] = __('EA Program', 'yourpropfirm');
         }
     }
 
     return $new_columns;
 }
 add_filter('manage_edit-product_columns', 'ealicensewoocommerce_add_program_sn_column_to_admin_products', 20);
+
+function ealicensewoocommerce_display_program_sn_in_admin_products($column, $post_id) {
+    if ('ealicensewoocommerce_program_sn' === $column) {
+        $program_sn = get_post_meta($post_id, '_ealicensewoocommerce_program_sn', true);
+        if ($program_sn) {
+            echo '<span id="_ealicensewoocommerce_program_sn-' . $post_id . '">' . esc_html($program_sn) . '</span>'; 
+        } else {
+            echo '—';
+        }
+    }
+}
+add_action('manage_product_posts_custom_column', 'ealicensewoocommerce_display_program_sn_in_admin_products', 10, 2);
