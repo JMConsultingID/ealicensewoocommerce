@@ -54,7 +54,10 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
             $currency = $order->get_currency();
             $account_quota = get_post_meta($product_id, '_ealicensewoocommerce_account_quota', true);
             $license_expiration = get_post_meta($product_id, '_ealicensewoocommerce_license_expiration', true);
+            $eaprogram_sn = get_post_meta($product_id, '_ealicensewoocommerce_program_sn', true);
             $language = substr(get_locale(), 0, 2); // Example: 'en' for English
+            $site_language = get_locale();
+            $site_language_value = get_bloginfo("language");
 
             // Prepare data to send to API
             $data = array(
@@ -65,7 +68,8 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                 'currency' => strtolower($currency),
                 'account_quota' => $account_quota,
                 'license_expiration' => $license_expiration,
-                'language' => $language,
+                'eaprogram_sn' => $eaprogram_sn,
+                'language' => $site_language_value,
                 'source' => json_encode($source),
                 'billing' => array(
                     'email' => $order->get_billing_email(),
