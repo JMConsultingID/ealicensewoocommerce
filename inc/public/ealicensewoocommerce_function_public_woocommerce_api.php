@@ -113,6 +113,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                     update_post_meta($order_id, '_ealicensewoocommerce_license_key', sanitize_text_field($response_data['license_key']));
                     update_post_meta($order_id, '_ealicensewoocommerce_account_quota', sanitize_text_field($response_data['account_quota']));
                     update_post_meta($order_id, '_ealicensewoocommerce_license_expiration', sanitize_text_field($response_data['license_expiration']));
+                    update_post_meta($order_id, '_ealicensewoocommerce_program_sn', sanitize_text_field($response_data['program_sn']));
                     ealicensewoocommerce_send_customer_email($order);
                 }
 

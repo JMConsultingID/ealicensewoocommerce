@@ -17,6 +17,7 @@ function ealicensewoocommerce_display_admin_order_meta($order) {
     $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
     $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
     $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
+    $program_sn = get_post_meta($order->get_id(), '_ealicensewoocommerce_program_sn', true);
     
     echo '<p><strong>' . __('License Key') . ':</strong> ' . esc_html($license_key) . '</p>';
     echo '<p><strong>' . __('Account Limit') . ':</strong> ' . esc_html($account_quota) . ' Accounts</p>';
