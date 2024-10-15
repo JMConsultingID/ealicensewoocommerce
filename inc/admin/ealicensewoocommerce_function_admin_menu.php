@@ -190,6 +190,7 @@ function ealicensewoocommerce_manage_license_page() {
                     <th width="150px"><?php _e('License Key', 'ealicensewoocommerce'); ?></th>
                     <th width="150px"><?php _e('Email', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('OrderID', 'ealicensewoocommerce'); ?></th>
+                    <th><?php _e('ProgramSN', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Account Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('Used Quota', 'ealicensewoocommerce'); ?></th>
                     <th><?php _e('License Expiration', 'ealicensewoocommerce'); ?></th>
@@ -222,6 +223,7 @@ function ealicensewoocommerce_manage_license_page() {
                             echo '<td>' . esc_html($license['license_key']) . '</td>';
                             echo '<td>' . esc_html($license['email']) . '</td>';
                             echo '<td><a href="' . esc_url(admin_url('post.php?post=' . (int) $license['order_id'] . '&action=edit')) . '" target="_blank">' . esc_html((int) $license['order_id']) . '</a></td>';
+                            echo '<td>' . esc_html($license['program_sn']) . '</td>';
                             echo '<td>' . esc_html($license['account_quota']) . '</td>';
                             echo '<td>' . esc_html($license['used_quota']) . '</td>';
                             echo '<td>' . esc_html($license['license_expiration']) . '</td>';
