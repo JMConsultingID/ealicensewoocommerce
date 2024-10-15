@@ -68,7 +68,7 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
                 'currency' => strtolower($currency),
                 'account_quota' => $account_quota,
                 'license_expiration' => $license_expiration,
-                'eaprogram_sn' => $eaprogram_sn,
+                'program_sn' => $eaprogram_sn,
                 'language' => $site_language_value,
                 'source' => json_encode($source),
                 'billing' => array(
