@@ -38,6 +38,14 @@ function ealicensewoocommerce_add_additional_fields() {
             'lifetime' => 'lifetime',
         ),
     ));
+
+    // Adding EA Program SN (Serial Number) text input
+    woocommerce_wp_text_input(array(
+        'id' => '_ealicensewoocommerce_program_sn',
+        'label' => __('EA Program SN', 'ealicensewoocommerce'),
+        'desc_tip' => true,
+        'description' => __('Enter the EA Program Serial Number', 'ealicensewoocommerce'),
+    ));
 }
 
 add_action('woocommerce_process_product_meta', 'ealicensewoocommerce_save_additional_fields');
@@ -51,5 +59,11 @@ function ealicensewoocommerce_save_additional_fields($post_id) {
     $license_expiration = $_POST['_ealicensewoocommerce_license_expiration'];
     if (!empty($license_expiration)) {
         update_post_meta($post_id, '_ealicensewoocommerce_license_expiration', esc_attr($license_expiration));
+    }
+
+    // Save EA Program SN (Serial Number)
+    $program_sn = $_POST['_ealicensewoocommerce_program_sn'];
+    if (!empty($program_sn)) {
+        update_post_meta($post_id, '_ealicensewoocommerce_program_sn', esc_attr($program_sn));
     }
 }
