@@ -67,3 +67,19 @@ function ealicensewoocommerce_save_additional_fields($post_id) {
         update_post_meta($post_id, '_ealicensewoocommerce_program_sn', esc_attr($program_sn));
     }
 }
+
+
+function ealicensewoocommerce_add_program_sn_column_to_admin_products($columns) {
+    $new_columns = array();
+
+    foreach ($columns as $key => $name) {
+        $new_columns[$key] = $name;
+
+        if ('sku' === $key) {
+            $new_columns['_ealicensewoocommerce_program_sn'] = __('EA Program', 'yourpropfirm');
+        }
+    }
+
+    return $new_columns;
+}
+add_filter('manage_edit-product_columns', 'ealicensewoocommerce_add_program_sn_column_to_admin_products', 20);
