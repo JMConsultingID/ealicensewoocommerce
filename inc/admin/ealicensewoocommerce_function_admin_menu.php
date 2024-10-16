@@ -343,16 +343,16 @@ function ealicensewoocommerce_logs_page() {
 
     // Display logs in a table
     echo '<div class="wrap">';
-    echo '<h1>' . __('Validate License Logs', 'ealicensewoocommerce') . '</h1>';
+    echo '<h1>' . __('Validation Logs', 'ealicensewoocommerce') . '</h1>';
     echo '<table class="wp-list-table widefat fixed striped">';
     echo '<thead>
             <tr>
-                <th width="30px;">' . __('No', 'ealicensewoocommerce') . '</th>
+                <th width="30px">' . __('No', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Program SN', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Account MQL', 'ealicensewoocommerce') . '</th>
                 <th>' . __('License Key', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Validation', 'ealicensewoocommerce') . '</th>
-                <th>' . __('Message', 'ealicensewoocommerce') . '</th>
+                <th width="30%">' . __('Message', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Date', 'ealicensewoocommerce') . '</th>
             </tr>
           </thead>';
