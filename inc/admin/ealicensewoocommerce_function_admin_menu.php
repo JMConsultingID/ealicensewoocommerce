@@ -373,14 +373,14 @@ function ealicensewoocommerce_logs_page() {
         $message_validation = !empty($log['message_validation']) ? esc_html($log['message_validation']) : 'N/A';
         $date = !empty($log['date']) ? date('Y-m-d H:i:s', strtotime($log['date'])) : 'N/A'; // Date with time
 
-        echo '<tr ' . $validation_class . '>';
-        echo '<td>' . esc_html($number++) . '</td>';  // Increment the counter
-        echo '<td>' . $program_sn . '</td>';
-        echo '<td>' . $account_mql . '</td>';
-        echo '<td>' . $license_key . '</td>';
-        echo '<td>' . $validation_status . '</td>'; // Apply red color if invalid
-        echo '<td>' . $message_validation . '</td>';
-        echo '<td>' . esc_html($date) . '</td>';
+        echo '<tr>';
+        echo '<td ' . $validation_class . '>' . esc_html($number++) . '</td>';  // Increment the counter
+        echo '<td ' . $validation_class . '>' . $program_sn . '</td>';
+        echo '<td ' . $validation_class . '>' . $account_mql . '</td>';
+        echo '<td ' . $validation_class . '>' . $license_key . '</td>';
+        echo '<td ' . $validation_class . '>' . $validation_status . '</td>'; // Apply red color if invalid
+        echo '<td ' . $validation_class . '>' . $message_validation . '</td>';
+        echo '<td ' . $validation_class . '>' . esc_html($date) . '</td>';
         echo '</tr>';
     }
 
