@@ -179,12 +179,13 @@ function ealicensewoocommerce_display_licenses_by_email() {
     // echo '<h4>' . __('My licenses', 'ealicensewoocommerce') . '</h4>';
     // Display the licenses in a table
     echo '<table class="shop_table shop_table_responsive my_account_orders">';
-    echo '<thead><tr><th>' . __('Order ID', 'ealicensewoocommerce') . '</th><th>' . __('License', 'ealicensewoocommerce') . '</th><th>' . __('Account Quota', 'ealicensewoocommerce') . '</th><th>' . __('Used Quota', 'ealicensewoocommerce') . '</th><th>' . __('Expiration', 'ealicensewoocommerce') . '</th><th>' . __('Expiration Date', 'ealicensewoocommerce') . '</th><th>' . __('Status', 'ealicensewoocommerce') . '</th></tr></thead>';
+    echo '<thead><tr><th>' . __('Order ID', 'ealicensewoocommerce') . '</th><th>' . __('Product Name', 'ealicensewoocommerce') . '</th><th>' . __('License', 'ealicensewoocommerce') . '</th><th>' . __('Account Quota', 'ealicensewoocommerce') . '</th><th>' . __('Used Quota', 'ealicensewoocommerce') . '</th><th>' . __('Expiration', 'ealicensewoocommerce') . '</th><th>' . __('Expiration Date', 'ealicensewoocommerce') . '</th><th>' . __('Status', 'ealicensewoocommerce') . '</th></tr></thead>';
     echo '<tbody>';
 
     foreach ($licenses as $license) {
         echo '<tr>';
         echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-id" data-title="Order ID"><a href="/my-account/view-order/' . esc_html($license['order_id']) . '">#' . esc_html($license['order_id']) . '</a></td>';
+         echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-product-name" data-title="Product Name">' . esc_html($license['product_name']) . '</td>';
         echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-ea-license" data-title="License">' . esc_html($license['license_key']) . '</td>';        
         echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-ea-account-quota" data-title="Account Quota">' . esc_html($license['account_quota']) . '</td>';
         echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-ea-used-quota" data-title="Used Quota">' . esc_html($license['used_quota']) . '</td>';
