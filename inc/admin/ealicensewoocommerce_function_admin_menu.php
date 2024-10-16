@@ -347,7 +347,7 @@ function ealicensewoocommerce_logs_page() {
     echo '<table class="wp-list-table widefat fixed striped">';
     echo '<thead>
             <tr>
-                <th>' . __('No', 'ealicensewoocommerce') . '</th>
+                <th width="30px;">' . __('No', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Program SN', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Account MQL', 'ealicensewoocommerce') . '</th>
                 <th>' . __('License Key', 'ealicensewoocommerce') . '</th>
