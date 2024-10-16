@@ -30,6 +30,15 @@ function ealicensewoocommerce_add_admin_menu() {
 
     add_submenu_page(
         'ealicensewoocommerce',
+        __('Validation Logs', 'ealicensewoocommerce'),
+        __('Validation Logs', 'ealicensewoocommerce'),
+        'manage_options',
+        'ealicensewoocommerce-logs',
+        'ealicensewoocommerce_logs_page'
+    );
+
+    add_submenu_page(
+        'ealicensewoocommerce',
         __('Settings', 'ealicensewoocommerce'),
         __('Settings', 'ealicensewoocommerce'),
         'manage_options',
@@ -283,4 +292,105 @@ function ealicensewoocommerce_manage_license_page() {
         </div>
     </div>
     <?php
+}
+
+
+// Function to fetch data Validate Logs from REST API and display it in a table with pagination and search
+function ealicensewoocommerce_logs_page() {
+    // Get the API base endpoint URL, API Version, and Authorization Key from settings
+    $api_base_endpoint = get_option('ealicensewoocommerce_api_base_endpoint_url');
+    $api_version = get_option('ealicensewoocommerce_api_version', 'v1'); // Default to 'v1' if not set
+    $api_authorization_key = get_option('ealicensewoocommerce_api_authorization_key');
+
+    // Construct the full API endpoint URL based on the base URL and version
+    $api_endpoint = trailingslashit($api_base_endpoint) . $api_version . '/validate-license-logs';
+
+    // Handle pagination parameters
+    $current_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
+    $items_per_page = 10; // Set the number of items per page
+
+    // Set up headers for the API request
+    $headers = array(
+        'Accept' => 'application/json',
+        'Content-Type'  => 'application/json',
+        'Authorization' => 'Bearer ' . $api_authorization_key
+    );
+
+    // Set up query parameters for pagination
+    $query_args = array(
+        'page' => $current_page,
+        'limit' => $items_per_page
+    );
+
+    // Build the full API URL with query parameters
+    $api_url = add_query_arg($query_args, $api_endpoint);
+
+    // Fetch data from REST API
+    $response = wp_remote_get($api_url, array('headers' => $headers));
+
+    if (is_wp_error($response)) {
+        echo '<div class="notice notice-error"><p>' . __('Error fetching logs', 'ealicensewoocommerce') . '</p></div>';
+        return;
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    $logs_data = json_decode($body, true);
+
+    if (empty($logs_data['data'])) {
+        echo '<p>' . __('No validation logs found.', 'ealicensewoocommerce') . '</p>';
+        return;
+    }
+
+    // Display logs in a table
+    echo '<div class="wrap">';
+    echo '<h1>' . __('Validate License Logs', 'ealicensewoocommerce') . '</h1>';
+    echo '<table class="wp-list-table widefat fixed striped">';
+    echo '<thead>
+            <tr>
+                <th>' . __('No', 'ealicensewoocommerce') . '</th>
+                <th>' . __('Program SN', 'ealicensewoocommerce') . '</th>
+                <th>' . __('Account MQL', 'ealicensewoocommerce') . '</th>
+                <th>' . __('License Key', 'ealicensewoocommerce') . '</th>
+                <th>' . __('Validation Status', 'ealicensewoocommerce') . '</th>
+                <th>' . __('Date', 'ealicensewoocommerce') . '</th>
+            </tr>
+          </thead>';
+    echo '<tbody>';
+
+    // Initialize counter for '$number'
+    $number = ($current_page - 1) * $items_per_page + 1;
+
+    foreach ($logs_data['data'] as $log) {
+        echo '<tr>';
+        echo '<td>' . esc_html($number++) . '</td>';  // Increment the counter
+        echo '<td>' . esc_html($log['program_sn']) . '</td>';
+        echo '<td>' . esc_html($log['account_mql']) . '</td>';
+        echo '<td>' . esc_html($log['license_key']) . '</td>';
+        echo '<td>' . esc_html($log['validation_status']) . '</td>';
+        echo '<td>' . esc_html(date('Y-m-d', strtotime($log['date']))) . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</tbody>';
+    echo '</table>';
+
+    // Handle pagination
+    $total_pages = isset($logs_data['last_page']) ? $logs_data['last_page'] : 1;
+
+    if ($total_pages > 1) {
+        $pagination_args = array(
+            'base' => add_query_arg('paged', '%#%'),
+            'format' => '',
+            'current' => $current_page,
+            'total' => $total_pages,
+            'prev_text' => __('&laquo; Previous', 'ealicensewoocommerce'),
+            'next_text' => __('Next &raquo;', 'ealicensewoocommerce'),
+        );
+
+        echo '<div class="tablenav"><div class="tablenav-pages">';
+        echo paginate_links($pagination_args);
+        echo '</div></div>';
+    }
+
+    echo '</div>';
 }
