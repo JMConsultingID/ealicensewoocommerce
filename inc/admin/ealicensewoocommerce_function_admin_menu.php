@@ -351,7 +351,8 @@ function ealicensewoocommerce_logs_page() {
                 <th>' . __('Program SN', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Account MQL', 'ealicensewoocommerce') . '</th>
                 <th>' . __('License Key', 'ealicensewoocommerce') . '</th>
-                <th>' . __('Validation Status', 'ealicensewoocommerce') . '</th>
+                <th>' . __('Validation', 'ealicensewoocommerce') . '</th>
+                <th>' . __('Message', 'ealicensewoocommerce') . '</th>
                 <th>' . __('Date', 'ealicensewoocommerce') . '</th>
             </tr>
           </thead>';
@@ -361,15 +362,28 @@ function ealicensewoocommerce_logs_page() {
     $number = ($current_page - 1) * $items_per_page + 1;
 
     foreach ($logs_data['data'] as $log) {
-        echo '<tr>';
+        // Determine if the validation status is invalid
+        $validation_status = esc_html($log['validation_status']);
+        $validation_class = ($validation_status === 'invalid') ? 'style="color:red;"' : '';
+        
+        // Ensure fields have values, otherwise use 'N/A'
+        $program_sn = !empty($log['program_sn']) ? esc_html($log['program_sn']) : 'N/A';
+        $account_mql = !empty($log['account_mql']) ? esc_html($log['account_mql']) : 'N/A';
+        $license_key = !empty($log['license_key']) ? esc_html($log['license_key']) : 'N/A';
+        $message_validation = !empty($log['message_validation']) ? esc_html($log['message_validation']) : 'N/A';
+        $date = !empty($log['date']) ? date('Y-m-d H:i:s', strtotime($log['date'])) : 'N/A'; // Date with time
+
+        echo '<tr ' . $validation_class . '>';
         echo '<td>' . esc_html($number++) . '</td>';  // Increment the counter
-        echo '<td>' . esc_html($log['program_sn']) . '</td>';
-        echo '<td>' . esc_html($log['account_mql']) . '</td>';
-        echo '<td>' . esc_html($log['license_key']) . '</td>';
-        echo '<td>' . esc_html($log['validation_status']) . '</td>';
-        echo '<td>' . esc_html(date('Y-m-d', strtotime($log['date']))) . '</td>';
+        echo '<td>' . $program_sn . '</td>';
+        echo '<td>' . $account_mql . '</td>';
+        echo '<td>' . $license_key . '</td>';
+        echo '<td>' . $validation_status . '</td>'; // Apply red color if invalid
+        echo '<td>' . $message_validation . '</td>';
+        echo '<td>' . esc_html($date) . '</td>';
         echo '</tr>';
     }
+
 
     echo '</tbody>';
     echo '</table>';
