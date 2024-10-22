@@ -71,7 +71,9 @@ function ealicensewoocommerce_register_settings() {
     register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_api_version');
 
     register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_template_dashboard_id');
+    register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_template_videos_id');
     register_setting('ealicensewoocommerce_settings_group', 'ealicensewoocommerce_template_offers_id');
+
 
     add_settings_section('ealicensewoocommerce_section', __('EA License Main Settings', 'ealicensewoocommerce'), null, 'ealicensewoocommerce_settings');
 
@@ -89,7 +91,8 @@ function ealicensewoocommerce_register_settings() {
 
     add_settings_section('ealicensewoocommerce_elementor_section', __('Elementor Settings Page', 'ealicensewoocommerce'), null, 'ealicensewoocommerce_settings');
     add_settings_field('ealicensewoocommerce_template_dashboard_id', __('Dashboard Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_dashboard_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_elementor_section');
-    add_settings_field('ealicensewoocommerce_template_offers_id', __('Offers Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_guides_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_elementor_section');
+    add_settings_field('ealicensewoocommerce_template_videos_id', __('Videos Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_videos_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_elementor_section');
+    add_settings_field('ealicensewoocommerce_template_offers_id', __('Offers Template ID', 'ealicensewoocommerce'), 'ealicensewoocommerce_license_offers_template_callback', 'ealicensewoocommerce_settings', 'ealicensewoocommerce_elementor_section');
 }
 add_action('admin_init', 'ealicensewoocommerce_register_settings');
 
@@ -143,7 +146,12 @@ function ealicensewoocommerce_license_license_template_callback() {
     echo '<input type="text" id="ealicensewoocommerce_template_license_id" name="ealicensewoocommerce_template_license_id" value="' . $value . '" class="regular-text" />';
 }
 
-function ealicensewoocommerce_license_guides_template_callback() {
+function ealicensewoocommerce_license_videos_template_callback() {
+    $value = esc_attr(get_option('ealicensewoocommerce_template_videos_id'));
+    echo '<input type="text" id="ealicensewoocommerce_template_videos_id" name="ealicensewoocommerce_template_videos_id" value="' . $value . '" class="regular-text" />';
+}
+
+function ealicensewoocommerce_license_offers_template_callback() {
     $value = esc_attr(get_option('ealicensewoocommerce_template_offers_id'));
     echo '<input type="text" id="ealicensewoocommerce_template_offers_id" name="ealicensewoocommerce_template_offers_id" value="' . $value . '" class="regular-text" />';
 }

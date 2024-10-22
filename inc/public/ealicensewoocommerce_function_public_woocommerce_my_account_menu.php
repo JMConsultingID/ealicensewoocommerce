@@ -18,6 +18,7 @@ function ealicensewoocommerce_menu_items($items) {
     $new_items = array(
         'dashboard'        => __('Expert Advisor', 'ealicensewoocommerce'),
         'my-licenses'      => __('Licenses', 'ealicensewoocommerce'),
+        'videos'           => __('Videos', 'ealicensewoocommerce'),
         'orders'           => __('Orders', 'ealicensewoocommerce'),
         'offers'           => __('Offers', 'ealicensewoocommerce'),
         'edit-account'     => __('Settings', 'ealicensewoocommerce'),
@@ -40,6 +41,7 @@ function ealicensewoocommerce_account_navigation() {
     $icon_classes = array(
         'dashboard'        => 'fas fa-tachometer-alt',
         'my-licenses'      => 'fas fa-key',
+        'videos'           => 'fas fa-play',
         'orders'           => 'fas fa-shopping-cart',
         'offers'           => 'fas fa-tag',
         'edit-account'     => 'fas fa-cog',
@@ -66,43 +68,10 @@ function ealicensewoocommerce_account_navigation() {
     <?php
 }
 
-
-function ealicensewoocommerce_add_icons() {
-    ?>
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function() {
-            // Query all navigation links in My Account page
-            let menuItems = document.querySelectorAll('.woocommerce-MyAccount-navigation-link a');
-
-            // Loop through each menu item and prepend the correct icon if not already present
-            menuItems.forEach(function(item) {
-                // Check if the item already contains an icon, if not, add it
-                if (!item.querySelector('i') && !item.querySelector('svg')) {
-                    if (item.innerText.includes("Expert Advisor")) {
-                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13.125 5C13.125 6.72589 11.7259 8.125 10 8.125C8.27414 8.125 6.87503 6.72589 6.87503 5C6.87503 3.27411 8.27414 1.875 10 1.875C11.7259 1.875 13.125 3.27411 13.125 5Z" stroke="#09CA8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75098 16.7652C3.80956 13.3641 6.58492 10.625 10 10.625C13.4152 10.625 16.1906 13.3642 16.2491 16.7654C14.3468 17.6383 12.2304 18.125 10.0003 18.125C7.77003 18.125 5.65344 17.6383 3.75098 16.7652Z" stroke="#09CA8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + item.innerHTML;
-                    } else if (item.innerText.includes("Licenses")) {
-                        item.innerHTML = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="heroicons-outline/document"><path id="Vector" d="M16.25 11.875V9.6875C16.25 8.1342 14.9908 6.875 13.4375 6.875H12.1875C11.6697 6.875 11.25 6.45527 11.25 5.9375V4.6875C11.25 3.1342 9.9908 1.875 8.4375 1.875H6.875M8.75 1.875H4.6875C4.16973 1.875 3.75 2.29473 3.75 2.8125V17.1875C3.75 17.7053 4.16973 18.125 4.6875 18.125H15.3125C15.8303 18.125 16.25 17.7053 16.25 17.1875V9.375C16.25 5.23286 12.8921 1.875 8.75 1.875Z" stroke="#09CA8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g></svg> ' + item.innerHTML;
-                    } else if (item.innerText.includes("Orders")) {
-                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.875 5.625H16.875M6.875 10H16.875M6.875 14.375H16.875M3.125 5.625H3.13125V5.63125H3.125V5.625ZM3.4375 5.625C3.4375 5.79759 3.29759 5.9375 3.125 5.9375C2.95241 5.9375 2.8125 5.79759 2.8125 5.625C2.8125 5.45241 2.95241 5.3125 3.125 5.3125C3.29759 5.3125 3.4375 5.45241 3.4375 5.625ZM3.125 10H3.13125V10.0063H3.125V10ZM3.4375 10C3.4375 10.1726 3.29759 10.3125 3.125 10.3125C2.95241 10.3125 2.8125 10.1726 2.8125 10C2.8125 9.82741 2.95241 9.6875 3.125 9.6875C3.29759 9.6875 3.4375 9.82741 3.4375 10ZM3.125 14.375H3.13125V14.3813H3.125V14.375ZM3.4375 14.375C3.4375 14.5476 3.29759 14.6875 3.125 14.6875C2.95241 14.6875 2.8125 14.5476 2.8125 14.375C2.8125 14.2024 2.95241 14.0625 3.125 14.0625C3.29759 14.0625 3.4375 14.2024 3.4375 14.375Z" stroke="#09CA8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + item.innerHTML;
-                    } else if (item.innerText.includes("Offers")) {
-                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1.04932 13.5082C1.04932 13.873 1.19401 14.2228 1.45166 14.4809C1.7093 14.7391 2.05884 14.8845 2.42356 14.8852H17.5761C17.9408 14.8845 18.2903 14.7391 18.548 14.4809C18.8056 14.2228 18.9503 13.873 18.9503 13.5082V10.7074C18.3558 10.5462 17.8308 10.1937 17.4565 9.70444C17.0823 9.21515 16.8795 8.61626 16.8795 8.00023C16.8795 7.38421 17.0823 6.78532 17.4565 6.29603C17.8308 5.80674 18.3558 5.45428 18.9503 5.29305V2.49223C18.9503 2.12751 18.8056 1.77768 18.548 1.51952C18.2903 1.26136 17.9408 1.11596 17.5761 1.11523H2.42356C2.05884 1.11596 1.7093 1.26136 1.45166 1.51952C1.19401 1.77768 1.04932 2.12751 1.04932 2.49223V5.28754C1.64861 5.44517 2.17884 5.79681 2.55721 6.28757C2.93558 6.77832 3.14079 7.38056 3.14079 8.00023C3.14079 8.61991 2.93558 9.22215 2.55721 9.7129C2.17884 10.2037 1.64861 10.5553 1.04932 10.7129V13.5082Z" stroke="#09CA8C" stroke-width="1.377" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + item.innerHTML;
-                    } else if (item.innerText.includes("Settings")) {
-                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M18.125 5.625C18.125 7.69607 16.4461 9.375 14.375 9.375C14.2672 9.375 14.1604 9.37045 14.0549 9.36153C13.1587 9.28577 12.168 9.42101 11.5962 10.1153L5.63693 17.3516C5.23364 17.8413 4.63248 18.125 3.99807 18.125C2.82553 18.125 1.875 17.1745 1.875 16.0019C1.875 15.3675 2.1587 14.7664 2.64842 14.3631L9.88471 8.40377C10.579 7.83201 10.7142 6.8413 10.6385 5.94509C10.6296 5.83958 10.625 5.73282 10.625 5.625C10.625 3.55393 12.3039 1.875 14.375 1.875C14.9253 1.875 15.4479 1.99353 15.9187 2.20645L13.1885 4.93664C13.4019 5.86636 14.1338 6.59821 15.0635 6.81164L17.7936 4.08149C18.0065 4.55223 18.125 5.07478 18.125 5.625Z" stroke="#09CA8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.05603 15.9375H4.06228V15.9438H4.05603V15.9375Z" stroke="#09CA8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + item.innerHTML;
-                    } else if (item.innerText.includes("Logout")) {
-                        item.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13.125 7.5V4.375C13.125 3.33947 12.2855 2.5 11.25 2.5L6.25 2.5C5.21447 2.5 4.375 3.33947 4.375 4.375L4.375 15.625C4.375 16.6605 5.21447 17.5 6.25 17.5H11.25C12.2855 17.5 13.125 16.6605 13.125 15.625V12.5M15.625 12.5L18.125 10M18.125 10L15.625 7.5M18.125 10L7.5 10" stroke="#09CA8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + item.innerHTML;
-                    }
-                }
-            });
-        });
-    </script>
-    <?php
-}
-// add_action('woocommerce_before_account_navigation', 'ealicensewoocommerce_add_icons');
-
-
 // Add the custom endpoint for My License, Video Tutorials, and Guides
 function ealicensewoocommerce_menu_items_endpoint() {
     add_rewrite_endpoint('my-licenses', EP_PAGES);
+    add_rewrite_endpoint('videos', EP_PAGES);
     add_rewrite_endpoint('offers', EP_PAGES);
 }
 add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
@@ -110,6 +79,7 @@ add_action('init', 'ealicensewoocommerce_menu_items_endpoint');
 // Add new query vars
 function ealicensewoocommerce_query_vars( $vars ) {
     $vars[] = 'my-licenses';
+    $vars[] = 'videos';
     $vars[] = 'offers';
     return $vars;
 }
@@ -199,6 +169,18 @@ function ealicensewoocommerce_display_licenses_by_email() {
 }
 
 add_action('woocommerce_account_my-licenses_endpoint', 'ealicensewoocommerce_display_licenses_by_email');
+
+function ealicensewoocommerce_videos_content() {
+    $videos_elementor_page_id = esc_attr(get_option('ealicensewoocommerce_template_videos_id'));
+
+    if (empty($videos_elementor_page_id)) {
+        echo '<div class="alert alert-warning d-flex align-items-center">Please set the Videos Elementor Template ID in the settings.</div>';
+    } else {
+        echo do_shortcode('[elementor-template id="' . $videos_elementor_page_id . '"]');
+    }
+
+}
+add_action('woocommerce_account_videos_endpoint', 'ealicensewoocommerce_videos_content');
 
 function ealicensewoocommerce_offers_content() {
     $offers_elementor_page_id = esc_attr(get_option('ealicensewoocommerce_template_offers_id'));
