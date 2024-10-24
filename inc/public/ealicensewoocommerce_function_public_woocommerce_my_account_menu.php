@@ -41,7 +41,7 @@ function ealicensewoocommerce_account_navigation() {
     $icon_classes = array(
         'dashboard'        => 'fas fa-tachometer-alt',
         'my-licenses'      => 'fas fa-key',
-        'videos'           => 'fas fa-video',
+        'videos'           => 'fas fa-graduation-cap',
         'orders'           => 'fas fa-shopping-cart',
         'offers'           => 'fas fa-tag',
         'edit-account'     => 'fas fa-cog',
