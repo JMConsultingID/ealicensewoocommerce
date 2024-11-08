@@ -46,6 +46,14 @@ add_action('woocommerce_admin_order_data_after_billing_address', 'ealicensewooco
 //     }
 // }
 
+add_filter('woocommerce_checkout_fields', 'make_email_readonly_for_logged_in_users');
+function make_email_readonly_for_logged_in_users($fields) {
+    if (is_user_logged_in()) {
+        $fields['billing']['billing_email']['custom_attributes'] = array('readonly' => 'readonly');
+    }
+    return $fields;
+}
+
 
 // Function to auto-register a user and log them in after the order is completed
 add_action('woocommerce_thankyou', 'ealicensewoocommerce_auto_register_user_after_checkout');
