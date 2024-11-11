@@ -142,9 +142,23 @@ function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
 add_filter('wp_nav_menu_items', 'custom_menu_items_for_woocommerce_account', 10, 2);
 function custom_menu_items_for_woocommerce_account($items, $args) {
         if (is_user_logged_in()) {
-            $items .= '<li class="fa-solid fa-right-to-bracket menu-item menu-item-type-custom menu-item-object-custom menu-item-cus-11374"><a class="elementor-item" href="' . get_permalink(get_option('woocommerce_myaccount_page_id')) . '">My Account</a></li>';
+            // Dropdown for logged-in users
+            $items .= '
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-cus-11374 account-menu">
+                <a class="elementor-item" href="#"> <i class="fa fa-user"></i></a>
+                <ul class="dropdown-content" style="display: none;">
+                    <li><a href="' . esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) . '">My Account</a></li>
+                </ul>
+            </li>';
         } else {
-            $items .= '<li class="fa-solid fa-right-to-bracket menu-item menu-item-type-custom menu-item-object-custom menu-item-cus-11374"><a class="elementor-item" href="' . get_permalink(get_option('woocommerce_myaccount_page_id')) . '">Login</a></li>';
+            // Dropdown for guests
+            $items .= '
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-cus-11374 account-menu">
+                <a class="elementor-item" href="#"> <i class="fa fa-user"></i> Login</a>
+                <ul class="dropdown-content" style="display: none;">
+                    <li><a href="' . esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) . '">Login</a></li>
+                </ul>
+            </li>';
         }
     return $items;
 }
