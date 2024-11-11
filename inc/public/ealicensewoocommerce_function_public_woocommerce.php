@@ -147,16 +147,16 @@ function custom_menu_items_for_woocommerce_account($items, $args) {
             <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-cus-11374 account-menu">
                 <a class="elementor-item" href="#"> <i class="fa fa-user"></i></a>
                 <ul class="dropdown-content" style="display: none;">
-                    <li><a href="' . esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) . '">My Account</a></li>
+                    <li><a href="' . esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) . '"><i class="fa fa-user"></i>My Account</a></li>
                 </ul>
             </li>';
         } else {
             // Dropdown for guests
             $items .= '
             <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-cus-11374 account-menu">
-                <a class="elementor-item" href="#"> <i class="fa fa-user"></i> Login</a>
+                <a class="elementor-item" href="#"><i class="fa fa-user"></i></a>
                 <ul class="dropdown-content" style="display: none;">
-                    <li><a href="' . esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) . '">Login</a></li>
+                    <li><a href="' . esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) . '"><i class="fa fa-user"></i>Login</a></li>
                 </ul>
             </li>';
         }
