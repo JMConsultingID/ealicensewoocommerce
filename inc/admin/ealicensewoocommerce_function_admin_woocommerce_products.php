@@ -23,6 +23,7 @@ function ealicensewoocommerce_add_additional_fields() {
         'id' => '_ealicensewoocommerce_account_quota',
         'label' => __('EA Account Quota', 'ealicensewoocommerce'),
         'options' => array(
+            '' => 'Select Account Quota',
             '2' => '2',
             '5' => '5',
             '10' => '10',
@@ -36,6 +37,7 @@ function ealicensewoocommerce_add_additional_fields() {
         'id' => '_ealicensewoocommerce_license_expiration',
         'label' => __('EA License Expiration', 'ealicensewoocommerce'),
         'options' => array(
+            '' => 'Select License Expiration',
             '1 month' => '1 month',
             '3 months' => '3 months',
             '6 months' => '6 months',
