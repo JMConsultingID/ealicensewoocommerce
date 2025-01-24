@@ -59,6 +59,12 @@ function ealicensewoocommerce_send_api_on_order_status_change($order_id, $old_st
             $site_language = get_locale();
             $site_language_value = get_bloginfo("language");
 
+            $exclude_from_license = get_post_meta($product_id, '_ealicensewoocommerce_exclude_from_license_manager', true);
+            if ($exclude_from_license === 'yes') {
+                // Do not send API if any product is excluded
+                return;
+            }
+
             // Prepare data to send to API
             $data = array(
                 'order_id' => (string) $order_id,

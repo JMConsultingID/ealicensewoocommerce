@@ -13,15 +13,29 @@ function ealicensewoocommerce_display_admin_order_meta($order) {
         return; // Exit if the feature is not enabled
     }
 
-    // Retrieve the license key from order meta
-    $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
-    $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
-    $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
-    $program_sn = get_post_meta($order->get_id(), '_ealicensewoocommerce_program_sn', true);
-    
-    echo '<p><strong>' . __('License Key') . ':</strong> ' . esc_html($license_key) . '</p>';
-    echo '<p><strong>' . __('Account Limit') . ':</strong> ' . esc_html($account_quota) . ' Accounts</p>';
-    echo '<p><strong>' . __('License Expiration') . ':</strong> ' . esc_html($license_expiration) . '</p>';
+    // Check for products excluded from the license manager
+    $items = $order->get_items();
+    $has_excluded_product = false;
+    foreach ($items as $item) {
+        $product_id = $item->get_product_id();
+        $exclude_from_license = get_post_meta($product_id, '_ealicensewoocommerce_exclude_from_license_manager', true);
+        if ($exclude_from_license === 'yes') {
+            $product_name = $item->get_name();
+            echo '<p><strong>' . __('Excluded Product') . ':</strong> ' . esc_html($product_name) . ' (' . __('This product is excluded from the EA License Manager.') . ')</p>';
+            $has_excluded_product = true;
+        }
+    }
+
+    // Display license details if no excluded products exist
+    if (!$has_excluded_product) {
+        $license_key = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_key', true);
+        $account_quota = get_post_meta($order->get_id(), '_ealicensewoocommerce_account_quota', true);
+        $license_expiration = get_post_meta($order->get_id(), '_ealicensewoocommerce_license_expiration', true);
+        echo '<p><strong>' . __('License Key') . ':</strong> ' . esc_html($license_key) . '</p>';
+        echo '<p><strong>' . __('Account Limit') . ':</strong> ' . esc_html($account_quota) . ' Accounts</p>';
+        echo '<p><strong>' . __('License Expiration') . ':</strong> ' . esc_html($license_expiration) . '</p>';
+    }
+
 }
 add_action('woocommerce_admin_order_data_after_billing_address', 'ealicensewoocommerce_display_admin_order_meta', 10, 1);
 
@@ -62,6 +76,16 @@ add_action('woocommerce_thankyou', 'ealicensewoocommerce_auto_register_user_afte
 function ealicensewoocommerce_auto_register_user_after_checkout($order_id) {
     // Get the order object
     $order = wc_get_order($order_id);
+
+    // Check if any product in the order has _ealicensewoocommerce_exclude_from_license_manager set to "yes"
+    $items = $order->get_items();
+    foreach ($items as $item) {
+        $product_id = $item->get_product_id();
+        $exclude_from_license = get_post_meta($product_id, '_ealicensewoocommerce_exclude_from_license_manager', true);
+        if ($exclude_from_license === 'yes') {
+            return;
+        }
+    }
 
     // Check if the user is not already registered (guest checkout)
     if ($order->get_user_id() == 0) {
