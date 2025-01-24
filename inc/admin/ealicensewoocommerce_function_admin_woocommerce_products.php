@@ -108,3 +108,32 @@ function ealicensewoocommerce_display_program_sn_in_admin_products($column, $pos
     }
 }
 add_action('manage_product_posts_custom_column', 'ealicensewoocommerce_display_program_sn_in_admin_products', 10, 2);
+
+
+// Add script to disable fields when checkbox is checked
+add_action('admin_footer', 'ealicensewoocommerce_disable_fields_script');
+function ealicensewoocommerce_disable_fields_script() {
+    global $post;
+    if ($post->post_type === 'product') {
+        ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                function toggleFields() {
+                    if ($('#_ealicensewoocommerce_exclude_from_license_manager').is(':checked')) {
+                        $('#_ealicensewoocommerce_account_quota').prop('disabled', true);
+                        $('#_ealicensewoocommerce_license_expiration').prop('disabled', true);
+                        $('#_ealicensewoocommerce_program_sn').prop('disabled', true);
+                    } else {
+                        $('#_ealicensewoocommerce_account_quota').prop('disabled', false);
+                        $('#_ealicensewoocommerce_license_expiration').prop('disabled', false);
+                        $('#_ealicensewoocommerce_program_sn').prop('disabled', false);
+                    }
+                }
+
+                toggleFields();
+                $('#_ealicensewoocommerce_exclude_from_license_manager').change(toggleFields);
+            });
+        </script>
+        <?php
+    }
+}
