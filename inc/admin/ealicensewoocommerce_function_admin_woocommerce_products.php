@@ -11,6 +11,13 @@
 add_action('woocommerce_product_options_pricing', 'ealicensewoocommerce_add_additional_fields');
 
 function ealicensewoocommerce_add_additional_fields() {
+    // Adding the "Exclude This Product From License Manager" checkbox field
+    woocommerce_wp_checkbox(array(
+        'id' => '_ealicensewoocommerce_exclude_from_license_manager',
+        'label' => __('Exclude This Product From License Manager', 'ealicensewoocommerce'),
+        'description' => __('Check this box to exclude this product from being managed by the License Manager.', 'ealicensewoocommerce'),
+    ));
+
     // Adding the custom fields
     woocommerce_wp_select(array(
         'id' => '_ealicensewoocommerce_account_quota',
@@ -51,6 +58,12 @@ function ealicensewoocommerce_add_additional_fields() {
 add_action('woocommerce_process_product_meta', 'ealicensewoocommerce_save_additional_fields');
 
 function ealicensewoocommerce_save_additional_fields($post_id) {
+    // Save exclude from license manager
+    $exclude_from_license_manager = isset($_POST['_ealicensewoocommerce_exclude_from_license_manager']) ? 'yes' : 'no';
+    if (!empty($exclude_from_license_manager)) {
+        update_post_meta($post_id, '_ealicensewoocommerce_exclude_from_license_manager', $exclude_from_license_manager);
+    }
+
     $account_quota = $_POST['_ealicensewoocommerce_account_quota'];
     if (!empty($account_quota)) {
         update_post_meta($post_id, '_ealicensewoocommerce_account_quota', esc_attr($account_quota));
