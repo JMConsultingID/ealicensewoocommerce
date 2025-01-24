@@ -14,7 +14,7 @@ function ealicensewoocommerce_add_additional_fields() {
     // Adding the "Exclude This Product From License Manager" checkbox field
     woocommerce_wp_checkbox(array(
         'id' => '_ealicensewoocommerce_exclude_from_license_manager',
-        'label' => __('Exclude This Product From License Manager', 'ealicensewoocommerce'),
+        'label' => __('Exclude From License Manager', 'ealicensewoocommerce'),
         'description' => __('Check this box to exclude this product from being managed by the License Manager.', 'ealicensewoocommerce'),
     ));
 
